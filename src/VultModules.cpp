@@ -28,12 +28,12 @@ void init(rack::Plugin *p)
 #ifdef VERSION
    p->version = TOSTRING(VERSION);
 #endif
-   p->addModel(createModel<RescombWidget>("VultModules", "Vult Modules", "Rescomb", "Rescomb"));
-   p->addModel(createModel<StabileWidget>("VultModules", "Vult Modules", "Stabile", "Stabile"));
-   p->addModel(createModel<LateralusWidget>("VultModules", "Vult Modules", "Lateralus", "Lateralus"));
-   p->addModel(createModel<DebriatusWidget>("VultModules", "Vult Modules", "Debriatus", "Debriatus"));
-   p->addModel(createModel<SplieWidget>("VultModules", "Vult Modules", "Splie", "Splie"));
-   p->addModel(createModel<TrummorWidget>("VultModules", "Vult Modules", "Trummor", "Trummor"));
-   p->addModel(createModel<ToheWidget>("VultModules", "Vult Modules", "Tohe", "Tohe"));
-   p->addModel(createModel<TangentsWidget>("VultModules", "Vult Modules", "Tangents", "Tangents"));
+   p->addModel(createModel<DebriatusWidget>("VultModules", "Vult", "Debriatus", "Debriatus"));
+   p->addModel(createModel<LateralusWidget>("VultModules", "Vult", "Lateralus", "Lateralus"));
+   p->addModel(createModel<RescombWidget>("VultModules", "Vult", "Rescomb", "Rescomb"));
+   p->addModel(createModel<SplieWidget>("VultModules", "Vult", "Splie", "Splie"));
+   p->addModel(createModel<StabileWidget>("VultModules", "Vult", "Stabile", "Stabile"));
+   p->addModel(createModel<TangentsWidget>("VultModules", "Vult", "Tangents", "Tangents"));
+   p->addModel(createModel<ToheWidget>("VultModules", "Vult", "Tohe", "Tohe"));
+   p->addModel(createModel<TrummorWidget>("VultModules", "Vult", "Trummor", "Trummor"));
 }
