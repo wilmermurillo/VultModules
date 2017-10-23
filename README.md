@@ -13,8 +13,6 @@ I provide precompiled binaries for: [Linux, Mac and Windows](https://github.com/
 ![Trummor](/images/Trummor-render.png?raw=true "Trummor")
 ![Tangents](/images/Tangents-render.png?raw=true "Tangents")
 
-*This repository builds against the latest released version of Rack (the latest tag). It may take a day or two for me to catch up when a new version of Rack is released. Let me know if I haven't fixed that.*
-
 ## Donate
 
 I’m glad to publish these modules for free so anyone can use them. Behind every module there are many hours of work (and many litters of coffee). If you enjoy these modules you can support the development by making a donation. As a suggestion, you can send me the amount to buy 1 kg of roasted coffee beans in your country. That will make me very happy. Here's the link: [DONATE](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RRMY2QPYEZT2S)
