@@ -88,10 +88,10 @@ TangentsWidget::TangentsWidget()
       panel->setBackground(SVG::load(assetPlugin(plugin, "res/Tangents.svg")));
       addChild(panel);
    }
-   addChild(createScrew<VultScrew>(Vec(15, 0)));
-   addChild(createScrew<VultScrew>(Vec(box.size.x - 30, 0)));
-   addChild(createScrew<VultScrew>(Vec(15, 365)));
-   addChild(createScrew<VultScrew>(Vec(box.size.x - 30, 365)));
+   addChild(createScrew<VultScrew>(Vec(16, 0)));
+   addChild(createScrew<VultScrew>(Vec(box.size.x - 29, 0)));
+   addChild(createScrew<VultScrew>(Vec(16, 365)));
+   addChild(createScrew<VultScrew>(Vec(box.size.x - 29, 365)));
 
    addParam(createParam<VultKnobBig>(Vec(25, 75), module, Tangents::CUTOFF_PARAM, 0.0, 0.85, 0.85 / 2.0));
    addParam(createParam<VultKnob>(Vec(34, 173), module, Tangents::RESONANCE_PARAM, 0.0, 1.0, 0.0));
@@ -99,12 +99,12 @@ TangentsWidget::TangentsWidget()
    addParam(createParam<VultKnobSmall>(Vec(108, 82), module, Tangents::CUTOFF_AMT_PARAM, -1.0, 1.0, 0.0));
    addParam(createParam<VultKnobSmall>(Vec(108, 173), module, Tangents::RESONANCE_AMT_PARAM, -1.0, 1.0, 0.0));
 
-   addInput(createInput<VultJack>(Vec(105, 107), module, Tangents::CUTOFF_INPUT));
-   addInput(createInput<VultJack>(Vec(105, 198), module, Tangents::RESONANCE_INPUT));
+   addInput(createInput<VultJack>(Vec(104, 107), module, Tangents::CUTOFF_INPUT));
+   addInput(createInput<VultJack>(Vec(104, 198), module, Tangents::RESONANCE_INPUT));
 
-   addInput(createInput<VultJack>(Vec(21, 313), module, Tangents::LP_INPUT));
-   addInput(createInput<VultJack>(Vec(63, 313), module, Tangents::BP_INPUT));
-   addInput(createInput<VultJack>(Vec(105, 313), module, Tangents::HP_INPUT));
+   addInput(createInput<VultJack>(Vec(20, 313), module, Tangents::LP_INPUT));
+   addInput(createInput<VultJack>(Vec(62, 313), module, Tangents::BP_INPUT));
+   addInput(createInput<VultJack>(Vec(104, 313), module, Tangents::HP_INPUT));
 
-   addOutput(createOutput<VultJack>(Vec(63, 248), module, Tangents::AUDIO_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(62, 248), module, Tangents::AUDIO_OUTPUT));
 }

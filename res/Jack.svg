@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" 
+<svg width="26" height="24" viewBox="0 0 26 24" version="1.1" 
    xmlns="http://www.w3.org/2000/svg" 
-   xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-   <g transform="matrix(8,0,0,8,-24,0)">
-      <path d="M4.5,0L5.799,0.75L5.799,2.25L4.5,3L3.201,2.25L3.201,0.75L4.5,0Z" style="fill:rgb(146,146,146);stroke:rgb(77,77,77);stroke-width:0.13px;"/>
+   xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:8.5;">
+   <g id="path6413" transform="matrix(0.799629,5.08446e-32,-2.54223e-32,-0.799629,-438.345,1495.59)">
+      <path d="M557.25,1841.31c-0.446,0 -0.968,0.305 -1.187,0.692l-7.145,12.646c-0.219,0.388 -0.219,0.994 0,1.382l7.145,12.644c0.219,0.389 0.741,0.694 1.187,0.694l14.272,0c0.446,0 0.968,-0.305 1.187,-0.694l7.145,-12.644c0.219,-0.388 0.219,-0.994 0,-1.382l-7.145,-12.646c-0.219,-0.387 -0.741,-0.692 -1.187,-0.692l-14.272,0Z" style="fill:rgb(146,146,146);fill-rule:nonzero;stroke:rgb(89,89,89);stroke-width:1px;"/>
    </g>
-   <g transform="matrix(4.04783,0,0,4.04783,-0.14348,-0.14348)">
+   <g transform="matrix(4.5538,0,0,4.5538,-0.707022,-1.64913)">
       <circle cx="3" cy="3" r="1.976" style="fill:rgb(92,92,92);"/>
    </g>
-   <g transform="matrix(3.03587,0,0,3.03587,2.89239,2.89239)">
+   <g id="path6435" transform="matrix(0.845465,0,0,-0.845465,-464.214,1580.63)">
+      <path d="M556.106,1855.34c0.023,-4.599 3.69,-8.268 8.289,-8.288c4.575,0.013 8.276,3.708 8.271,8.288c-0.003,4.572 -3.705,8.259 -8.271,8.271c-4.59,-0.02 -8.256,-3.68 -8.289,-8.271Z" style="fill:rgb(85,85,85);fill-rule:nonzero;stroke:rgb(59,59,59);stroke-width:1px;"/>
+   </g>
+   <g transform="matrix(2.78288,0,0,2.78288,4.60575,3.66365)">
       <circle cx="3" cy="3" r="1.976"/>
    </g>
 </svg>

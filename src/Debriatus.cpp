@@ -97,10 +97,10 @@ DebriatusWidget::DebriatusWidget()
       panel->setBackground(SVG::load(assetPlugin(plugin, "res/Debriatus.svg")));
       addChild(panel);
    }
-   addChild(createScrew<VultScrew>(Vec(15, 0)));
-   addChild(createScrew<VultScrew>(Vec(box.size.x - 30, 0)));
-   addChild(createScrew<VultScrew>(Vec(15, 365)));
-   addChild(createScrew<VultScrew>(Vec(box.size.x - 30, 365)));
+   addChild(createScrew<VultScrew>(Vec(16, 0)));
+   addChild(createScrew<VultScrew>(Vec(box.size.x - 29, 0)));
+   addChild(createScrew<VultScrew>(Vec(16, 365)));
+   addChild(createScrew<VultScrew>(Vec(box.size.x - 29, 365)));
 
    addParam(createParam<VultKnob>(Vec(30, 52), module, Debriatus::FOLD_PARAM, 0.0, 1.0, 0.0));
    addParam(createParam<VultKnob>(Vec(30, 118), module, Debriatus::CRUSH_PARAM, 0.0, 1.0, 0.0));
@@ -112,11 +112,11 @@ DebriatusWidget::DebriatusWidget()
    addParam(createParam<VultKnobSmall>(Vec(104, 185), module, Debriatus::DISTORT_AMT_PARAM, -1.0, 1.0, 0.0));
    addParam(createParam<VultKnobSmall>(Vec(104, 252), module, Debriatus::SATURATE_AMT_PARAM, -1.0, 1.0, 0.0));
 
-   addInput(createInput<VultJack>(Vec(101, 77), module, Debriatus::FOLD_INPUT));
-   addInput(createInput<VultJack>(Vec(101, 143), module, Debriatus::CRUSH_INPUT));
-   addInput(createInput<VultJack>(Vec(101, 210), module, Debriatus::DISTORT_INPUT));
-   addInput(createInput<VultJack>(Vec(101, 277), module, Debriatus::SATURATE_INPUT));
+   addInput(createInput<VultJack>(Vec(100, 77), module, Debriatus::FOLD_INPUT));
+   addInput(createInput<VultJack>(Vec(100, 143), module, Debriatus::CRUSH_INPUT));
+   addInput(createInput<VultJack>(Vec(100, 210), module, Debriatus::DISTORT_INPUT));
+   addInput(createInput<VultJack>(Vec(100, 277), module, Debriatus::SATURATE_INPUT));
 
    addInput(createInput<VultJack>(Vec(27, 318), module, Debriatus::AUDIO_INPUT));
-   addOutput(createOutput<VultJack>(Vec(101, 318), module, Debriatus::AUDIO_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(100, 318), module, Debriatus::AUDIO_OUTPUT));
 }

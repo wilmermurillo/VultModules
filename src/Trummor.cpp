@@ -187,10 +187,10 @@ TrummorWidget::TrummorWidget()
       panel->setBackground(SVG::load(assetPlugin(plugin, "res/Trummor.svg")));
       addChild(panel);
    }
-   addChild(createScrew<VultScrew>(Vec(15, 0)));
-   addChild(createScrew<VultScrew>(Vec(box.size.x - 30, 0)));
-   addChild(createScrew<VultScrew>(Vec(15, 365)));
-   addChild(createScrew<VultScrew>(Vec(box.size.x - 30, 365)));
+   addChild(createScrew<VultScrew>(Vec(16, 0)));
+   addChild(createScrew<VultScrew>(Vec(box.size.x - 29, 0)));
+   addChild(createScrew<VultScrew>(Vec(16, 365)));
+   addChild(createScrew<VultScrew>(Vec(box.size.x - 29, 365)));
 
    addParam(createParam<VultKnob>(Vec(101, 196), module, Trummor::LEVEL1_PARAM, 0.0, 1.0, 0.7));
    addParam(createParam<VultKnob>(Vec(244, 196), module, Trummor::LEVEL2_PARAM, 0.0, 1.0, 0.1));
@@ -209,32 +209,32 @@ TrummorWidget::TrummorWidget()
 
    addParam(createParam<VultKnobAlt>(Vec(177, 85), module, Trummor::TONE_PARAM, -1.0, 1.0, -0.7));
 
-   addParam(createParam<VultKnobAlt>(Vec(53, 205), module, Trummor::OSC_BLEND_PARAM, 0.0, 1.0, 0.0));
-   addParam(createParam<VultKnobAlt>(Vec(195, 205), module, Trummor::NOISE_BLEND_PARAM, 0.0, 1.0, 0.0));
+   addParam(createParam<VultKnobAlt>(Vec(53, 202), module, Trummor::OSC_BLEND_PARAM, 0.0, 1.0, 0.0));
+   addParam(createParam<VultKnobAlt>(Vec(195, 202), module, Trummor::NOISE_BLEND_PARAM, 0.0, 1.0, 0.0));
 
    addParam(createParam<VultSelector2>(Vec(12, 201), module, Trummor::SEL_ENV1_PARAM, 0.0, 1.0, 0.0));
    addParam(createParam<VultSelector2>(Vec(155, 201), module, Trummor::SEL_ENV2_PARAM, 0.0, 1.0, 0.0));
 
-   addInput(createInput<VultJack>(Vec(63, 336), module, Trummor::GATE_INPUT));
+   addInput(createInput<VultJack>(Vec(62, 336), module, Trummor::GATE_INPUT));
 
-   addInput(createInput<VultJack>(Vec(20, 295), module, Trummor::OSC_INPUT));
-   addInput(createInput<VultJack>(Vec(188, 295), module, Trummor::NOISE_INPUT));
+   addInput(createInput<VultJack>(Vec(19, 295), module, Trummor::OSC_INPUT));
+   addInput(createInput<VultJack>(Vec(187, 295), module, Trummor::NOISE_INPUT));
 
-   addOutput(createOutput<VultJack>(Vec(213, 336), module, Trummor::AUDIO_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(212, 336), module, Trummor::AUDIO_OUTPUT));
 
-   addOutput(createOutput<VultJack>(Vec(112, 295), module, Trummor::PITCH_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(111, 295), module, Trummor::PITCH_OUTPUT));
 
-   addOutput(createOutput<VultJack>(Vec(67, 295), module, Trummor::ENV1_OUTPUT));
-   addOutput(createOutput<VultJack>(Vec(238, 295), module, Trummor::ENV2_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(66, 295), module, Trummor::ENV1_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(237, 295), module, Trummor::ENV2_OUTPUT));
 
-   addInput(createInput<VultJack>(Vec(14, 257), module, Trummor::OSC_MOD_INPUT));
-   addInput(createInput<VultJack>(Vec(157, 257), module, Trummor::NOISE_MOD_INPUT));
+   addInput(createInput<VultJack>(Vec(13, 259), module, Trummor::OSC_MOD_INPUT));
+   addInput(createInput<VultJack>(Vec(156, 259), module, Trummor::NOISE_MOD_INPUT));
 
-   addParam(createParam<VultKnobSmall>(Vec(50, 260), module, Trummor::OSC_MOD_PARAM, -1.0, 1.0, 0.0));
-   addParam(createParam<VultKnobSmall>(Vec(193, 260), module, Trummor::NOISE_MOD_PARAM, -1.0, 1.0, 0.0));
+   addParam(createParam<VultKnobSmall>(Vec(50, 262), module, Trummor::OSC_MOD_PARAM, -1.0, 1.0, 0.0));
+   addParam(createParam<VultKnobSmall>(Vec(193, 262), module, Trummor::NOISE_MOD_PARAM, -1.0, 1.0, 0.0));
 
-   addParam(createParam<TrummodNoiseSelector>(Vec(218, 262), module, Trummor::NOISE_SEL_PARAM, 0.0, 7.0, 0.0));
-   addParam(createParam<TrummodOscSelector>(Vec(75, 262), module, Trummor::OSC_SEL_PARAM, 0.0, 8.0, 0.0));
+   addParam(createParam<TrummodNoiseSelector>(Vec(218, 264), module, Trummor::NOISE_SEL_PARAM, 0.0, 7.0, 0.0));
+   addParam(createParam<TrummodOscSelector>(Vec(75, 264), module, Trummor::OSC_SEL_PARAM, 0.0, 8.0, 0.0));
 
    addParam(createParam<VultKnobAlt>(Vec(237, 85), module, Trummor::DECIMATE_PARAM, 0.0, 1.0, 0.0));
 }

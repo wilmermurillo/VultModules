@@ -76,16 +76,16 @@ SplieWidget::SplieWidget()
       panel->setBackground(SVG::load(assetPlugin(plugin, "res/Splie.svg")));
       addChild(panel);
    }
-   addChild(createScrew<VultScrew>(Vec(15, 0)));
-   addChild(createScrew<VultScrew>(Vec(15, 365)));
+   addChild(createScrew<VultScrew>(Vec(16, 0)));
+   addChild(createScrew<VultScrew>(Vec(16, 365)));
 
-   addInput(createInput<VultJack>(Vec(11, 43), module, Splie::IN_A));
-   addOutput(createOutput<VultJack>(Vec(11, 80), module, Splie::OUT1_A));
-   addOutput(createOutput<VultJack>(Vec(11, 117), module, Splie::OUT2_A));
-   addOutput(createOutput<VultJack>(Vec(11, 154), module, Splie::OUT3_A));
+   addInput(createInput<VultJack>(Vec(10, 43), module, Splie::IN_A));
+   addOutput(createOutput<VultJack>(Vec(10, 80), module, Splie::OUT1_A));
+   addOutput(createOutput<VultJack>(Vec(10, 117), module, Splie::OUT2_A));
+   addOutput(createOutput<VultJack>(Vec(10, 154), module, Splie::OUT3_A));
 
-   addInput(createInput<VultJack>(Vec(11, 186), module, Splie::IN_B));
-   addOutput(createOutput<VultJack>(Vec(11, 223), module, Splie::OUT1_B));
-   addOutput(createOutput<VultJack>(Vec(11, 260), module, Splie::OUT2_B));
-   addOutput(createOutput<VultJack>(Vec(11, 298), module, Splie::OUT3_B));
+   addInput(createInput<VultJack>(Vec(10, 186), module, Splie::IN_B));
+   addOutput(createOutput<VultJack>(Vec(10, 223), module, Splie::OUT1_B));
+   addOutput(createOutput<VultJack>(Vec(10, 260), module, Splie::OUT2_B));
+   addOutput(createOutput<VultJack>(Vec(10, 298), module, Splie::OUT3_B));
 }

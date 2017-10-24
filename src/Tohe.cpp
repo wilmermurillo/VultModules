@@ -77,12 +77,12 @@ ToheWidget::ToheWidget()
       addChild(panel);
    }
 
-   addChild(createScrew<VultScrew>(Vec(23, 0)));
-   addChild(createScrew<VultScrew>(Vec(23, 365)));
+   addChild(createScrew<VultScrew>(Vec(16, 0)));
+   addChild(createScrew<VultScrew>(Vec(16, 365)));
 
    addParam(createParam<VultKnob>(Vec(10, 88), module, Tohe::TONE_PARAM, -1.0, 1.0, 0.0));
    addParam(createParam<VultKnobSmall>(Vec(21, 158), module, Tohe::TONE_AMT_PARAM, -1.0, 1.0, 0.0));
-   addInput(createInput<VultJack>(Vec(18, 183), module, Tohe::TONE_INPUT));
+   addInput(createInput<VultJack>(Vec(17, 183), module, Tohe::TONE_INPUT));
    addInput(createInput<VultJack>(Vec(17, 228), module, Tohe::AUDIO_INPUT));
    addOutput(createOutput<VultJack>(Vec(17, 274), module, Tohe::AUDIO_OUTPUT));
 }

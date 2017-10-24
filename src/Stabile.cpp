@@ -103,10 +103,10 @@ StabileWidget::StabileWidget()
       addChild(panel);
    }
 
-   addChild(createScrew<VultScrew>(Vec(15, 0)));
-   addChild(createScrew<VultScrew>(Vec(box.size.x - 30, 0)));
-   addChild(createScrew<VultScrew>(Vec(15, 365)));
-   addChild(createScrew<VultScrew>(Vec(box.size.x - 30, 365)));
+   addChild(createScrew<VultScrew>(Vec(16, 0)));
+   addChild(createScrew<VultScrew>(Vec(box.size.x - 29, 0)));
+   addChild(createScrew<VultScrew>(Vec(16, 365)));
+   addChild(createScrew<VultScrew>(Vec(box.size.x - 29, 365)));
 
    addParam(createParam<VultKnobBig>(Vec(25, 53), module, Stabile::CUTOFF_PARAM, 0.0, 1.0, 0.5));
    addParam(createParam<VultKnob>(Vec(34, 134), module, Stabile::RESONANCE_PARAM, 0.0, 4.0, 0.0));
@@ -117,15 +117,15 @@ StabileWidget::StabileWidget()
    addParam(createParam<VultKnob>(Vec(34, 202), module, Stabile::SEMBLANCE_PARAM, 0.0, 1.0, 0.5));
    addParam(createParam<VultKnobSmall>(Vec(108, 202), module, Stabile::SEMBLANCE_AMT_PARAM, -1.0, 1.0, 0.0));
 
-   addInput(createInput<VultJack>(Vec(105, 85), module, Stabile::CUTOFF_INPUT));
-   addInput(createInput<VultJack>(Vec(105, 159), module, Stabile::RESONANCE_INPUT));
+   addInput(createInput<VultJack>(Vec(104, 85), module, Stabile::CUTOFF_INPUT));
+   addInput(createInput<VultJack>(Vec(104, 159), module, Stabile::RESONANCE_INPUT));
 
-   addInput(createInput<VultJack>(Vec(60, 318), module, Stabile::AUDIO_INPUT));
+   addInput(createInput<VultJack>(Vec(59, 318), module, Stabile::AUDIO_INPUT));
 
-   addOutput(createOutput<VultJack>(Vec(9, 277), module, Stabile::LP_OUTPUT));
-   addOutput(createOutput<VultJack>(Vec(45, 277), module, Stabile::BP_OUTPUT));
-   addOutput(createOutput<VultJack>(Vec(82, 277), module, Stabile::HP_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(8, 277), module, Stabile::LP_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(44, 277), module, Stabile::BP_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(81, 277), module, Stabile::HP_OUTPUT));
 
-   addInput(createInput<VultJack>(Vec(105, 227), module, Stabile::SEMBLANCE_INPUT));
-   addOutput(createOutput<VultJack>(Vec(118, 277), module, Stabile::SEM_OUTPUT));
+   addInput(createInput<VultJack>(Vec(104, 227), module, Stabile::SEMBLANCE_INPUT));
+   addOutput(createOutput<VultJack>(Vec(117, 277), module, Stabile::SEM_OUTPUT));
 }

@@ -91,10 +91,10 @@ RescombWidget::RescombWidget()
       addChild(panel);
    }
 
-   addChild(createScrew<VultScrew>(Vec(15, 0)));
-   addChild(createScrew<VultScrew>(Vec(box.size.x - 30, 0)));
-   addChild(createScrew<VultScrew>(Vec(15, 365)));
-   addChild(createScrew<VultScrew>(Vec(box.size.x - 30, 365)));
+   addChild(createScrew<VultScrew>(Vec(16, 0)));
+   addChild(createScrew<VultScrew>(Vec(box.size.x - 29, 0)));
+   addChild(createScrew<VultScrew>(Vec(16, 365)));
+   addChild(createScrew<VultScrew>(Vec(box.size.x - 29, 365)));
 
    addParam(createParam<VultKnob>(Vec(30, 78), module, Rescomb::TUNE_PARAM, -0.4, 0.4, 0.0));
    addParam(createParam<VultKnob>(Vec(30, 158), module, Rescomb::COMB_PARAM, -1.0, 1.0, 0.0));
@@ -103,10 +103,10 @@ RescombWidget::RescombWidget()
    addParam(createParam<VultKnobSmall>(Vec(103, 158), module, Rescomb::COMB_AMT_PARAM, -1.0, 1.0, 0.0));
    addParam(createParam<VultKnobSmall>(Vec(103, 238), module, Rescomb::FEEDBACK_AMT_PARAM, -1.0, 1.0, 0.0));
 
-   addInput(createInput<VultJack>(Vec(101, 85), module, Rescomb::PITCH_INPUT));
-   addInput(createInput<VultJack>(Vec(101, 183), module, Rescomb::COMB_INPUT));
-   addInput(createInput<VultJack>(Vec(101, 263), module, Rescomb::FEEDBACK_INPUT));
+   addInput(createInput<VultJack>(Vec(100, 85), module, Rescomb::PITCH_INPUT));
+   addInput(createInput<VultJack>(Vec(100, 183), module, Rescomb::COMB_INPUT));
+   addInput(createInput<VultJack>(Vec(100, 263), module, Rescomb::FEEDBACK_INPUT));
 
-   addInput(createInput<VultJack>(Vec(27, 318), module, Rescomb::AUDIO_INPUT));
-   addOutput(createOutput<VultJack>(Vec(101, 318), module, Rescomb::AUDIO_OUTPUT));
+   addInput(createInput<VultJack>(Vec(26, 318), module, Rescomb::AUDIO_INPUT));
+   addOutput(createOutput<VultJack>(Vec(100, 318), module, Rescomb::AUDIO_OUTPUT));
 }
