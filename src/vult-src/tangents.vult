@@ -13,16 +13,16 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 fun tune(cut, fs, oversampling) {
    val f = Util.cvTokHz(cut);
-   val fh = (2.0 * pi()) * f / (oversampling * fs);
+   val fh = tan((2.0 * pi()) * f / (oversampling * fs));
    return fh;
 }
 
 fun tune_44100(cut) @[table(min = 0.0, max = 1.0, size = 128)]{
-   return tune(cut, 44.1, 4.0);
+   return tune(cut, 44.1, 2.0);
 }
 
 fun tune_48000(cut) @[table(min = 0.0, max = 1.0, size = 128)]{
-   return tune(cut, 48.0, 4.0);
+   return tune(cut, 48.0, 2.0);
 }
 
 fun tune_88200(cut) @[table(min = 0.0, max = 1.0, size = 128)]{
@@ -92,14 +92,11 @@ fun process_heun(lp, bp, hp, cut, res) {
    if(fs == 176400.0 || fs == 192000.0) {
       out = h:heun(lp, bp, hp, fh, cut, res);
    }
-   else if(fs == 88200.0 || fs == 96000.0) {
-      out = h:heun(lp, bp, hp, fh, cut, res);
-      out = h:heun(lp, bp, hp, fh, cut, res);
-   }
    else {
-      out = h:heun(lp, bp, hp, fh, cut, res);
-      out = h:heun(lp, bp, hp, fh, cut, res);
-      out = h:heun(lp, bp, hp, fh, cut, res);
+      val lp1 = Util.upsampleOrder1_2x(lp);
+      val bp1 = Util.upsampleOrder1_2x(bp);
+      val hp1 = Util.upsampleOrder1_2x(hp);
+      out = h:heun(lp1, bp1, hp1, fh, cut, res);
       out = h:heun(lp, bp, hp, fh, cut, res);
    }
    return out;

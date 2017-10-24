@@ -13,16 +13,16 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 fun tune(cut, fs, oversampling) {
    val f = Util.cvTokHz(cut);
-   val fh = (2.0 * pi()) * f / (oversampling * fs);
+   val fh = tan((2.0 * pi()) * f / (oversampling * fs));
    return fh;
 }
 
 fun tune_44100(cut) @[table(min = 0.0, max = 1.0, size = 128)]{
-   return tune(cut, 44.1, 4.0);
+   return tune(cut, 44.1, 2.0);
 }
 
 fun tune_48000(cut) @[table(min = 0.0, max = 1.0, size = 128)]{
-   return tune(cut, 48.0, 4.0);
+   return tune(cut, 48.0, 2.0);
 }
 
 fun tune_88200(cut) @[table(min = 0.0, max = 1.0, size = 128)]{
@@ -105,17 +105,12 @@ fun process_heun(input:real, cut:real, res:real) {
    if(fs == 176400.0 || fs == 192000.0) {
       db12, db24 = h:heun(input, fh, res);
    }
-   else if(fs == 88200.0 || fs == 96000.0) {
-      db12, db24 = h:heun(input, fh, res);
-      db12, db24 = h:heun(input, fh, res);
-   }
    else {
-      db12, db24 = h:heun(input, fh, res);
-      db12, db24 = h:heun(input, fh, res);
-      db12, db24 = h:heun(input, fh, res);
+      val input1 = Util.upsampleOrder1_2x(input);
+      db12, db24 = h:heun(input1, fh, res);
       db12, db24 = h:heun(input, fh, res);
    }
-   return db12 * (1.0 + res * 0.5), db24 * (1.0 + res);
+   return db12 * (1.0 + res * 0.5), db24 * (1.0 + res * 1.5);
 }
 
 
