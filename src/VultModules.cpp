@@ -36,4 +36,5 @@ void init(rack::Plugin *p)
    p->addModel(createModel<TangentsWidget>("VultModules", "Vult", "Tangents", "Tangents"));
    p->addModel(createModel<ToheWidget>("VultModules", "Vult", "Tohe", "Tohe"));
    p->addModel(createModel<TrummorWidget>("VultModules", "Vult", "Trummor", "Trummor"));
+   p->addModel(createModel<Trummor2Widget>("VultModules", "Vult", "Trummor2", "Trummor 2"));
 }

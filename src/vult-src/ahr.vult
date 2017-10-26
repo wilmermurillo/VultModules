@@ -11,7 +11,7 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-fun do(gate:real, a:real, h:real, r:real) {
+fun do(gate:real, a:real, h:real, r:real, enabled) {
    mem state;
    mem out;
    mem rate;
@@ -31,7 +31,26 @@ fun do(gate:real, a:real, h:real, r:real) {
 
    val resetting = if state == reset then 1.0 else 0.0;
 
-   // transitions
+   // states
+
+   if(state == reset) {
+      rate = 1.0 / (100.0 * 0.005 + 0.05);
+      target = 0.0;
+   }
+   if(state == attack && enabled) {
+      rate = 1.0 / (100.0 * a + 0.05);
+      target = 1.2 * 1024.0;
+   }
+   if(state == hold) {
+      val hrate = 1.0 / (100.0 * h + 0.05);
+      hold_phase = hold_phase + hrate;
+   }
+   if(state == release) {
+      rate = 1.0 / (200.0 * r + 0.05);
+      target = 0.0;
+   }
+
+      // transitions
 
    if(Util.edge(out > 1024.0)) {
       hold_phase = 0.0;
@@ -44,50 +63,8 @@ fun do(gate:real, a:real, h:real, r:real) {
       state = release;
    }
 
-   // states
-
-   if(state == reset) {
-      rate = 1.0 / (100.0 * 0.005 + 0.05);
-      target = 0.0;
-   }
-   if(state == attack) {
-      rate = 1.0 / (100.0 * a + 0.05);
-      target = 1.2 * 1024.0;
-   }
-   if(state == hold) {
-      val hrate = 1.0 / (100.0 * h + 0.05);
-      hold_phase = hold_phase + hrate;
-   }
-   if(state == release) {
-      rate = 1.0 / (200.0 * r + 0.01);
-      target = 0.0;
-   }
-
    out = out + (target - out) * rate * 0.005 * Util.sampleRateScale();
 
 
    return clip(out / 1024.0, 0.0, 1.0), resetting;
-}
-
-fun process(gate:real) {
-   mem knob1, knob2, knob3;
-
-   return do(gate,knob1,knob2,knob3);
-}
-and noteOn(note:int, velocity:int, channel:int) {
-}
-and noteOff(note:int, channel:int) {
-}
-and controlChange(control:int, value: int, channel:int) {
-   if(control == 1)
-      knob1 = real(value)/127.0;
-   if(control == 2)
-      knob2 = real(value)/127.0;
-   if(control == 3)
-      knob3 = real(value)/127.0;
-}
-and default() {
-   knob1 = 0.0;
-   knob2 = 0.5;
-   knob3 = 0.5;
 }

@@ -20,29 +20,45 @@ fun do(gate, osc_in, noise_in) {
    mem int_osc, ext_osc;
    mem int_noise, ext_noise;
    mem env1_scale, env2_scale;
+   mem ring_sel;
+   mem bend_time;
+   mem sub;
+   mem cheby;
    mem env_enabled;
-
+   mem cutoff, resonance;
    // Envelope of the drum. One parameter affects the hold and relase
    val osc_env, env_reset = Ahr.do(gate, env1_scale * env1_a, env1_scale * env1_h, env1_scale * env1_r, env_enabled);
    // Change of pitch
-   val cv = Swept.process(1.0 - env_reset, pitch + bend * 0.4, pitch, 0.1);
+   val swept = Swept.process(1.0 - env_reset, bend * 0.6, 0.0, bend_time);
+   val cv = pitch + swept;
    // Note: the oscillator is dissabled while the nevelop resets
+   val sub_osc, reset_sub = Tricore.process(cv - 0.1, 0.0, env_reset);
    val osc, reset_osc = Tricore.process(cv, 0.0, env_reset);
-   osc = int_osc * osc + ext_osc * osc_in;
-   env_enabled = not(reset_osc);
+   env_enabled = not(reset_sub) && not(reset_osc);
 
+   osc = sub * sub_osc + osc;
+   osc = int_osc * osc + ext_osc * osc_in;
    // Saturates the triangle to get a sine with some harmonics
-   val osc_sat = Util.saturate((drive + 1.0) * osc);
+   osc = osc + cheby * Util.cheby3(osc);
+   osc = Util.saturate((drive + 1.0) * osc);
 
    val noise_env, _ = Ahr.do(gate, env2_scale * env2_a, env2_scale * env2_h, env2_scale * env2_r, env_enabled);
    val noise_osc =
       if decimate == 0.0 then
-         int_noise * (random() - 0.5) + ext_noise * noise_in
+         (if ring_sel then
+            5.0 * (random() - 0.5) * noise_in
+         else
+            int_noise * (random() - 0.5) + ext_noise * noise_in)
       else
-         Decimate.decimate(int_noise * Noise.process(gate) + ext_noise * noise_in, decimate);
-   noise_osc = Tohe.do(noise_osc, tone);
+         (if ring_sel then
+            5.0 * Decimate.decimate(Noise.process(gate), decimate) * noise_in
+         else
+            Decimate.decimate(int_noise * Noise.process(gate) + ext_noise * noise_in, decimate));
+   noise_osc = Tohe2.do(noise_osc, tone);
 
-   val output = level1 * osc_env * osc_sat + level2 * noise_env * noise_osc;
+   val filter_input = noise_env * noise_osc;
+   val filter_output,_,_,_ = Stabile.process(filter_input, cutoff, 4.0 * resonance, 0.5);
+   val output = level1 * osc_env * osc + level2 * filter_output;
    return output, cv, osc_env, noise_env;
 }
 and setLevel1(value) {
@@ -97,4 +113,22 @@ and setEnv2Scale(value) {
 }
 and setDecimate(value) {
    decimate = clip(value, 0.0, 1.0);
+}
+and setRingSel(value) {
+   ring_sel = value > 0.5;
+}
+and setBendTime(value) {
+   bend_time = value;
+}
+and setSub(value) {
+   sub = value;
+}
+and setCheby(value) {
+   cheby = value;
+}
+and setCutoff(value) {
+   cutoff = value;
+}
+and setResonance(value) {
+   resonance = value;
 }

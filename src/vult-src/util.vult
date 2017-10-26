@@ -166,3 +166,7 @@ fun upsampleOrder1_2x(y0) {
    y1 = y0;
    return p0;
 }
+
+fun cheby3(x){
+   return 4.0 * x * x * x - 3.0 * x;
+}

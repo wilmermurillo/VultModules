@@ -169,6 +169,11 @@ struct TrummorWidget : ModuleWidget
    TrummorWidget();
 };
 
+struct Trummor2Widget : ModuleWidget
+{
+   Trummor2Widget();
+};
+
 struct ToheWidget : ModuleWidget
 {
    ToheWidget();

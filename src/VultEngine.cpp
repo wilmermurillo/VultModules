@@ -45,16 +45,16 @@ uint8_t Util_change(Util__ctx_type_3 &_ctx, float x){
 }
 
 float Util_cubic_clipper(float x){
-   uint8_t _cond_37;
-   _cond_37 = (x <= -0.666666666667f);
-   if(_cond_37){
+   uint8_t _cond_38;
+   _cond_38 = (x <= -0.666666666667f);
+   if(_cond_38){
       return -0.666666666667f;
    }
    else
    {
-      uint8_t _cond_36;
-      _cond_36 = (x >= 0.666666666667f);
-      if(_cond_36){
+      uint8_t _cond_37;
+      _cond_37 = (x >= 0.666666666667f);
+      if(_cond_37){
          return 0.666666666667f;
       }
       else
@@ -169,9 +169,9 @@ void Util_pitchToRate_init(Util__ctx_type_16 &_output_){
 float Util_pitchToRate(Util__ctx_type_16 &_ctx, float pitch){
    float fs;
    fs = getSampleRate();
-   uint8_t _cond_39;
-   _cond_39 = (Util_change(_ctx._inst20,pitch) || Util_change(_ctx._inst21,fs));
-   if(_cond_39){
+   uint8_t _cond_40;
+   _cond_40 = (Util_change(_ctx._inst20,pitch) || Util_change(_ctx._inst21,fs));
+   if(_cond_40){
       _ctx.rate = (Util_pitchToRateUnit(pitch) / getSampleRate());
    }
    return _ctx.rate;
@@ -194,9 +194,9 @@ void Util_cvToRate_init(Util__ctx_type_17 &_output_){
 float Util_cvToRate(Util__ctx_type_17 &_ctx, float cv){
    float fs;
    fs = getSampleRate();
-   uint8_t _cond_40;
-   _cond_40 = (Util_change(_ctx._inst24,cv) || Util_change(_ctx._inst25,fs));
-   if(_cond_40){
+   uint8_t _cond_41;
+   _cond_41 = (Util_change(_ctx._inst24,cv) || Util_change(_ctx._inst25,fs));
+   if(_cond_41){
       _ctx.rate = (Util_cvToRateUnit(cv) / fs);
    }
    return _ctx.rate;
@@ -230,9 +230,9 @@ float Util_polylog(float x){
 float Util_shaper(float x){
    float pos;
    float sign;
-   uint8_t _cond_41;
-   _cond_41 = (x >= 0.f);
-   if(_cond_41){
+   uint8_t _cond_42;
+   _cond_42 = (x >= 0.f);
+   if(_cond_42){
       pos = x;
       sign = 1.f;
    }
@@ -242,9 +242,9 @@ float Util_shaper(float x){
       sign = -1.f;
    }
    float y;
-   uint8_t _cond_42;
-   _cond_42 = (pos < 1.f);
-   if(_cond_42){ y = ((2.f + (- pos)) * pos); }
+   uint8_t _cond_43;
+   _cond_43 = (pos < 1.f);
+   if(_cond_43){ y = ((2.f + (- pos)) * pos); }
    else
    { y = 1.f; }
    return (y * sign);
@@ -282,19 +282,19 @@ void Util_upsampleOrder2_4x(Util__ctx_type_23 &_ctx, float y0, _tuple___real_rea
    p1 = ((0.375f * y0) + (0.75f * _ctx.y1) + (-0.125f * _ctx.y2));
    float p0;
    p0 = ((0.65625f * y0) + (0.4375f * _ctx.y1) + (-0.09375f * _ctx.y2));
-   float _tmp_43_0;
-   _tmp_43_0 = _ctx.y1;
-   float _tmp_43_1;
-   _tmp_43_1 = y0;
-   _ctx.y2 = _tmp_43_0;
-   _ctx.y1 = _tmp_43_1;
-   _tuple___real_real_real__ _tuple_44;
+   float _tmp_44_0;
+   _tmp_44_0 = _ctx.y1;
+   float _tmp_44_1;
+   _tmp_44_1 = y0;
+   _ctx.y2 = _tmp_44_0;
+   _ctx.y1 = _tmp_44_1;
+   _tuple___real_real_real__ _tuple_45;
    {
-      _tuple_44.field_0 = p2;
-      _tuple_44.field_1 = p1;
-      _tuple_44.field_2 = p0;
+      _tuple_45.field_0 = p2;
+      _tuple_45.field_1 = p1;
+      _tuple_45.field_2 = p0;
    }
-   _output_ = _tuple_44;
+   _output_ = _tuple_45;
    return ;
 }
 
@@ -314,12 +314,12 @@ void Util_upsampleOrder2_2x_init(Util__ctx_type_24 &_output_){
 float Util_upsampleOrder2_2x(Util__ctx_type_24 &_ctx, float y0){
    float p0;
    p0 = ((0.375f * y0) + (0.75f * _ctx.y1) + (-0.125f * _ctx.y2));
-   float _tmp_46_0;
-   _tmp_46_0 = _ctx.y1;
-   float _tmp_46_1;
-   _tmp_46_1 = y0;
-   _ctx.y2 = _tmp_46_0;
-   _ctx.y1 = _tmp_46_1;
+   float _tmp_47_0;
+   _tmp_47_0 = _ctx.y1;
+   float _tmp_47_1;
+   _tmp_47_1 = y0;
+   _ctx.y2 = _tmp_47_0;
+   _ctx.y1 = _tmp_47_1;
    return p0;
 }
 
@@ -343,13 +343,13 @@ void Util_upsampleOrder1_4x(Util__ctx_type_25 &_ctx, float y0, _tuple___real_rea
    float p0;
    p0 = (((3.f * y0) + _ctx.y1) * 0.25f);
    _ctx.y1 = y0;
-   _tuple___real_real_real__ _tuple_47;
+   _tuple___real_real_real__ _tuple_48;
    {
-      _tuple_47.field_0 = p2;
-      _tuple_47.field_1 = p1;
-      _tuple_47.field_2 = p0;
+      _tuple_48.field_0 = p2;
+      _tuple_48.field_1 = p1;
+      _tuple_48.field_2 = p0;
    }
-   _output_ = _tuple_47;
+   _output_ = _tuple_48;
    return ;
 }
 
@@ -370,6 +370,10 @@ float Util_upsampleOrder1_2x(Util__ctx_type_26 &_ctx, float y0){
    p0 = ((y0 + _ctx.y1) * 0.5f);
    _ctx.y1 = y0;
    return p0;
+}
+
+float Util_cheby3(float x){
+   return ((4.f * x * x * x) + (-3.f * x));
 }
 
 float Stabile_calc_g(float cv, float fs){
@@ -429,44 +433,44 @@ float Stabile_tune(float cv){
    fs = getSampleRate();
    float g;
    g = 0.f;
-   uint8_t _cond_93;
-   _cond_93 = (fs == 44100.f);
-   if(_cond_93){
+   uint8_t _cond_94;
+   _cond_94 = (fs == 44100.f);
+   if(_cond_94){
       g = Stabile_calc_g_44100(cv);
    }
    else
    {
-      uint8_t _cond_92;
-      _cond_92 = (fs == 48000.f);
-      if(_cond_92){
+      uint8_t _cond_93;
+      _cond_93 = (fs == 48000.f);
+      if(_cond_93){
          g = Stabile_calc_g_48000(cv);
       }
       else
       {
-         uint8_t _cond_91;
-         _cond_91 = (fs == 88200.f);
-         if(_cond_91){
+         uint8_t _cond_92;
+         _cond_92 = (fs == 88200.f);
+         if(_cond_92){
             g = Stabile_calc_g_88200(cv);
          }
          else
          {
-            uint8_t _cond_90;
-            _cond_90 = (fs == 96000.f);
-            if(_cond_90){
+            uint8_t _cond_91;
+            _cond_91 = (fs == 96000.f);
+            if(_cond_91){
                g = Stabile_calc_g_96000(cv);
             }
             else
             {
-               uint8_t _cond_89;
-               _cond_89 = (fs == 176400.f);
-               if(_cond_89){
+               uint8_t _cond_90;
+               _cond_90 = (fs == 176400.f);
+               if(_cond_90){
                   g = Stabile_calc_g_176400(cv);
                }
                else
                {
-                  uint8_t _cond_88;
-                  _cond_88 = (fs == 192000.f);
-                  if(_cond_88){
+                  uint8_t _cond_89;
+                  _cond_89 = (fs == 192000.f);
+                  if(_cond_89){
                      g = Stabile_calc_g_192000(cv);
                   }
                   else
@@ -487,8 +491,8 @@ void Stabile__ctx_type_8_init(Stabile__ctx_type_8 &_output_){
    _ctx.z1 = 0.f;
    _ctx.inv_den = 0.f;
    _ctx.g = 0.f;
+   Util__ctx_type_3_init(_ctx._inst86);
    Util__ctx_type_3_init(_ctx._inst85);
-   Util__ctx_type_3_init(_ctx._inst84);
    _ctx.R = 0.f;
    Stabile_default(_ctx);
    _output_ = _ctx;
@@ -502,9 +506,9 @@ void Stabile_process_init(Stabile__ctx_type_8 &_output_){
 
 void Stabile_process(Stabile__ctx_type_8 &_ctx, float x, float cv, float q, float semblance, _tuple___real_real_real_real__ &_output_){
    q = (q + 0.5f);
-   uint8_t _cond_94;
-   _cond_94 = (Util_change(_ctx._inst84,cv) || Util_change(_ctx._inst85,q));
-   if(_cond_94){
+   uint8_t _cond_95;
+   _cond_95 = (Util_change(_ctx._inst85,cv) || Util_change(_ctx._inst86,q));
+   if(_cond_95){
       _ctx.g = Stabile_tune(cv);
       _ctx.R = (1.f / (2.f * (q + 1e-18f)));
       _ctx.inv_den = (1.f / (1.f + (2.f * _ctx.R * _ctx.g) + (_ctx.g * _ctx.g)));
@@ -519,14 +523,14 @@ void Stabile_process(Stabile__ctx_type_8 &_ctx, float x, float cv, float q, floa
    _ctx.z2 = ((_ctx.g * band) + low);
    float sem;
    sem = ((Util_fadeA(semblance) * low) + (Util_fadeB(semblance) * high));
-   _tuple___real_real_real_real__ _tuple_95;
+   _tuple___real_real_real_real__ _tuple_96;
    {
-      _tuple_95.field_0 = low;
-      _tuple_95.field_1 = band;
-      _tuple_95.field_2 = high;
-      _tuple_95.field_3 = sem;
+      _tuple_96.field_0 = low;
+      _tuple_96.field_1 = band;
+      _tuple_96.field_2 = high;
+      _tuple_96.field_3 = sem;
    }
-   _output_ = _tuple_95;
+   _output_ = _tuple_96;
    return ;
 }
 
@@ -546,9 +550,9 @@ void Tricore__ctx_type_0_init(Tricore__ctx_type_0 &_output_){
    _ctx.reset_state = 0;
    _ctx.reset_phase = 0.f;
    _ctx.phase = 0.f;
+   Util__ctx_type_2_init(_ctx._inst107);
    Util__ctx_type_2_init(_ctx._inst106);
-   Util__ctx_type_2_init(_ctx._inst105);
-   Util__ctx_type_17_init(_ctx._inst103);
+   Util__ctx_type_17_init(_ctx._inst104);
    _output_ = _ctx;
    return ;
 }
@@ -558,48 +562,54 @@ void Tricore_process_init(Tricore__ctx_type_0 &_output_){
    return ;
 }
 
-float Tricore_process(Tricore__ctx_type_0 &_ctx, float cv, float reset, float disable){
+void Tricore_process(Tricore__ctx_type_0 &_ctx, float cv, float reset, float disable, _tuple___real_bool__ &_output_){
    uint8_t bdisable;
    bdisable = (disable > 0.5f);
-   uint8_t _cond_112;
-   _cond_112 = bool_not(_ctx.reset_state);
-   if(_cond_112){
-      _ctx.phase = (_ctx.phase + Util_cvToRate(_ctx._inst103,cv));
-      uint8_t _cond_111;
-      _cond_111 = (_ctx.phase > 1.f);
-      if(_cond_111){
+   uint8_t _cond_113;
+   _cond_113 = bool_not(_ctx.reset_state);
+   if(_cond_113){
+      _ctx.phase = (_ctx.phase + Util_cvToRate(_ctx._inst104,cv));
+      uint8_t _cond_112;
+      _cond_112 = (_ctx.phase > 1.f);
+      if(_cond_112){
          _ctx.phase = (_ctx.phase + -1.f);
       }
    }
    float sine_out;
    sine_out = Util_sine(_ctx.phase);
-   uint8_t _cond_113;
-   _cond_113 = (Util_edge(_ctx._inst105,(reset > 0.f)) || Util_edge(_ctx._inst106,bdisable));
-   if(_cond_113){
+   uint8_t _cond_114;
+   _cond_114 = (Util_edge(_ctx._inst106,(reset > 0.f)) || Util_edge(_ctx._inst107,bdisable));
+   if(_cond_114){
       _ctx.reset_phase = 1.f;
       _ctx.reset_state = 1;
    }
    float reset_out;
    reset_out = 1.f;
    if(_ctx.reset_state){
-      uint8_t _cond_115;
-      _cond_115 = (fabsf(_ctx.reset_phase) > 0.001f);
-      if(_cond_115){
+      uint8_t _cond_116;
+      _cond_116 = (fabsf(_ctx.reset_phase) > 0.001f);
+      if(_cond_116){
          float reset_speed;
          reset_speed = 0.01f;
          _ctx.reset_phase = (_ctx.reset_phase + (- (_ctx.reset_phase * reset_speed)));
       }
       else
       {
-         uint8_t _cond_114;
-         _cond_114 = (_ctx.reset_phase > 0.001f);
-         if(bool_not(_cond_114)){ _ctx.reset_phase = 0.f; }
+         uint8_t _cond_115;
+         _cond_115 = (_ctx.reset_phase > 0.001f);
+         if(bool_not(_cond_115)){ _ctx.reset_phase = 0.f; }
          _ctx.reset_state = 0;
          _ctx.phase = 0.f;
       }
       reset_out = _ctx.reset_phase;
    }
-   return (reset_out * sine_out);
+   _tuple___real_bool__ _tuple_117;
+   {
+      _tuple_117.field_0 = (reset_out * sine_out);
+      _tuple_117.field_1 = _ctx.reset_state;
+   }
+   _output_ = _tuple_117;
+   return ;
 }
 
 float Tohe_tone_k1(float g){
@@ -620,7 +630,7 @@ void Tohe__ctx_type_2_init(Tohe__ctx_type_2 &_output_){
    _ctx.k1 = 0.f;
    _ctx.k0 = 0.f;
    _ctx.comp = 0.f;
-   Util__ctx_type_3_init(_ctx._inst119);
+   Util__ctx_type_3_init(_ctx._inst124);
    Tohe_start(_ctx);
    _output_ = _ctx;
    return ;
@@ -632,9 +642,9 @@ void Tohe_do_init(Tohe__ctx_type_2 &_output_){
 }
 
 float Tohe_do(Tohe__ctx_type_2 &_ctx, float x, float gain){
-   uint8_t _cond_122;
-   _cond_122 = Util_change(_ctx._inst119,gain);
-   if(_cond_122){
+   uint8_t _cond_127;
+   _cond_127 = Util_change(_ctx._inst124,gain);
+   if(_cond_127){
       _ctx.k1 = Tohe_tone_k1(gain);
       _ctx.k0 = Tohe_tone_k0(gain);
       _ctx.comp = Util_map(fabsf(gain),0.f,1.f,1.f,1.8f);
@@ -645,9 +655,9 @@ float Tohe_do(Tohe__ctx_type_2 &_ctx, float x, float gain){
    y0 = ((_ctx.k0 * w0) + _ctx.w1);
    _ctx.w1 = w0;
    float sign;
-   uint8_t _cond_123;
-   _cond_123 = (gain < 0.f);
-   if(_cond_123){ sign = -1.f; }
+   uint8_t _cond_128;
+   _cond_128 = (gain < 0.f);
+   if(_cond_128){ sign = -1.f; }
    else
    { sign = 1.f; }
    return (((_ctx.k1 * (x + (sign * y0)) * 0.5f) + x) * _ctx.comp);
@@ -667,7 +677,7 @@ void Tohe_start(Tohe__ctx_type_2 &_ctx){
 void Swept__ctx_type_0_init(Swept__ctx_type_0 &_output_){
    Swept__ctx_type_0 _ctx;
    _ctx.out = 0.f;
-   Util__ctx_type_2_init(_ctx._inst125);
+   Util__ctx_type_2_init(_ctx._inst130);
    _output_ = _ctx;
    return ;
 }
@@ -680,10 +690,12 @@ void Swept_process_init(Swept__ctx_type_0 &_output_){
 float Swept_process(Swept__ctx_type_0 &_ctx, float gate, float start, float end, float rate){
    uint8_t bgate;
    bgate = (gate > 0.5f);
-   _ctx.out = (_ctx.out + ((end + (- _ctx.out)) * rate * 0.004f * Util_sampleRateScale()));
-   uint8_t _cond_131;
-   _cond_131 = Util_edge(_ctx._inst125,bgate);
-   if(_cond_131){
+   float g;
+   g = (1.f + (- Util_polylog((0.5f + (rate * 0.5f)))));
+   _ctx.out = (_ctx.out + ((end + (- _ctx.out)) * g * 0.004f * Util_sampleRateScale()));
+   uint8_t _cond_136;
+   _cond_136 = Util_edge(_ctx._inst130,bgate);
+   if(_cond_136){
       _ctx.out = start;
    }
    return _ctx.out;
@@ -725,7 +737,7 @@ void Noise__ctx_type_0_init(Noise__ctx_type_0 &_output_){
    Noise__ctx_type_0 _ctx;
    _ctx.x2 = 0;
    _ctx.x1 = 0;
-   Util__ctx_type_2_init(_ctx._inst133);
+   Util__ctx_type_2_init(_ctx._inst138);
    _output_ = _ctx;
    return ;
 }
@@ -744,9 +756,9 @@ float Noise_process(Noise__ctx_type_0 &_ctx, float gate){
    y2 = (int_to_float(_ctx.x2) * 3.0517578125e-05f);
    float out;
    out = (y1 + (- y2));
-   uint8_t _cond_139;
-   _cond_139 = Util_edge(_ctx._inst133,(gate > 0.1f));
-   if(_cond_139){
+   uint8_t _cond_144;
+   _cond_144 = Util_edge(_ctx._inst138,(gate > 0.1f));
+   if(_cond_144){
       _ctx.x1 = 0;
       _ctx.x2 = 0;
    }
@@ -803,9 +815,9 @@ float Decimate_decimate(Decimate__ctx_type_0 &_ctx, float in, float factor){
    n = float_to_int((127.f * factor));
    n = int_clip(n,0,127);
    _ctx.count = (_ctx.count + 1);
-   uint8_t _cond_142;
-   _cond_142 = (_ctx.count > n);
-   if(_cond_142){
+   uint8_t _cond_147;
+   _cond_147 = (_ctx.count > n);
+   if(_cond_147){
       _ctx.count = 0;
       _ctx.out = in;
    }
@@ -819,8 +831,8 @@ void Ahr__ctx_type_0_init(Ahr__ctx_type_0 &_output_){
    _ctx.rate = 0.f;
    _ctx.out = 0.f;
    _ctx.hold_phase = 0.f;
-   Util__ctx_type_2_init(_ctx._inst146);
-   Util__ctx_type_2_init(_ctx._inst144);
+   Util__ctx_type_2_init(_ctx._inst155);
+   Util__ctx_type_2_init(_ctx._inst149);
    _output_ = _ctx;
    return ;
 }
@@ -830,7 +842,7 @@ void Ahr_do_init(Ahr__ctx_type_0 &_output_){
    return ;
 }
 
-void Ahr_do(Ahr__ctx_type_0 &_ctx, float gate, float a, float h, float r, _tuple___real_real__ &_output_){
+void Ahr_do(Ahr__ctx_type_0 &_ctx, float gate, float a, float h, float r, uint8_t enabled, _tuple___real_real__ &_output_){
    int release;
    release = 0;
    int attack;
@@ -841,19 +853,44 @@ void Ahr_do(Ahr__ctx_type_0 &_ctx, float gate, float a, float h, float r, _tuple
    reset = 3;
    uint8_t bgate;
    bgate = (gate > 0.f);
-   uint8_t _cond_163;
-   _cond_163 = Util_edge(_ctx._inst144,bgate);
-   if(_cond_163){
+   uint8_t _cond_159;
+   _cond_159 = Util_edge(_ctx._inst149,bgate);
+   if(_cond_159){
       _ctx.state = reset;
    }
    float resetting;
-   uint8_t _cond_172;
-   _cond_172 = (_ctx.state == reset);
-   if(_cond_172){ resetting = 1.f; }
+   uint8_t _cond_168;
+   _cond_168 = (_ctx.state == reset);
+   if(_cond_168){ resetting = 1.f; }
    else
    { resetting = 0.f; }
+   uint8_t _cond_160;
+   _cond_160 = (_ctx.state == reset);
+   if(_cond_160){
+      _ctx.rate = 1.81818181818f;
+      _ctx.target = 0.f;
+   }
+   uint8_t _cond_161;
+   _cond_161 = ((_ctx.state == attack) && enabled);
+   if(_cond_161){
+      _ctx.rate = (1.f / ((100.f * a) + 0.05f));
+      _ctx.target = 1228.8f;
+   }
+   uint8_t _cond_162;
+   _cond_162 = (_ctx.state == hold);
+   if(_cond_162){
+      float hrate;
+      hrate = (1.f / ((100.f * h) + 0.05f));
+      _ctx.hold_phase = (_ctx.hold_phase + hrate);
+   }
+   uint8_t _cond_163;
+   _cond_163 = (_ctx.state == release);
+   if(_cond_163){
+      _ctx.rate = (1.f / ((200.f * r) + 0.05f));
+      _ctx.target = 0.f;
+   }
    uint8_t _cond_164;
-   _cond_164 = Util_edge(_ctx._inst146,(_ctx.out > 1024.f));
+   _cond_164 = Util_edge(_ctx._inst155,(_ctx.out > 1024.f));
    if(_cond_164){
       _ctx.hold_phase = 0.f;
       _ctx.state = hold;
@@ -868,111 +905,14 @@ void Ahr_do(Ahr__ctx_type_0 &_ctx, float gate, float a, float h, float r, _tuple
    if(_cond_166){
       _ctx.state = release;
    }
-   uint8_t _cond_167;
-   _cond_167 = (_ctx.state == reset);
-   if(_cond_167){
-      _ctx.rate = 1.81818181818f;
-      _ctx.target = 0.f;
-   }
-   uint8_t _cond_168;
-   _cond_168 = (_ctx.state == attack);
-   if(_cond_168){
-      _ctx.rate = (1.f / ((100.f * a) + 0.05f));
-      _ctx.target = 1228.8f;
-   }
-   uint8_t _cond_169;
-   _cond_169 = (_ctx.state == hold);
-   if(_cond_169){
-      float hrate;
-      hrate = (1.f / ((100.f * h) + 0.05f));
-      _ctx.hold_phase = (_ctx.hold_phase + hrate);
-   }
-   uint8_t _cond_170;
-   _cond_170 = (_ctx.state == release);
-   if(_cond_170){
-      _ctx.rate = (1.f / ((200.f * r) + 0.01f));
-      _ctx.target = 0.f;
-   }
    _ctx.out = (_ctx.out + ((_ctx.target + (- _ctx.out)) * _ctx.rate * 0.005f * Util_sampleRateScale()));
-   _tuple___real_real__ _tuple_171;
+   _tuple___real_real__ _tuple_167;
    {
-      _tuple_171.field_0 = float_clip((_ctx.out * 0.0009765625f),0.f,1.f);
-      _tuple_171.field_1 = resetting;
+      _tuple_167.field_0 = float_clip((_ctx.out * 0.0009765625f),0.f,1.f);
+      _tuple_167.field_1 = resetting;
    }
-   _output_ = _tuple_171;
+   _output_ = _tuple_167;
    return ;
-}
-
-void Ahr__ctx_type_1_init(Ahr__ctx_type_1 &_output_){
-   Ahr__ctx_type_1 _ctx;
-   _ctx.knob3 = 0.f;
-   _ctx.knob2 = 0.f;
-   _ctx.knob1 = 0.f;
-   Ahr__ctx_type_0_init(_ctx._inst155);
-   _output_ = _ctx;
-   return ;
-}
-
-void Ahr_process_init(Ahr__ctx_type_1 &_output_){
-   Ahr__ctx_type_1_init(_output_);
-   return ;
-}
-
-void Ahr_process(Ahr__ctx_type_1 &_ctx, float gate, _tuple___real_real__ &_output_){
-   _tuple___real_real__ _call_174;
-   Ahr_do(_ctx._inst155,gate,_ctx.knob1,_ctx.knob2,_ctx.knob3,_call_174);
-   _output_ = _call_174;
-   return ;
-}
-
-void Ahr_noteOn_init(Ahr__ctx_type_1 &_output_){
-   Ahr__ctx_type_1_init(_output_);
-   return ;
-}
-
-void Ahr_noteOn(Ahr__ctx_type_1 &_ctx, int note, int velocity, int channel){
-}
-
-void Ahr_noteOff_init(Ahr__ctx_type_1 &_output_){
-   Ahr__ctx_type_1_init(_output_);
-   return ;
-}
-
-void Ahr_noteOff(Ahr__ctx_type_1 &_ctx, int note, int channel){
-}
-
-void Ahr_controlChange_init(Ahr__ctx_type_1 &_output_){
-   Ahr__ctx_type_1_init(_output_);
-   return ;
-}
-
-void Ahr_controlChange(Ahr__ctx_type_1 &_ctx, int control, int value, int channel){
-   uint8_t _cond_176;
-   _cond_176 = (control == 1);
-   if(_cond_176){
-      _ctx.knob1 = (int_to_float(value) * 0.00787401574803f);
-   }
-   uint8_t _cond_177;
-   _cond_177 = (control == 2);
-   if(_cond_177){
-      _ctx.knob2 = (int_to_float(value) * 0.00787401574803f);
-   }
-   uint8_t _cond_178;
-   _cond_178 = (control == 3);
-   if(_cond_178){
-      _ctx.knob3 = (int_to_float(value) * 0.00787401574803f);
-   }
-}
-
-void Ahr_default_init(Ahr__ctx_type_1 &_output_){
-   Ahr__ctx_type_1_init(_output_);
-   return ;
-}
-
-void Ahr_default(Ahr__ctx_type_1 &_ctx){
-   _ctx.knob1 = 0.f;
-   _ctx.knob2 = 0.5f;
-   _ctx.knob3 = 0.5f;
 }
 
 void Trummor__ctx_type_0_init(Trummor__ctx_type_0 &_output_){
@@ -985,6 +925,7 @@ void Trummor__ctx_type_0_init(Trummor__ctx_type_0 &_output_){
    _ctx.int_noise = 0.f;
    _ctx.ext_osc = 0.f;
    _ctx.ext_noise = 0.f;
+   _ctx.env_enabled = 0;
    _ctx.env2_scale = 0.f;
    _ctx.env2_r = 0.f;
    _ctx.env2_h = 0.f;
@@ -996,13 +937,13 @@ void Trummor__ctx_type_0_init(Trummor__ctx_type_0 &_output_){
    _ctx.drive = 0.f;
    _ctx.decimate = 0.f;
    _ctx.bend = 0.f;
-   Tohe__ctx_type_2_init(_ctx._inst194);
-   Decimate__ctx_type_0_init(_ctx._inst193);
-   Noise__ctx_type_0_init(_ctx._inst192);
-   Ahr__ctx_type_0_init(_ctx._inst191);
-   Tricore__ctx_type_0_init(_ctx._inst190);
-   Swept__ctx_type_0_init(_ctx._inst189);
-   Ahr__ctx_type_0_init(_ctx._inst188);
+   Tohe__ctx_type_2_init(_ctx._inst181);
+   Decimate__ctx_type_0_init(_ctx._inst180);
+   Noise__ctx_type_0_init(_ctx._inst179);
+   Ahr__ctx_type_0_init(_ctx._inst178);
+   Tricore__ctx_type_0_init(_ctx._inst177);
+   Swept__ctx_type_0_init(_ctx._inst176);
+   Ahr__ctx_type_0_init(_ctx._inst175);
    _output_ = _ctx;
    return ;
 }
@@ -1015,36 +956,41 @@ void Trummor_do_init(Trummor__ctx_type_0 &_output_){
 void Trummor_do(Trummor__ctx_type_0 &_ctx, float gate, float osc_in, float noise_in, _tuple___real_real_real_real__ &_output_){
    float osc_env;
    float env_reset;
-   _tuple___real_real__ _call_212;
-   Ahr_do(_ctx._inst188,gate,(_ctx.env1_scale * _ctx.env1_a),(_ctx.env1_scale * _ctx.env1_h),(_ctx.env1_scale * _ctx.env1_r),_call_212);
-   osc_env = _call_212.field_0;env_reset = _call_212.field_1;
+   _tuple___real_real__ _call_199;
+   Ahr_do(_ctx._inst175,gate,(_ctx.env1_scale * _ctx.env1_a),(_ctx.env1_scale * _ctx.env1_h),(_ctx.env1_scale * _ctx.env1_r),_ctx.env_enabled,_call_199);
+   osc_env = _call_199.field_0;env_reset = _call_199.field_1;
    float cv;
-   cv = Swept_process(_ctx._inst189,(1.f + (- env_reset)),(_ctx.pitch + (_ctx.bend * 0.4f)),_ctx.pitch,0.1f);
+   cv = Swept_process(_ctx._inst176,(1.f + (- env_reset)),(_ctx.pitch + (_ctx.bend * 0.4f)),_ctx.pitch,0.1f);
    float osc;
-   osc = ((_ctx.int_osc * Tricore_process(_ctx._inst190,cv,0.f,env_reset)) + (_ctx.ext_osc * osc_in));
+   uint8_t reset_osc;
+   _tuple___real_bool__ _call_200;
+   Tricore_process(_ctx._inst177,cv,0.f,env_reset,_call_200);
+   osc = _call_200.field_0;reset_osc = _call_200.field_1;
+   osc = ((_ctx.int_osc * osc) + (_ctx.ext_osc * osc_in));
+   _ctx.env_enabled = bool_not(reset_osc);
    float osc_sat;
    osc_sat = Util_saturate(((_ctx.drive + 1.f) * osc));
    float noise_env;
-   _tuple___real_real__ _call_213;
-   Ahr_do(_ctx._inst191,gate,(_ctx.env2_scale * _ctx.env2_a),(_ctx.env2_scale * _ctx.env2_h),(_ctx.env2_scale * _ctx.env2_r),_call_213);
-   noise_env = _call_213.field_0;
+   _tuple___real_real__ _call_201;
+   Ahr_do(_ctx._inst178,gate,(_ctx.env2_scale * _ctx.env2_a),(_ctx.env2_scale * _ctx.env2_h),(_ctx.env2_scale * _ctx.env2_r),_ctx.env_enabled,_call_201);
+   noise_env = _call_201.field_0;
    float noise_osc;
-   uint8_t _cond_217;
-   _cond_217 = (_ctx.decimate == 0.f);
-   if(_cond_217){ noise_osc = ((_ctx.int_noise * (float_random() + -0.5f)) + (_ctx.ext_noise * noise_in)); }
+   uint8_t _cond_206;
+   _cond_206 = (_ctx.decimate == 0.f);
+   if(_cond_206){ noise_osc = ((_ctx.int_noise * (float_random() + -0.5f)) + (_ctx.ext_noise * noise_in)); }
    else
-   { noise_osc = Decimate_decimate(_ctx._inst193,((_ctx.int_noise * Noise_process(_ctx._inst192,gate)) + (_ctx.ext_noise * noise_in)),_ctx.decimate); }
-   noise_osc = Tohe_do(_ctx._inst194,noise_osc,_ctx.tone);
+   { noise_osc = Decimate_decimate(_ctx._inst180,((_ctx.int_noise * Noise_process(_ctx._inst179,gate)) + (_ctx.ext_noise * noise_in)),_ctx.decimate); }
+   noise_osc = Tohe_do(_ctx._inst181,noise_osc,_ctx.tone);
    float output;
    output = ((_ctx.level1 * osc_env * osc_sat) + (_ctx.level2 * noise_env * noise_osc));
-   _tuple___real_real_real_real__ _tuple_214;
+   _tuple___real_real_real_real__ _tuple_202;
    {
-      _tuple_214.field_0 = output;
-      _tuple_214.field_1 = cv;
-      _tuple_214.field_2 = osc_env;
-      _tuple_214.field_3 = noise_env;
+      _tuple_202.field_0 = output;
+      _tuple_202.field_1 = cv;
+      _tuple_202.field_2 = osc_env;
+      _tuple_202.field_3 = noise_env;
    }
-   _output_ = _tuple_214;
+   _output_ = _tuple_202;
    return ;
 }
 
@@ -1182,9 +1128,9 @@ void Trummor_setEnv1Scale_init(Trummor__ctx_type_0 &_output_){
 }
 
 void Trummor_setEnv1Scale(Trummor__ctx_type_0 &_ctx, float value){
-   uint8_t _cond_219;
-   _cond_219 = (value < 0.5f);
-   if(_cond_219){ _ctx.env1_scale = 1.f; }
+   uint8_t _cond_208;
+   _cond_208 = (value < 0.5f);
+   if(_cond_208){ _ctx.env1_scale = 1.f; }
    else
    { _ctx.env1_scale = 0.2f; }
 }
@@ -1195,9 +1141,9 @@ void Trummor_setEnv2Scale_init(Trummor__ctx_type_0 &_output_){
 }
 
 void Trummor_setEnv2Scale(Trummor__ctx_type_0 &_ctx, float value){
-   uint8_t _cond_220;
-   _cond_220 = (value < 0.5f);
-   if(_cond_220){ _ctx.env2_scale = 1.f; }
+   uint8_t _cond_209;
+   _cond_209 = (value < 0.5f);
+   if(_cond_209){ _ctx.env2_scale = 1.f; }
    else
    { _ctx.env2_scale = 0.2f; }
 }
@@ -1209,6 +1155,415 @@ void Trummor_setDecimate_init(Trummor__ctx_type_0 &_output_){
 
 void Trummor_setDecimate(Trummor__ctx_type_0 &_ctx, float value){
    _ctx.decimate = float_clip(value,0.f,1.f);
+}
+
+float Tohe2_tone_k1(float g){
+   int index;
+   index = int_clip(float_to_int((15.5f * (g + 1.f))),0,31);
+   return (float_wrap_array(Tohe2_tone_k1_c0)[index] + (g * (float_wrap_array(Tohe2_tone_k1_c1)[index] + (float_wrap_array(Tohe2_tone_k1_c2)[index] * g))));
+}
+
+float Tohe2_tone_k0(float g){
+   int index;
+   index = int_clip(float_to_int((15.5f * (g + 1.f))),0,31);
+   return (float_wrap_array(Tohe2_tone_k0_c0)[index] + (g * (float_wrap_array(Tohe2_tone_k0_c1)[index] + (float_wrap_array(Tohe2_tone_k0_c2)[index] * g))));
+}
+
+void Tohe2__ctx_type_2_init(Tohe2__ctx_type_2 &_output_){
+   Tohe2__ctx_type_2 _ctx;
+   _ctx.w1 = 0.f;
+   _ctx.k1 = 0.f;
+   _ctx.k0 = 0.f;
+   _ctx.comp = 0.f;
+   Util__ctx_type_3_init(_ctx._inst221);
+   Tohe2_start(_ctx);
+   _output_ = _ctx;
+   return ;
+}
+
+void Tohe2_stage_init(Tohe2__ctx_type_2 &_output_){
+   Tohe2__ctx_type_2_init(_output_);
+   return ;
+}
+
+float Tohe2_stage(Tohe2__ctx_type_2 &_ctx, float x, float gain){
+   uint8_t _cond_230;
+   _cond_230 = Util_change(_ctx._inst221,gain);
+   if(_cond_230){
+      _ctx.k1 = Tohe2_tone_k1(gain);
+      _ctx.k0 = Tohe2_tone_k0(gain);
+      uint8_t _cond_229;
+      _cond_229 = (gain > 0.f);
+      if(_cond_229){ _ctx.comp = 1.f; }
+      else
+      { _ctx.comp = Util_map(fabsf(gain),0.f,1.f,1.f,1.4f); }
+   }
+   float w0;
+   w0 = (x + (- (_ctx.k0 * _ctx.w1)));
+   float y0;
+   y0 = ((_ctx.k0 * w0) + _ctx.w1);
+   _ctx.w1 = w0;
+   float sign;
+   uint8_t _cond_231;
+   _cond_231 = (gain < 0.f);
+   if(_cond_231){ sign = -1.f; }
+   else
+   { sign = 1.f; }
+   return (((_ctx.k1 * (x + (sign * y0)) * 0.5f) + x) * _ctx.comp);
+}
+
+void Tohe2_start_init(Tohe2__ctx_type_2 &_output_){
+   Tohe2__ctx_type_2_init(_output_);
+   return ;
+}
+
+void Tohe2_start(Tohe2__ctx_type_2 &_ctx){
+   _ctx.k1 = 0.f;
+   _ctx.k0 = -0.847311804015f;
+   _ctx.comp = 1.f;
+}
+
+void Tohe2__ctx_type_3_init(Tohe2__ctx_type_3 &_output_){
+   Tohe2__ctx_type_3 _ctx;
+   Tohe2__ctx_type_2_init(_ctx._inst228);
+   Tohe2__ctx_type_2_init(_ctx._inst227);
+   Tohe2__ctx_type_2_init(_ctx._inst226);
+   Tohe2__ctx_type_2_init(_ctx._inst225);
+   _output_ = _ctx;
+   return ;
+}
+
+void Tohe2_do_init(Tohe2__ctx_type_3 &_output_){
+   Tohe2__ctx_type_3_init(_output_);
+   return ;
+}
+
+float Tohe2_do(Tohe2__ctx_type_3 &_ctx, float x, float gain){
+   return Tohe2_stage(_ctx._inst228,Tohe2_stage(_ctx._inst227,Tohe2_stage(_ctx._inst226,Tohe2_stage(_ctx._inst225,x,gain),gain),gain),gain);
+}
+
+void Trummor2__ctx_type_0_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0 _ctx;
+   _ctx.tone = 0.f;
+   _ctx.sub = 0.f;
+   _ctx.ring_sel = 0;
+   _ctx.resonance = 0.f;
+   _ctx.pitch = 0.f;
+   _ctx.level2 = 0.f;
+   _ctx.level1 = 0.f;
+   _ctx.int_osc = 0.f;
+   _ctx.int_noise = 0.f;
+   _ctx.ext_osc = 0.f;
+   _ctx.ext_noise = 0.f;
+   _ctx.env_enabled = 0;
+   _ctx.env2_scale = 0.f;
+   _ctx.env2_r = 0.f;
+   _ctx.env2_h = 0.f;
+   _ctx.env2_a = 0.f;
+   _ctx.env1_scale = 0.f;
+   _ctx.env1_r = 0.f;
+   _ctx.env1_h = 0.f;
+   _ctx.env1_a = 0.f;
+   _ctx.drive = 0.f;
+   _ctx.decimate = 0.f;
+   _ctx.cutoff = 0.f;
+   _ctx.cheby = 0.f;
+   _ctx.bend_time = 0.f;
+   _ctx.bend = 0.f;
+   Stabile__ctx_type_8_init(_ctx._inst243);
+   Tohe2__ctx_type_3_init(_ctx._inst242);
+   Decimate__ctx_type_0_init(_ctx._inst241);
+   Noise__ctx_type_0_init(_ctx._inst240);
+   Decimate__ctx_type_0_init(_ctx._inst239);
+   Noise__ctx_type_0_init(_ctx._inst238);
+   Ahr__ctx_type_0_init(_ctx._inst237);
+   Tricore__ctx_type_0_init(_ctx._inst236);
+   Tricore__ctx_type_0_init(_ctx._inst235);
+   Swept__ctx_type_0_init(_ctx._inst234);
+   Ahr__ctx_type_0_init(_ctx._inst233);
+   _output_ = _ctx;
+   return ;
+}
+
+void Trummor2_do_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_do(Trummor2__ctx_type_0 &_ctx, float gate, float osc_in, float noise_in, _tuple___real_real_real_real__ &_output_){
+   float osc_env;
+   float env_reset;
+   _tuple___real_real__ _call_267;
+   Ahr_do(_ctx._inst233,gate,(_ctx.env1_scale * _ctx.env1_a),(_ctx.env1_scale * _ctx.env1_h),(_ctx.env1_scale * _ctx.env1_r),_ctx.env_enabled,_call_267);
+   osc_env = _call_267.field_0;env_reset = _call_267.field_1;
+   float swept;
+   swept = Swept_process(_ctx._inst234,(1.f + (- env_reset)),(_ctx.bend * 0.6f),0.f,_ctx.bend_time);
+   float cv;
+   cv = (_ctx.pitch + swept);
+   float sub_osc;
+   uint8_t reset_sub;
+   _tuple___real_bool__ _call_268;
+   Tricore_process(_ctx._inst235,(cv + -0.1f),0.f,env_reset,_call_268);
+   sub_osc = _call_268.field_0;reset_sub = _call_268.field_1;
+   float osc;
+   uint8_t reset_osc;
+   _tuple___real_bool__ _call_269;
+   Tricore_process(_ctx._inst236,cv,0.f,env_reset,_call_269);
+   osc = _call_269.field_0;reset_osc = _call_269.field_1;
+   _ctx.env_enabled = (bool_not(reset_sub) && bool_not(reset_osc));
+   osc = ((_ctx.sub * sub_osc) + osc);
+   osc = ((_ctx.int_osc * osc) + (_ctx.ext_osc * osc_in));
+   osc = (osc + (_ctx.cheby * Util_cheby3(osc)));
+   osc = Util_saturate(((_ctx.drive + 1.f) * osc));
+   float noise_env;
+   _tuple___real_real__ _call_270;
+   Ahr_do(_ctx._inst237,gate,(_ctx.env2_scale * _ctx.env2_a),(_ctx.env2_scale * _ctx.env2_h),(_ctx.env2_scale * _ctx.env2_r),_ctx.env_enabled,_call_270);
+   noise_env = _call_270.field_0;
+   float noise_osc;
+   uint8_t _cond_277;
+   _cond_277 = (_ctx.decimate == 0.f);
+   if(_cond_277){ if(_ctx.ring_sel){ noise_osc = (5.f * (float_random() + -0.5f) * noise_in); }
+   else
+   { noise_osc = ((_ctx.int_noise * (float_random() + -0.5f)) + (_ctx.ext_noise * noise_in)); } }
+   else
+   { if(_ctx.ring_sel){ noise_osc = (5.f * Decimate_decimate(_ctx._inst239,Noise_process(_ctx._inst238,gate),_ctx.decimate) * noise_in); }
+   else
+   { noise_osc = Decimate_decimate(_ctx._inst241,((_ctx.int_noise * Noise_process(_ctx._inst240,gate)) + (_ctx.ext_noise * noise_in)),_ctx.decimate); } }
+   noise_osc = Tohe2_do(_ctx._inst242,noise_osc,_ctx.tone);
+   float filter_input;
+   filter_input = (noise_env * noise_osc);
+   float filter_output;
+   _tuple___real_real_real_real__ _call_271;
+   Stabile_process(_ctx._inst243,filter_input,_ctx.cutoff,(4.f * _ctx.resonance),0.5f,_call_271);
+   filter_output = _call_271.field_0;
+   float output;
+   output = ((_ctx.level1 * osc_env * osc) + (_ctx.level2 * filter_output));
+   _tuple___real_real_real_real__ _tuple_272;
+   {
+      _tuple_272.field_0 = output;
+      _tuple_272.field_1 = cv;
+      _tuple_272.field_2 = osc_env;
+      _tuple_272.field_3 = noise_env;
+   }
+   _output_ = _tuple_272;
+   return ;
+}
+
+void Trummor2_setLevel1_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setLevel1(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.level1 = float_clip(value,0.f,1.f);
+}
+
+void Trummor2_setLevel2_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setLevel2(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.level2 = float_clip(value,0.f,1.f);
+}
+
+void Trummor2_setEnv1A_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setEnv1A(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.env1_a = float_clip(value,0.f,1.f);
+}
+
+void Trummor2_setEnv1H_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setEnv1H(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.env1_h = float_clip(value,0.f,1.f);
+}
+
+void Trummor2_setEnv1R_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setEnv1R(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.env1_r = float_clip(value,0.f,1.f);
+}
+
+void Trummor2_setEnv2A_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setEnv2A(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.env2_a = float_clip(value,0.f,1.f);
+}
+
+void Trummor2_setEnv2H_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setEnv2H(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.env2_h = float_clip(value,0.f,1.f);
+}
+
+void Trummor2_setEnv2R_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setEnv2R(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.env2_r = float_clip(value,0.f,1.f);
+}
+
+void Trummor2_setPitch_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setPitch(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.pitch = float_clip(value,-1.f,1.f);
+}
+
+void Trummor2_setBend_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setBend(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.bend = float_clip(value,-1.f,1.f);
+}
+
+void Trummor2_setDrive_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setDrive(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.drive = float_clip(value,0.f,1.f);
+}
+
+void Trummor2_setTone_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setTone(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.tone = float_clip(value,-1.f,1.f);
+}
+
+void Trummor2_setOscBlend_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setOscBlend(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.int_osc = Util_fadeA(value);
+   _ctx.ext_osc = Util_fadeB(value);
+}
+
+void Trummor2_setNoiseBlend_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setNoiseBlend(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.int_noise = Util_fadeA(value);
+   _ctx.ext_noise = Util_fadeB(value);
+}
+
+void Trummor2_setEnv1Scale_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setEnv1Scale(Trummor2__ctx_type_0 &_ctx, float value){
+   uint8_t _cond_280;
+   _cond_280 = (value < 0.5f);
+   if(_cond_280){ _ctx.env1_scale = 1.f; }
+   else
+   { _ctx.env1_scale = 0.2f; }
+}
+
+void Trummor2_setEnv2Scale_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setEnv2Scale(Trummor2__ctx_type_0 &_ctx, float value){
+   uint8_t _cond_281;
+   _cond_281 = (value < 0.5f);
+   if(_cond_281){ _ctx.env2_scale = 1.f; }
+   else
+   { _ctx.env2_scale = 0.2f; }
+}
+
+void Trummor2_setDecimate_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setDecimate(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.decimate = float_clip(value,0.f,1.f);
+}
+
+void Trummor2_setRingSel_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setRingSel(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.ring_sel = (value > 0.5f);
+}
+
+void Trummor2_setBendTime_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setBendTime(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.bend_time = value;
+}
+
+void Trummor2_setSub_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setSub(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.sub = value;
+}
+
+void Trummor2_setCheby_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setCheby(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.cheby = value;
+}
+
+void Trummor2_setCutoff_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setCutoff(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.cutoff = value;
+}
+
+void Trummor2_setResonance_init(Trummor2__ctx_type_0 &_output_){
+   Trummor2__ctx_type_0_init(_output_);
+   return ;
+}
+
+void Trummor2_setResonance(Trummor2__ctx_type_0 &_ctx, float value){
+   _ctx.resonance = value;
 }
 
 float Tangents_tune(float cut, float fs, float oversampling){
@@ -1256,44 +1611,44 @@ float Tangents_tune_192000(float cut){
 }
 
 float Tangents_getTune(float cut, float fs){
-   uint8_t _cond_266;
-   _cond_266 = (fs == 44100.f);
-   if(_cond_266){
+   uint8_t _cond_345;
+   _cond_345 = (fs == 44100.f);
+   if(_cond_345){
       return Tangents_tune_44100(cut);
    }
    else
    {
-      uint8_t _cond_265;
-      _cond_265 = (fs == 48000.f);
-      if(_cond_265){
+      uint8_t _cond_344;
+      _cond_344 = (fs == 48000.f);
+      if(_cond_344){
          return Tangents_tune_48000(cut);
       }
       else
       {
-         uint8_t _cond_264;
-         _cond_264 = (fs == 88200.f);
-         if(_cond_264){
+         uint8_t _cond_343;
+         _cond_343 = (fs == 88200.f);
+         if(_cond_343){
             return Tangents_tune_88200(cut);
          }
          else
          {
-            uint8_t _cond_263;
-            _cond_263 = (fs == 96000.f);
-            if(_cond_263){
+            uint8_t _cond_342;
+            _cond_342 = (fs == 96000.f);
+            if(_cond_342){
                return Tangents_tune_96000(cut);
             }
             else
             {
-               uint8_t _cond_262;
-               _cond_262 = (fs == 176400.f);
-               if(_cond_262){
+               uint8_t _cond_341;
+               _cond_341 = (fs == 176400.f);
+               if(_cond_341){
                   return Tangents_tune_176400(cut);
                }
                else
                {
-                  uint8_t _cond_261;
-                  _cond_261 = (fs == 192000.f);
-                  if(_cond_261){
+                  uint8_t _cond_340;
+                  _cond_340 = (fs == 192000.f);
+                  if(_cond_340){
                      return Tangents_tune_192000(cut);
                   }
                   else
@@ -1352,11 +1707,11 @@ void Tangents__ctx_type_9_init(Tangents__ctx_type_9 &_output_){
    Tangents__ctx_type_9 _ctx;
    Tangents__ctx_type_8_init(_ctx.h);
    _ctx.fh = 0.f;
-   Util__ctx_type_26_init(_ctx._inst256);
-   Util__ctx_type_26_init(_ctx._inst255);
-   Util__ctx_type_26_init(_ctx._inst254);
-   Util__ctx_type_3_init(_ctx._inst250);
-   Util__ctx_type_3_init(_ctx._inst249);
+   Util__ctx_type_26_init(_ctx._inst335);
+   Util__ctx_type_26_init(_ctx._inst334);
+   Util__ctx_type_26_init(_ctx._inst333);
+   Util__ctx_type_3_init(_ctx._inst329);
+   Util__ctx_type_3_init(_ctx._inst328);
    _output_ = _ctx;
    return ;
 }
@@ -1369,26 +1724,26 @@ void Tangents_process_heun_init(Tangents__ctx_type_9 &_output_){
 float Tangents_process_heun(Tangents__ctx_type_9 &_ctx, float lp, float bp, float hp, float cut, float res){
    float fs;
    fs = getSampleRate();
-   uint8_t _cond_267;
-   _cond_267 = (Util_change(_ctx._inst249,cut) || Util_change(_ctx._inst250,fs));
-   if(_cond_267){
+   uint8_t _cond_346;
+   _cond_346 = (Util_change(_ctx._inst328,cut) || Util_change(_ctx._inst329,fs));
+   if(_cond_346){
       _ctx.fh = Tangents_getTune(cut,fs);
    }
    float out;
    out = 0.f;
-   uint8_t _cond_268;
-   _cond_268 = ((fs == 176400.f) || (fs == 192000.f));
-   if(_cond_268){
+   uint8_t _cond_347;
+   _cond_347 = ((fs == 176400.f) || (fs == 192000.f));
+   if(_cond_347){
       out = Tangents_heun(_ctx.h,lp,bp,hp,_ctx.fh,cut,res);
    }
    else
    {
       float lp1;
-      lp1 = Util_upsampleOrder1_2x(_ctx._inst254,lp);
+      lp1 = Util_upsampleOrder1_2x(_ctx._inst333,lp);
       float bp1;
-      bp1 = Util_upsampleOrder1_2x(_ctx._inst255,bp);
+      bp1 = Util_upsampleOrder1_2x(_ctx._inst334,bp);
       float hp1;
-      hp1 = Util_upsampleOrder1_2x(_ctx._inst256,hp);
+      hp1 = Util_upsampleOrder1_2x(_ctx._inst335,hp);
       out = Tangents_heun(_ctx.h,lp1,bp1,hp1,_ctx.fh,cut,res);
       out = Tangents_heun(_ctx.h,lp,bp,hp,_ctx.fh,cut,res);
    }
@@ -1416,8 +1771,8 @@ float Tangents_simple_noise(Tangents__ctx_type_10 &_ctx){
 
 void Tangents__ctx_type_11_init(Tangents__ctx_type_11 &_output_){
    Tangents__ctx_type_11 _ctx;
-   Tangents__ctx_type_9_init(_ctx._inst260);
-   Util__ctx_type_18_init(_ctx._inst259);
+   Tangents__ctx_type_9_init(_ctx._inst339);
+   Util__ctx_type_18_init(_ctx._inst338);
    _output_ = _ctx;
    return ;
 }
@@ -1433,16 +1788,16 @@ float Tangents_process(Tangents__ctx_type_11 &_ctx, float lp, float bp, float hp
    float comp;
    comp = Util_map(res,0.9f,1.f,0.f,0.25f);
    float limit;
-   uint8_t _cond_269;
-   _cond_269 = (comp > 0.f);
-   if(_cond_269){ limit = (0.9f + (- comp)); }
+   uint8_t _cond_348;
+   _cond_348 = (comp > 0.f);
+   if(_cond_348){ limit = (0.9f + (- comp)); }
    else
    { limit = 0.9f; }
    float cut;
    cut = float_clip(cut_in,0.f,limit);
    float noise;
-   noise = (Util_simple_noise(_ctx._inst259) * 0.005f);
-   return Tangents_process_heun(_ctx._inst260,(lp + noise),bp,hp,cut,res);
+   noise = (Util_simple_noise(_ctx._inst338) * 0.005f);
+   return Tangents_process_heun(_ctx._inst339,(lp + noise),bp,hp,cut,res);
 }
 
 void Rescomb__ctx_type_0_init(Rescomb__ctx_type_0 &_output_){
@@ -1465,9 +1820,9 @@ float Rescomb_delay(Rescomb__ctx_type_0 &_ctx, float x, float cv){
    r_size = 3000.f;
    float r_index;
    r_index = fmodf((int_to_float(_ctx.write_pos) + (- (Util_cvToperiodUnit(cv) * getSampleRate()))),r_size);
-   uint8_t _cond_277;
-   _cond_277 = (r_index < 0.f);
-   if(_cond_277){ r_index = (r_size + r_index); }
+   uint8_t _cond_356;
+   _cond_356 = (r_index < 0.f);
+   if(_cond_356){ r_index = (r_size + r_index); }
    int t1;
    t1 = (float_to_int(floorf(r_index)) % 3000);
    int t2;
@@ -1493,9 +1848,9 @@ void Rescomb__ctx_type_2_init(Rescomb__ctx_type_2 &_output_){
    Rescomb__ctx_type_2 _ctx;
    _ctx.stone = 0.f;
    _ctx.output = 0.f;
-   Rescomb__ctx_type_0_init(_ctx._inst276);
-   Util__ctx_type_9_init(_ctx._inst275);
-   Util__ctx_type_3_init(_ctx._inst273);
+   Rescomb__ctx_type_0_init(_ctx._inst355);
+   Util__ctx_type_9_init(_ctx._inst354);
+   Util__ctx_type_3_init(_ctx._inst352);
    _output_ = _ctx;
    return ;
 }
@@ -1506,16 +1861,16 @@ void Rescomb_do_init(Rescomb__ctx_type_2 &_output_){
 }
 
 float Rescomb_do(Rescomb__ctx_type_2 &_ctx, float in, float cv, float tone, float res){
-   uint8_t _cond_279;
-   _cond_279 = Util_change(_ctx._inst273,tone);
-   if(_cond_279){
+   uint8_t _cond_358;
+   _cond_358 = Util_change(_ctx._inst352,tone);
+   if(_cond_358){
       _ctx.stone = Rescomb_toneCurve(tone);
    }
    float feedback;
-   feedback = Util_dcblock(_ctx._inst275,(_ctx.output * res));
+   feedback = Util_dcblock(_ctx._inst354,(_ctx.output * res));
    float saturated_input;
    saturated_input = Util_stanh((in + feedback));
-   _ctx.output = ((_ctx.stone * Rescomb_delay(_ctx._inst276,saturated_input,cv)) + in);
+   _ctx.output = ((_ctx.stone * Rescomb_delay(_ctx._inst355,saturated_input,cv)) + in);
    return Util_stanh(_ctx.output);
 }
 
@@ -1564,44 +1919,44 @@ float Lateralus_tune_192000(float cut){
 }
 
 float Lateralus_getTune(float cut, float fs){
-   uint8_t _cond_316;
-   _cond_316 = (fs == 44100.f);
-   if(_cond_316){
+   uint8_t _cond_395;
+   _cond_395 = (fs == 44100.f);
+   if(_cond_395){
       return Lateralus_tune_44100(cut);
    }
    else
    {
-      uint8_t _cond_315;
-      _cond_315 = (fs == 48000.f);
-      if(_cond_315){
+      uint8_t _cond_394;
+      _cond_394 = (fs == 48000.f);
+      if(_cond_394){
          return Lateralus_tune_48000(cut);
       }
       else
       {
-         uint8_t _cond_314;
-         _cond_314 = (fs == 88200.f);
-         if(_cond_314){
+         uint8_t _cond_393;
+         _cond_393 = (fs == 88200.f);
+         if(_cond_393){
             return Lateralus_tune_88200(cut);
          }
          else
          {
-            uint8_t _cond_313;
-            _cond_313 = (fs == 96000.f);
-            if(_cond_313){
+            uint8_t _cond_392;
+            _cond_392 = (fs == 96000.f);
+            if(_cond_392){
                return Lateralus_tune_96000(cut);
             }
             else
             {
-               uint8_t _cond_312;
-               _cond_312 = (fs == 176400.f);
-               if(_cond_312){
+               uint8_t _cond_391;
+               _cond_391 = (fs == 176400.f);
+               if(_cond_391){
                   return Lateralus_tune_176400(cut);
                }
                else
                {
-                  uint8_t _cond_311;
-                  _cond_311 = (fs == 192000.f);
-                  if(_cond_311){
+                  uint8_t _cond_390;
+                  _cond_390 = (fs == 192000.f);
+                  if(_cond_390){
                      return Lateralus_tune_192000(cut);
                   }
                   else
@@ -1679,12 +2034,12 @@ void Lateralus_heun(Lateralus__ctx_type_8 &_ctx, float input, float fh, float re
    _ctx.p1 = (_ctx.p1 + ((dp1 + dpt1) * 0.5f));
    _ctx.p2 = (_ctx.p2 + ((dp2 + dpt2) * 0.5f));
    _ctx.p3 = (_ctx.p3 + ((dp3 + dpt3) * 0.5f));
-   _tuple___real_real__ _tuple_317;
+   _tuple___real_real__ _tuple_396;
    {
-      _tuple_317.field_0 = _ctx.p1;
-      _tuple_317.field_1 = _ctx.p3;
+      _tuple_396.field_0 = _ctx.p1;
+      _tuple_396.field_1 = _ctx.p3;
    }
-   _output_ = _tuple_317;
+   _output_ = _tuple_396;
    return ;
 }
 
@@ -1692,9 +2047,9 @@ void Lateralus__ctx_type_9_init(Lateralus__ctx_type_9 &_output_){
    Lateralus__ctx_type_9 _ctx;
    Lateralus__ctx_type_8_init(_ctx.h);
    _ctx.fh = 0.f;
-   Util__ctx_type_26_init(_ctx._inst307);
-   Util__ctx_type_3_init(_ctx._inst303);
-   Util__ctx_type_3_init(_ctx._inst302);
+   Util__ctx_type_26_init(_ctx._inst386);
+   Util__ctx_type_3_init(_ctx._inst382);
+   Util__ctx_type_3_init(_ctx._inst381);
    _output_ = _ctx;
    return ;
 }
@@ -1707,46 +2062,46 @@ void Lateralus_process_heun_init(Lateralus__ctx_type_9 &_output_){
 void Lateralus_process_heun(Lateralus__ctx_type_9 &_ctx, float input, float cut, float res, _tuple___real_real__ &_output_){
    float fs;
    fs = getSampleRate();
-   uint8_t _cond_319;
-   _cond_319 = (Util_change(_ctx._inst302,cut) || Util_change(_ctx._inst303,fs));
-   if(_cond_319){
+   uint8_t _cond_398;
+   _cond_398 = (Util_change(_ctx._inst381,cut) || Util_change(_ctx._inst382,fs));
+   if(_cond_398){
       _ctx.fh = Lateralus_getTune(cut,fs);
    }
    float db12;
    float db24;
    db12 = 0.f;
    db24 = 0.f;
-   uint8_t _cond_327;
-   _cond_327 = ((fs == 176400.f) || (fs == 192000.f));
-   if(_cond_327){
-      _tuple___real_real__ _call_321;
-      Lateralus_heun(_ctx.h,input,_ctx.fh,res,_call_321);
-      db12 = _call_321.field_0;db24 = _call_321.field_1;
+   uint8_t _cond_406;
+   _cond_406 = ((fs == 176400.f) || (fs == 192000.f));
+   if(_cond_406){
+      _tuple___real_real__ _call_400;
+      Lateralus_heun(_ctx.h,input,_ctx.fh,res,_call_400);
+      db12 = _call_400.field_0;db24 = _call_400.field_1;
    }
    else
    {
       float input1;
-      input1 = Util_upsampleOrder1_2x(_ctx._inst307,input);
-      _tuple___real_real__ _call_323;
-      Lateralus_heun(_ctx.h,input1,_ctx.fh,res,_call_323);
-      db12 = _call_323.field_0;db24 = _call_323.field_1;
-      _tuple___real_real__ _call_324;
-      Lateralus_heun(_ctx.h,input,_ctx.fh,res,_call_324);
-      db12 = _call_324.field_0;db24 = _call_324.field_1;
+      input1 = Util_upsampleOrder1_2x(_ctx._inst386,input);
+      _tuple___real_real__ _call_402;
+      Lateralus_heun(_ctx.h,input1,_ctx.fh,res,_call_402);
+      db12 = _call_402.field_0;db24 = _call_402.field_1;
+      _tuple___real_real__ _call_403;
+      Lateralus_heun(_ctx.h,input,_ctx.fh,res,_call_403);
+      db12 = _call_403.field_0;db24 = _call_403.field_1;
    }
-   _tuple___real_real__ _tuple_328;
+   _tuple___real_real__ _tuple_407;
    {
-      _tuple_328.field_0 = (db12 * (1.f + (res * 0.5f)));
-      _tuple_328.field_1 = (db24 * (1.f + (res * 1.5f)));
+      _tuple_407.field_0 = (db12 * (1.f + (res * 0.5f)));
+      _tuple_407.field_1 = (db24 * (1.f + (res * 1.5f)));
    }
-   _output_ = _tuple_328;
+   _output_ = _tuple_407;
    return ;
 }
 
 void Lateralus__ctx_type_10_init(Lateralus__ctx_type_10 &_output_){
    Lateralus__ctx_type_10 _ctx;
-   Lateralus__ctx_type_9_init(_ctx._inst310);
-   Util__ctx_type_18_init(_ctx._inst309);
+   Lateralus__ctx_type_9_init(_ctx._inst389);
+   Util__ctx_type_18_init(_ctx._inst388);
    _output_ = _ctx;
    return ;
 }
@@ -1762,18 +2117,18 @@ void Lateralus_process(Lateralus__ctx_type_10 &_ctx, float input, float cut_in, 
    float comp;
    comp = Util_map(res,0.9f,1.f,0.f,0.25f);
    float limit;
-   uint8_t _cond_331;
-   _cond_331 = (comp > 0.f);
-   if(_cond_331){ limit = (0.9f + (- comp)); }
+   uint8_t _cond_410;
+   _cond_410 = (comp > 0.f);
+   if(_cond_410){ limit = (0.9f + (- comp)); }
    else
    { limit = 0.9f; }
    float cut;
    cut = float_clip(cut_in,0.f,limit);
    float noise;
-   noise = (Util_simple_noise(_ctx._inst309) * 0.005f);
-   _tuple___real_real__ _call_330;
-   Lateralus_process_heun(_ctx._inst310,(input + noise),cut,(res * 1.1f),_call_330);
-   _output_ = _call_330;
+   noise = (Util_simple_noise(_ctx._inst388) * 0.005f);
+   _tuple___real_real__ _call_409;
+   Lateralus_process_heun(_ctx._inst389,(input + noise),cut,(res * 1.1f),_call_409);
+   _output_ = _call_409;
    return ;
 }
 
@@ -1792,9 +2147,9 @@ float Debriatus_factor(float cv){
 float Debriatus_crush(float i, float cv){
    float out;
    out = i;
-   uint8_t _cond_376;
-   _cond_376 = (cv == 0.f);
-   if(_cond_376){
+   uint8_t _cond_455;
+   _cond_455 = (cv == 0.f);
+   if(_cond_455){
       out = i;
    }
    else
@@ -1810,9 +2165,9 @@ float Debriatus_crush(float i, float cv){
 
 float Debriatus_fold(float signal, float level){
    float sign;
-   uint8_t _cond_377;
-   _cond_377 = (signal > 0.f);
-   if(_cond_377){ sign = 1.f; }
+   uint8_t _cond_456;
+   _cond_456 = (signal > 0.f);
+   if(_cond_456){ sign = 1.f; }
    else
    { sign = -1.f; }
    float amp;
@@ -1822,9 +2177,9 @@ float Debriatus_fold(float signal, float level){
    float delta;
    delta = (amp + (- base));
    float out;
-   uint8_t _cond_378;
-   _cond_378 = ((float_to_int(base) % 2) != 0);
-   if(_cond_378){ out = (1.f + (- delta)); }
+   uint8_t _cond_457;
+   _cond_457 = ((float_to_int(base) % 2) != 0);
+   if(_cond_457){ out = (1.f + (- delta)); }
    else
    { out = delta; }
    return (sign * out);
@@ -1868,7 +2223,7 @@ float VultEngine_rescomb(VultEngine__ctx_type_0 &_ctx, float in, float cv_in, fl
 
 void VultEngine__ctx_type_1_init(VultEngine__ctx_type_1 &_output_){
    VultEngine__ctx_type_1 _ctx;
-   Stabile__ctx_type_8_init(_ctx._inst381);
+   Stabile__ctx_type_8_init(_ctx._inst460);
    _output_ = _ctx;
    return ;
 }
@@ -1885,15 +2240,15 @@ void VultEngine_stabile(VultEngine__ctx_type_1 &_ctx, float in, float cut_in, fl
    res = float_clip(res_in,0.f,4.f);
    float semblance;
    semblance = float_clip(semblance_in,0.f,1.f);
-   _tuple___real_real_real_real__ _call_390;
-   Stabile_process(_ctx._inst381,in,cut,res,semblance,_call_390);
-   _output_ = _call_390;
+   _tuple___real_real_real_real__ _call_470;
+   Stabile_process(_ctx._inst460,in,cut,res,semblance,_call_470);
+   _output_ = _call_470;
    return ;
 }
 
 void VultEngine__ctx_type_2_init(VultEngine__ctx_type_2 &_output_){
    VultEngine__ctx_type_2 _ctx;
-   Lateralus__ctx_type_10_init(_ctx._inst383);
+   Lateralus__ctx_type_10_init(_ctx._inst462);
    _output_ = _ctx;
    return ;
 }
@@ -1904,15 +2259,15 @@ void VultEngine_lateralus_init(VultEngine__ctx_type_2 &_output_){
 }
 
 void VultEngine_lateralus(VultEngine__ctx_type_2 &_ctx, float in, float cut, float res, _tuple___real_real__ &_output_){
-   _tuple___real_real__ _call_392;
-   Lateralus_process(_ctx._inst383,in,cut,res,_call_392);
-   _output_ = _call_392;
+   _tuple___real_real__ _call_472;
+   Lateralus_process(_ctx._inst462,in,cut,res,_call_472);
+   _output_ = _call_472;
    return ;
 }
 
 void VultEngine__ctx_type_3_init(VultEngine__ctx_type_3 &_output_){
    VultEngine__ctx_type_3 _ctx;
-   Tangents__ctx_type_11_init(_ctx._inst385);
+   Tangents__ctx_type_11_init(_ctx._inst464);
    _output_ = _ctx;
    return ;
 }
@@ -1923,7 +2278,7 @@ void VultEngine_tangents_init(VultEngine__ctx_type_3 &_output_){
 }
 
 float VultEngine_tangents(VultEngine__ctx_type_3 &_ctx, float lp, float bp, float hp, float cut, float res){
-   return Tangents_process(_ctx._inst385,lp,bp,hp,cut,res);
+   return Tangents_process(_ctx._inst464,lp,bp,hp,cut,res);
 }
 
 float VultEngine_debriatus(float in, float fold_in, float crush_in, float distort_in, float saturate_in){
@@ -1951,28 +2306,47 @@ void VultEngine_trummor_init(VultEngine__ctx_type_5 &_output_){
 }
 
 void VultEngine_trummor(VultEngine__ctx_type_5 &_ctx, float gate, float osc_in, float noise_in, _tuple___real_real_real_real__ &_output_){
-   _tuple___real_real_real_real__ _call_394;
-   Trummor_do(_ctx.processor,gate,osc_in,noise_in,_call_394);
-   _output_ = _call_394;
+   _tuple___real_real_real_real__ _call_474;
+   Trummor_do(_ctx.processor,gate,osc_in,noise_in,_call_474);
+   _output_ = _call_474;
    return ;
 }
 
 void VultEngine__ctx_type_6_init(VultEngine__ctx_type_6 &_output_){
    VultEngine__ctx_type_6 _ctx;
-   Tohe__ctx_type_2_init(_ctx._inst389);
+   Trummor2__ctx_type_0_init(_ctx.processor);
    _output_ = _ctx;
    return ;
 }
 
-void VultEngine_tohe_init(VultEngine__ctx_type_6 &_output_){
+void VultEngine_trummor2_init(VultEngine__ctx_type_6 &_output_){
    VultEngine__ctx_type_6_init(_output_);
    return ;
 }
 
-float VultEngine_tohe(VultEngine__ctx_type_6 &_ctx, float x, float tone_in){
+void VultEngine_trummor2(VultEngine__ctx_type_6 &_ctx, float gate, float osc_in, float noise_in, _tuple___real_real_real_real__ &_output_){
+   _tuple___real_real_real_real__ _call_476;
+   Trummor2_do(_ctx.processor,gate,osc_in,noise_in,_call_476);
+   _output_ = _call_476;
+   return ;
+}
+
+void VultEngine__ctx_type_7_init(VultEngine__ctx_type_7 &_output_){
+   VultEngine__ctx_type_7 _ctx;
+   Tohe__ctx_type_2_init(_ctx._inst469);
+   _output_ = _ctx;
+   return ;
+}
+
+void VultEngine_tohe_init(VultEngine__ctx_type_7 &_output_){
+   VultEngine__ctx_type_7_init(_output_);
+   return ;
+}
+
+float VultEngine_tohe(VultEngine__ctx_type_7 &_ctx, float x, float tone_in){
    float tone;
    tone = float_clip(tone_in,-1.f,1.f);
-   return Tohe_do(_ctx._inst389,x,tone);
+   return Tohe_do(_ctx._inst469,x,tone);
 }
 
 
