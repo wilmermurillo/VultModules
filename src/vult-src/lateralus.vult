@@ -18,11 +18,11 @@ fun tune(cut, fs, oversampling) {
 }
 
 fun tune_44100(cut) @[table(min = 0.0, max = 1.0, size = 128)]{
-   return tune(cut, 44.1, 2.0);
+   return tune(cut, 44.1, 4.0);
 }
 
 fun tune_48000(cut) @[table(min = 0.0, max = 1.0, size = 128)]{
-   return tune(cut, 48.0, 2.0);
+   return tune(cut, 48.0, 4.0);
 }
 
 fun tune_88200(cut) @[table(min = 0.0, max = 1.0, size = 128)]{
