@@ -788,7 +788,8 @@ void Lateralus_heun(Lateralus__ctx_type_8 &_ctx, float input, float fh, float re
 typedef struct Lateralus__ctx_type_9 {
    Lateralus__ctx_type_8 h;
    float fh;
-   Util__ctx_type_26 _inst307;
+   Util__ctx_type_25 _inst310;
+   Util__ctx_type_26 _inst308;
    Util__ctx_type_3 _inst303;
    Util__ctx_type_3 _inst302;
 } Lateralus__ctx_type_9;
@@ -802,8 +803,8 @@ void Lateralus_process_heun_init(Lateralus__ctx_type_9 &_output_);
 void Lateralus_process_heun(Lateralus__ctx_type_9 &_ctx, float input, float cut, float res, _tuple___real_real__ &_output_);
 
 typedef struct Lateralus__ctx_type_10 {
-   Lateralus__ctx_type_9 _inst310;
-   Util__ctx_type_18 _inst309;
+   Lateralus__ctx_type_9 _inst313;
+   Util__ctx_type_18 _inst312;
 } Lateralus__ctx_type_10;
 
 typedef Lateralus__ctx_type_10 Lateralus_process_type;
@@ -843,7 +844,7 @@ void VultEngine_rescomb_init(VultEngine__ctx_type_0 &_output_);
 float VultEngine_rescomb(VultEngine__ctx_type_0 &_ctx, float in, float cv_in, float tone_in, float res_in);
 
 typedef struct VultEngine__ctx_type_1 {
-   Stabile__ctx_type_8 _inst381;
+   Stabile__ctx_type_8 _inst425;
 } VultEngine__ctx_type_1;
 
 typedef VultEngine__ctx_type_1 VultEngine_stabile_type;
@@ -855,7 +856,7 @@ void VultEngine_stabile_init(VultEngine__ctx_type_1 &_output_);
 void VultEngine_stabile(VultEngine__ctx_type_1 &_ctx, float in, float cut_in, float res_in, float semblance_in, _tuple___real_real_real_real__ &_output_);
 
 typedef struct VultEngine__ctx_type_2 {
-   Lateralus__ctx_type_10 _inst383;
+   Lateralus__ctx_type_10 _inst427;
 } VultEngine__ctx_type_2;
 
 typedef VultEngine__ctx_type_2 VultEngine_lateralus_type;
@@ -867,7 +868,7 @@ void VultEngine_lateralus_init(VultEngine__ctx_type_2 &_output_);
 void VultEngine_lateralus(VultEngine__ctx_type_2 &_ctx, float in, float cut, float res, _tuple___real_real__ &_output_);
 
 typedef struct VultEngine__ctx_type_3 {
-   Tangents__ctx_type_11 _inst385;
+   Tangents__ctx_type_11 _inst429;
 } VultEngine__ctx_type_3;
 
 typedef VultEngine__ctx_type_3 VultEngine_tangents_type;
@@ -893,7 +894,7 @@ void VultEngine_trummor_init(VultEngine__ctx_type_5 &_output_);
 void VultEngine_trummor(VultEngine__ctx_type_5 &_ctx, float gate, float osc_in, float noise_in, _tuple___real_real_real_real__ &_output_);
 
 typedef struct VultEngine__ctx_type_6 {
-   Tohe__ctx_type_2 _inst389;
+   Tohe__ctx_type_2 _inst433;
 } VultEngine__ctx_type_6;
 
 typedef VultEngine__ctx_type_6 VultEngine_tohe_type;
