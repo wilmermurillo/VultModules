@@ -13,7 +13,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 fun tune(cut, fs, oversampling) {
    val f = Util.cvTokHz(cut);
-   val fh = tan((2.0 * pi()) * f / (oversampling * fs));
+   val fh = (2.0 * pi()) * f / (oversampling * fs);
    return fh;
 }
 
@@ -105,8 +105,15 @@ fun process_heun(input:real, cut:real, res:real) {
    if(fs == 176400.0 || fs == 192000.0) {
       db12, db24 = h:heun(input, fh, res);
    }
+   else if(fs == 88200.0 || fs == 96000.0) {
+      val input1  = Util.upsampleOrder1_2x(input);
+      db12, db24 = h:heun(input1, fh, res);
+      db12, db24 = h:heun(input, fh, res);
+   }
    else {
-      val input1 = Util.upsampleOrder1_2x(input);
+      val input3, input2, input1 = Util.upsampleOrder1_4x(input);
+      db12, db24 = h:heun(input3, fh, res);
+      db12, db24 = h:heun(input2, fh, res);
       db12, db24 = h:heun(input1, fh, res);
       db12, db24 = h:heun(input, fh, res);
    }

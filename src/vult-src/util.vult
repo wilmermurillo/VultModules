@@ -33,11 +33,11 @@ fun change(x:real):bool {
 
 fun cubic_clipper(x) {
    if(x <= -2.0/3.0)
-      return -2.0/3.0;
+      return -1.0;
    else if(x >= 2.0/3.0)
-      return 2.0/3.0;
+      return 1.0;
    else
-      return 27.0/23.0 * (x - (x * x * x) / 3.0);
+      return 3.0 / 2.0 * 27.0/23.0 * (x - (x * x * x) / 3.0);
 }
 
 fun stanh(x) @[table(min = -24.0, max = 24.0, size = 241)] {
@@ -133,6 +133,10 @@ fun fadeA(x) @[table(size=32, min=0.0, max=1.0)]{
 
 fun fadeB(x) @[table(size=32, min=0.0, max=1.0)]{
    return sin(2.0 * pi() * x / 4.0);
+}
+
+fun fade(x) {
+   return fadeA(x), fadeB(x);
 }
 
 fun upsampleOrder2_4x(y0) {

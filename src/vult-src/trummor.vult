@@ -39,7 +39,7 @@ fun do(gate, osc_in, noise_in) {
       if decimate == 0.0 then
          int_noise * (random() - 0.5) + ext_noise * noise_in
       else
-         Decimate.decimate(int_noise * Noise.process(gate) + ext_noise * noise_in, decimate);
+         Decimate.decimate(int_noise * Noise.syncronized(Util.edge(gate > 0.1)) + ext_noise * noise_in, decimate);
    noise_osc = Tohe.do(noise_osc, tone);
 
    val output = level1 * osc_env * osc_sat + level2 * noise_env * noise_osc;

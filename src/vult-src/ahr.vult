@@ -38,7 +38,7 @@ fun do(gate:real, a:real, h:real, r:real, enabled) {
       target = 0.0;
    }
    if(state == attack && enabled) {
-      rate = 1.0 / (100.0 * a + 0.05);
+      rate = 1.0 / (100.0 * a + 0.1);
       target = 1.2 * 1024.0;
    }
    if(state == hold) {

@@ -62,6 +62,8 @@ struct Trummor : Module
 
    Trummor_do_type processor;
 
+   ParamWidget *selector;
+
    Trummor();
    void step();
 };
@@ -101,6 +103,8 @@ void Trummor::step()
    Trummor_setEnv2Scale(processor, params[SEL_ENV2_PARAM].value);
 
    Trummor_setDecimate(processor, params[DECIMATE_PARAM].value);
+
+   params[LEVEL1_PARAM].value = params[LEVEL2_PARAM].value;
 
    int osc_sel = round(params[OSC_SEL_PARAM].value);
    float osc_mod = params[OSC_MOD_PARAM].value * inputs[OSC_MOD_INPUT].value / 5.0;

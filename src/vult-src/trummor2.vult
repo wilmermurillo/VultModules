@@ -11,54 +11,78 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+fun shape(x, shaper, sub) {
+   val out = 0.0;
+   if(shaper < 0.0) {
+      val comp = Util.map(sub, 0.0, 1.0, 1.0, 0.7);
+      val xx = comp * x;
+      out = Util.shaper(xx * Util.fadeA(-shaper) + Util.cheby3(xx) * Util.fadeB(-shaper));
+   }
+   else
+      out = Util.shaper((shaper + 1.0) * x);
+   return out;
+}
+
+fun filterS(x, cutoff, resonance, filter_type) {
+   val out;
+   val low, band, high,_ = Stabile.process(x, clip(cutoff, 0.0, 0.92), 40.0 * resonance, 0.0);
+   out = if filter_type < 1.0 then low else if filter_type < 2.0 then band else high;
+   return out;
+}
+
+fun filterP(x, cutoff, resonance, filter_type) {
+   val lp, bp, hp = if filter_type < 1.0 then x, 0.0, 0.0 else if filter_type < 2.0 then 0.0, x, 0.0 else 0.0, 0.0, x;
+   return Tangents.process(lp, bp, hp, cutoff, 0.6 * Util.polylog(resonance));
+}
+
 fun do(gate, osc_in, noise_in) {
    mem level1, level2;
-   mem env1_a, env1_h, env1_r;
-   mem env2_a, env2_h, env2_r;
-   mem pitch, bend, drive;
-   mem tone, decimate;
+   mem env1_a, env1_h, env1_r, env1_mode;
+   mem env2_a, env2_h, env2_r, env2_mode;
+   mem pitch, bend, shaper;
+   mem grain, tone;
    mem int_osc, ext_osc;
    mem int_noise, ext_noise;
-   mem env1_scale, env2_scale;
    mem ring_sel;
    mem bend_time;
    mem sub;
-   mem cheby;
    mem env_enabled;
-   mem cutoff, resonance;
-   // Envelope of the drum. One parameter affects the hold and relase
+   mem cutoff, resonance, filter;
+
+   // -- Oscillator envelope
+   val env1_scale = if env1_mode then 1.0 else 0.2;
    val osc_env, env_reset = Ahr.do(gate, env1_scale * env1_a, env1_scale * env1_h, env1_scale * env1_r, env_enabled);
-   // Change of pitch
+   osc_env = if env1_mode then osc_env else Util.shaper(osc_env);
+
+   // -- Change of pitch
    val swept = Swept.process(1.0 - env_reset, bend * 0.6, 0.0, bend_time);
    val cv = pitch + swept;
-   // Note: the oscillator is dissabled while the nevelop resets
-   val sub_osc, reset_sub = Tricore.process(cv - 0.1, 0.0, env_reset);
+
+   // -- Oscillators
+   val sub_osc, reset_sub = Tricore.process(cv - 0.1 + sub * 0.001, 0.0, env_reset);
    val osc, reset_osc = Tricore.process(cv, 0.0, env_reset);
+   // sub mix
+   osc = sub * sub_osc + osc;
+   // ext mix
+   osc = int_osc * osc + ext_osc * osc_in;
+   // shaper
+   osc = shape(osc, shaper, sub);
+
    env_enabled = not(reset_sub) && not(reset_osc);
 
-   osc = sub * sub_osc + osc;
-   osc = int_osc * osc + ext_osc * osc_in;
-   // Saturates the triangle to get a sine with some harmonics
-   osc = osc + cheby * Util.cheby3(osc);
-   osc = Util.saturate((drive + 1.0) * osc);
-
+   // -- Noise Envenlope
+   val env2_scale = if env2_mode then 1.0 else 0.2;
    val noise_env, _ = Ahr.do(gate, env2_scale * env2_a, env2_scale * env2_h, env2_scale * env2_r, env_enabled);
-   val noise_osc =
-      if decimate == 0.0 then
-         (if ring_sel then
-            5.0 * (random() - 0.5) * noise_in
-         else
-            int_noise * (random() - 0.5) + ext_noise * noise_in)
-      else
-         (if ring_sel then
-            5.0 * Decimate.decimate(Noise.process(gate), decimate) * noise_in
-         else
-            Decimate.decimate(int_noise * Noise.process(gate) + ext_noise * noise_in, decimate));
-   noise_osc = Tohe2.do(noise_osc, tone);
+   noise_env = if env2_mode then noise_env else Util.shaper(noise_env);
 
-   val filter_input = noise_env * noise_osc;
-   val filter_output,_,_,_ = Stabile.process(filter_input, cutoff, 4.0 * resonance, 0.5);
-   val output = level1 * osc_env * osc + level2 * filter_output;
+   // -- Noise mix
+   val noise_osc = Noise.multi(gate, grain) + ext_noise * noise_in;
+   noise_osc = Tohe.do(noise_osc, tone);
+
+   // -- Filter
+   val filter_output = filterP(noise_osc * noise_env, cutoff, resonance, filter);
+   // -- Final mix
+   val output = level1 * osc_env * osc + (1.4 * level2) * filter_output;
    return output, cv, osc_env, noise_env;
 }
 and setLevel1(value) {
@@ -91,8 +115,11 @@ and setPitch(value) {
 and setBend(value) {
    bend = clip(value, -1.0, 1.0);
 }
-and setDrive(value) {
-   drive = clip(value, 0.0, 1.0);
+and setShaper(value) {
+   shaper = clip(value, -1.0, 1.0);
+}
+and setGrain(value) {
+   grain = clip(value, 0.0, 1.0);
 }
 and setTone(value) {
    tone = clip(value, -1.0, 1.0);
@@ -106,13 +133,10 @@ and setNoiseBlend(value) {
    ext_noise = Util.fadeB(value);
 }
 and setEnv1Scale(value) {
-   env1_scale = if value < 0.5 then 1.0 else 0.2;
+   env1_mode = value < 0.5;
 }
 and setEnv2Scale(value) {
-   env2_scale = if value < 0.5 then 1.0 else 0.2;
-}
-and setDecimate(value) {
-   decimate = clip(value, 0.0, 1.0);
+   env2_mode = value < 0.5;
 }
 and setRingSel(value) {
    ring_sel = value > 0.5;
@@ -121,14 +145,14 @@ and setBendTime(value) {
    bend_time = value;
 }
 and setSub(value) {
-   sub = value;
-}
-and setCheby(value) {
-   cheby = value;
+   sub = clip(value, 0.0, 1.0);
 }
 and setCutoff(value) {
-   cutoff = value;
+   cutoff = clip(value, 0.0, 0.92);
 }
 and setResonance(value) {
-   resonance = value;
+   resonance = clip(value, 0.0, 1.0);
+}
+and setFilter(value) {
+   filter = clip(value, 0.0, 2.0);
 }

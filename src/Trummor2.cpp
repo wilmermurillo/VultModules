@@ -19,33 +19,42 @@ struct Trummor2 : Module
 {
    enum ParamIds
    {
-      LEVEL1_PARAM,
-      LEVEL2_PARAM,
+      // Oscillator
+      TUNE_PARAM,
+      BEND_PARAM,
+      TIME_PARAM,
+      SUB_PARAM,
+      SHAPER_PARAM,
       ENV1_A_PARAM,
       ENV1_H_PARAM,
       ENV1_R_PARAM,
+      ENV1_SPEED_PARAM,
+      OSC_BLEND_PARAM,
+      LEVEL1_PARAM,
+
+      // Noise
+      MOOD_PARAM,
+      TONE_PARAM,
+      CUTOFF_PARAM,
+      RESONANCE_PARAM,
+      FILTER_PARAM,
       ENV2_A_PARAM,
       ENV2_H_PARAM,
       ENV2_R_PARAM,
-      PITCH_PARAM,
-      BEND_PARAM,
-      DRIVE_PARAM,
-      TONE_PARAM,
-      OSC_BLEND_PARAM,
+      ENV2_SPEED_PARAM,
       NOISE_BLEND_PARAM,
-      SEL_ENV1_PARAM,
-      SEL_ENV2_PARAM,
-      DECIMATE_PARAM,
-      OSC_MOD_PARAM,
-      NOISE_MOD_PARAM,
-      OSC_SEL_PARAM,
-      NOISE_SEL_PARAM,
-      RING_SEL_PARAM,
-      BEND_TIME_PARAM,
-      SUB_PARAM,
-      CHEBY_PARAM,
-      CUTOFF_PARAM,
-      RESONANCE_PARAM,
+      LEVEL2_PARAM,
+
+      LAST_MOD_PARAM,
+      // Modulation
+      MODA_AMT_PARAM,
+      MODB_AMT_PARAM,
+      MODC_AMT_PARAM,
+      MODD_AMT_PARAM,
+      MODA_BUTTON_PARAM,
+      MODB_BUTTON_PARAM,
+      MODC_BUTTON_PARAM,
+      MODD_BUTTON_PARAM,
       NUM_PARAMS
    };
    enum InputIds
@@ -53,8 +62,10 @@ struct Trummor2 : Module
       GATE_INPUT,
       OSC_INPUT,
       NOISE_INPUT,
-      OSC_MOD_INPUT,
-      NOISE_MOD_INPUT,
+      MODA_INPUT,
+      MODB_INPUT,
+      MODC_INPUT,
+      MODD_INPUT,
       NUM_INPUTS
    };
    enum OutputIds
@@ -65,11 +76,150 @@ struct Trummor2 : Module
       ENV2_OUTPUT,
       NUM_OUTPUTS
    };
+   enum States
+   {
+      LEARN_A,
+      LEARN_B,
+      LEARN_C,
+      LEARN_D,
+      NORMAL
+   };
 
    Trummor2_do_type processor;
 
+   int mod[5];
+   int pre_mod[5];
+
+   States state;
+
+   float previous[64];
+   float current[64];
+
    Trummor2();
-   void step();
+   void step() override;
+   void setParam(ParamIds p, float value)
+   {
+      current[p] = value;
+      switch (p)
+      {
+      case LEVEL1_PARAM:
+         Trummor2_setLevel1(processor, value);
+         break;
+      case LEVEL2_PARAM:
+         Trummor2_setLevel2(processor, value);
+         break;
+      case ENV1_A_PARAM:
+         Trummor2_setEnv1A(processor, value);
+         break;
+      case ENV1_H_PARAM:
+         Trummor2_setEnv1H(processor, value);
+         break;
+      case ENV1_R_PARAM:
+         Trummor2_setEnv1R(processor, value);
+         break;
+      case ENV2_A_PARAM:
+         Trummor2_setEnv2A(processor, value);
+         break;
+      case ENV2_H_PARAM:
+         Trummor2_setEnv2H(processor, value);
+         break;
+      case ENV2_R_PARAM:
+         Trummor2_setEnv2R(processor, value);
+         break;
+      case TUNE_PARAM:
+         Trummor2_setPitch(processor, value);
+         break;
+      case BEND_PARAM:
+         Trummor2_setBend(processor, value);
+         break;
+      case SHAPER_PARAM:
+         Trummor2_setShaper(processor, value);
+         break;
+      case MOOD_PARAM:
+         Trummor2_setGrain(processor, value);
+         break;
+      case TONE_PARAM:
+         Trummor2_setTone(processor, value);
+         break;
+      case OSC_BLEND_PARAM:
+         Trummor2_setOscBlend(processor, value);
+         break;
+      case NOISE_BLEND_PARAM:
+         Trummor2_setNoiseBlend(processor, value);
+         break;
+      case ENV1_SPEED_PARAM:
+         Trummor2_setEnv1Scale(processor, value);
+         break;
+      case ENV2_SPEED_PARAM:
+         Trummor2_setEnv2Scale(processor, value);
+         break;
+      case TIME_PARAM:
+         Trummor2_setBendTime(processor, value);
+         break;
+      case SUB_PARAM:
+         Trummor2_setSub(processor, value);
+         break;
+      case CUTOFF_PARAM:
+         Trummor2_setCutoff(processor, value);
+         break;
+      case RESONANCE_PARAM:
+         Trummor2_setResonance(processor, value);
+         break;
+      case FILTER_PARAM:
+         Trummor2_setFilter(processor, value);
+         break;
+      case LAST_MOD_PARAM:
+      case MODA_AMT_PARAM:
+      case MODB_AMT_PARAM:
+      case MODC_AMT_PARAM:
+      case MODD_AMT_PARAM:
+      case MODA_BUTTON_PARAM:
+      case MODB_BUTTON_PARAM:
+      case MODC_BUTTON_PARAM:
+      case MODD_BUTTON_PARAM:
+      case NUM_PARAMS:
+         break;
+      }
+   }
+   json_t *toJson() override
+   {
+      json_t *rootJ = json_object();
+
+      json_object_set_new(rootJ, "mod_a", json_integer(mod[LEARN_A]));
+      json_object_set_new(rootJ, "mod_b", json_integer(mod[LEARN_B]));
+      json_object_set_new(rootJ, "mod_c", json_integer(mod[LEARN_C]));
+      json_object_set_new(rootJ, "mod_d", json_integer(mod[LEARN_D]));
+
+      return rootJ;
+   }
+
+   void fromJson(json_t *rootJ) override
+   {
+      json_t *jmod_a = json_object_get(rootJ, "mod_a");
+      if (jmod_a)
+      {
+         mod[LEARN_A] = json_integer_value(jmod_a);
+         pre_mod[LEARN_A] = mod[LEARN_A];
+      }
+
+      json_t *jmod_b = json_object_get(rootJ, "mod_b");
+      {
+         mod[LEARN_B] = json_integer_value(jmod_b);
+         pre_mod[LEARN_B] = mod[LEARN_B];
+      }
+
+      json_t *jmod_c = json_object_get(rootJ, "mod_c");
+      {
+         mod[LEARN_C] = json_integer_value(jmod_c);
+         pre_mod[LEARN_C] = mod[LEARN_C];
+      }
+
+      json_t *jmod_d = json_object_get(rootJ, "mod_d");
+      {
+         mod[LEARN_D] = json_integer_value(jmod_d);
+         pre_mod[LEARN_D] = mod[LEARN_D];
+      }
+   }
 };
 
 Trummor2::Trummor2() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS)
@@ -78,110 +228,56 @@ Trummor2::Trummor2() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS)
    inputs.resize(NUM_INPUTS);
    outputs.resize(NUM_OUTPUTS);
    Trummor2_do_init(processor);
+   state = NORMAL;
 }
 
 void Trummor2::step()
 {
 
-   Trummor2_setLevel1(processor, params[LEVEL1_PARAM].value);
-   Trummor2_setLevel2(processor, params[LEVEL2_PARAM].value);
-
-   Trummor2_setEnv1A(processor, params[ENV1_A_PARAM].value);
-   Trummor2_setEnv1H(processor, params[ENV1_H_PARAM].value);
-   Trummor2_setEnv1R(processor, params[ENV1_R_PARAM].value);
-
-   Trummor2_setEnv2A(processor, params[ENV2_A_PARAM].value);
-   Trummor2_setEnv2H(processor, params[ENV2_H_PARAM].value);
-   Trummor2_setEnv2R(processor, params[ENV2_R_PARAM].value);
-
-   Trummor2_setPitch(processor, params[PITCH_PARAM].value);
-   Trummor2_setBend(processor, params[BEND_PARAM].value);
-   Trummor2_setDrive(processor, params[DRIVE_PARAM].value);
-
-   Trummor2_setTone(processor, params[TONE_PARAM].value);
-
-   Trummor2_setOscBlend(processor, params[OSC_BLEND_PARAM].value);
-   Trummor2_setNoiseBlend(processor, params[NOISE_BLEND_PARAM].value);
-
-   Trummor2_setEnv1Scale(processor, params[SEL_ENV1_PARAM].value);
-   Trummor2_setEnv2Scale(processor, params[SEL_ENV2_PARAM].value);
-
-   Trummor2_setDecimate(processor, params[DECIMATE_PARAM].value);
-
-   Trummor2_setRingSel(processor, params[RING_SEL_PARAM].value);
-
-   Trummor2_setBendTime(processor, params[BEND_TIME_PARAM].value);
-
-   Trummor2_setSub(processor, params[SUB_PARAM].value);
-
-   Trummor2_setCheby(processor, params[CHEBY_PARAM].value);
-
-   Trummor2_setCutoff(processor, params[CUTOFF_PARAM].value);
-   Trummor2_setResonance(processor, params[RESONANCE_PARAM].value);
-
-   int osc_sel = round(params[OSC_SEL_PARAM].value);
-   float osc_mod = params[OSC_MOD_PARAM].value * inputs[OSC_MOD_INPUT].value / 5.0;
-   switch (osc_sel)
+   if (previous[MODA_BUTTON_PARAM] != params[MODA_BUTTON_PARAM].value && params[MODA_BUTTON_PARAM].value >= 1.0)
    {
-   case 0:
-      Trummor2_setPitch(processor, osc_mod / 2.0f + params[PITCH_PARAM].value);
-      break;
-   case 1:
-      Trummor2_setBend(processor, (osc_mod + params[BEND_PARAM].value));
-      break;
-   case 2:
-      Trummor2_setDrive(processor, (osc_mod + params[DRIVE_PARAM].value));
-      break;
-   case 3:
-      Trummor2_setEnv1A(processor, (osc_mod + params[ENV1_A_PARAM].value));
-      break;
-   case 4:
-      Trummor2_setEnv1H(processor, (osc_mod + params[ENV1_H_PARAM].value));
-      break;
-   case 5:
-      Trummor2_setEnv1R(processor, (osc_mod + params[ENV1_R_PARAM].value));
-      break;
-   case 6:
-      Trummor2_setEnv1Scale(processor, (osc_mod + params[SEL_ENV1_PARAM].value));
-      break;
-   case 7:
-      Trummor2_setOscBlend(processor, (osc_mod + params[OSC_BLEND_PARAM].value));
-      break;
-   case 8:
-      Trummor2_setLevel1(processor, (osc_mod + params[LEVEL1_PARAM].value));
-      break;
+      state = LEARN_A;
+   }
+   else if (previous[MODB_BUTTON_PARAM] != params[MODB_BUTTON_PARAM].value && params[MODB_BUTTON_PARAM].value >= 1.0)
+   {
+      state = LEARN_B;
+   }
+   else if (previous[MODC_BUTTON_PARAM] != params[MODC_BUTTON_PARAM].value && params[MODC_BUTTON_PARAM].value >= 1.0)
+   {
+      state = LEARN_C;
+   }
+   else if (previous[MODD_BUTTON_PARAM] != params[MODD_BUTTON_PARAM].value && params[MODD_BUTTON_PARAM].value >= 1.0)
+   {
+      state = LEARN_D;
    }
 
-   int noise_sel = round(params[NOISE_SEL_PARAM].value);
-   float noise_mod = params[NOISE_MOD_PARAM].value * inputs[NOISE_MOD_INPUT].value / 5.0;
-
-   switch (noise_sel)
+   ParamIds last_changed = NUM_PARAMS;
+   for (int p = 0; p < NUM_PARAMS; p++)
    {
-   case 0:
-      Trummor2_setTone(processor, (noise_mod + params[TONE_PARAM].value));
-      break;
-   case 1:
-      Trummor2_setDecimate(processor, (noise_mod + params[DECIMATE_PARAM].value));
-      break;
-   case 2:
-      Trummor2_setEnv2A(processor, (noise_mod + params[ENV2_A_PARAM].value));
-      break;
-   case 3:
-      Trummor2_setEnv2H(processor, (noise_mod + params[ENV2_H_PARAM].value));
-      break;
-   case 4:
-      Trummor2_setEnv2R(processor, (noise_mod + params[ENV2_R_PARAM].value));
-      break;
-   case 5:
-      Trummor2_setEnv2Scale(processor, (noise_mod + params[SEL_ENV2_PARAM].value));
-      break;
-   case 6:
-      Trummor2_setNoiseBlend(processor, (noise_mod + params[NOISE_BLEND_PARAM].value));
-      break;
-   case 7:
-      Trummor2_setLevel2(processor, (noise_mod + params[LEVEL2_PARAM].value));
-      break;
+      current[p] = params[p].value;
+      setParam((ParamIds)p, current[p]);
+      if (p < LAST_MOD_PARAM && previous[p] != current[p])
+         last_changed = (ParamIds)p;
+
+      previous[p] = current[p];
    }
+   if (last_changed != NUM_PARAMS && state != NORMAL)
+   {
+      mod[state] = last_changed;
+      state = NORMAL;
+   }
+
+   float mod_a_value = params[MODA_AMT_PARAM].value * inputs[MODA_INPUT].value / 5.0;
+   setParam((ParamIds)mod[LEARN_A], current[mod[LEARN_A]] + mod_a_value);
+
+   float mod_b_value = params[MODB_AMT_PARAM].value * inputs[MODB_INPUT].value / 5.0;
+   setParam((ParamIds)mod[LEARN_B], current[mod[LEARN_B]] + mod_b_value);
+
+   float mod_c_value = params[MODC_AMT_PARAM].value * inputs[MODC_INPUT].value / 5.0;
+   setParam((ParamIds)mod[LEARN_C], current[mod[LEARN_C]] + mod_c_value);
+
+   float mod_d_value = params[MODD_AMT_PARAM].value * inputs[MODD_INPUT].value / 5.0;
+   setParam((ParamIds)mod[LEARN_D], current[mod[LEARN_D]] + mod_d_value);
 
    _tuple___real_real_real_real__ out;
    Trummor2_do(processor, inputs[GATE_INPUT].value / 10.0f, inputs[OSC_INPUT].value / 10.0f, inputs[NOISE_INPUT].value / 10.0f, out);
@@ -191,6 +287,75 @@ void Trummor2::step()
    outputs[ENV1_OUTPUT].value = out.field_2 * 10.0f;
    outputs[ENV2_OUTPUT].value = out.field_3 * 10.0f;
 }
+
+static const char *parameters[] = {
+    "O-TUNE",
+    "O-BEND",
+    "O-TIME",
+    "O-SUB",
+    "O-SHAPE",
+    "O-ATTACK",
+    "O-HOLD",
+    "O-RELEAS",
+    "O-SPEED",
+    "O-SOURCE",
+    "O-LEVEL",
+    "N-MOOD",
+    "N-TONE",
+    "N-CUTOFF",
+    "N-RES",
+    "N-FILTER",
+    "N-ATTACK",
+    "N-HOLD",
+    "N-RELEAS",
+    "N-SPEED",
+    "N-SOURCE",
+    "N-LEVEL",
+    "    ",
+};
+
+struct Trummor2Display : TransparentWidget
+{
+   Trummor2 *module;
+   std::shared_ptr<Font> font;
+
+   Trummor2Display()
+   {
+      font = Font::load(assetPlugin(plugin, "res/01 Digit.ttf"));
+   }
+
+   void draw(NVGcontext *vg) override
+   {
+      nvgFontSize(vg, 6);
+      nvgFontFaceId(vg, font->handle);
+      nvgTextLetterSpacing(vg, 2.5);
+
+      NVGcolor textColor = nvgRGB(0xFF, 0xFF, 0xFF);
+      nvgFillColor(vg, textColor);
+
+      if (module->state == Trummor2::NORMAL)
+      {
+         Vec moda = Vec(2, 12);
+         nvgText(vg, moda.x, moda.y, parameters[module->mod[Trummor2::LEARN_A]], NULL);
+
+         Vec modb = Vec(112 - strlen(parameters[module->mod[Trummor2::LEARN_B]]) * 6, 12);
+         nvgText(vg, modb.x, modb.y, parameters[module->mod[Trummor2::LEARN_B]], NULL);
+
+         Vec modc = Vec(2, 24);
+         nvgText(vg, modc.x, modc.y, parameters[module->mod[Trummor2::LEARN_C]], NULL);
+
+         Vec modd = Vec(112 - strlen(parameters[module->mod[Trummor2::LEARN_D]]) * 6, 24);
+         nvgText(vg, modd.x, modd.y, parameters[module->mod[Trummor2::LEARN_D]], NULL);
+      }
+      else
+      {
+         Vec row1 = Vec(18, 12);
+         nvgText(vg, row1.x, row1.y, "MOVE A CONTROL", NULL);
+         Vec row2 = Vec(24, 24);
+         nvgText(vg, row2.x, row2.y, "TO ASSIGN IT", NULL);
+      }
+   }
+};
 
 Trummor2Widget::Trummor2Widget()
 {
@@ -204,69 +369,79 @@ Trummor2Widget::Trummor2Widget()
       panel->setBackground(SVG::load(assetPlugin(plugin, "res/Trummor2.svg")));
       addChild(panel);
    }
+   {
+      Trummor2Display *display = new Trummor2Display();
+      display->box.pos = Vec(92, 302);
+      display->box.size = Vec(110, 30);
+      display->module = module;
+      addChild(display);
+   }
    addChild(createScrew<VultScrew>(Vec(16, 0)));
    addChild(createScrew<VultScrew>(Vec(box.size.x - 29, 0)));
    addChild(createScrew<VultScrew>(Vec(16, 365)));
    addChild(createScrew<VultScrew>(Vec(box.size.x - 29, 365)));
 
-   addParam(createParam<VultKnob>(Vec(101, 201), module, Trummor2::LEVEL1_PARAM, 0.0, 1.0, 0.7));
-   addParam(createParam<VultKnob>(Vec(244, 201), module, Trummor2::LEVEL2_PARAM, 0.0, 1.0, 0.1));
+   /* Oscillator section */
+   addParam(createParam<VultKnobAlt>(Vec(17, 59), module, Trummor2::TUNE_PARAM, -0.1, 0.3, 0.0));
+   addParam(createParam<VultKnobAlt>(Vec(63, 59), module, Trummor2::BEND_PARAM, -1.0, 1.0, 0.5));
+   addParam(createParam<VultKnobAlt>(Vec(110, 59), module, Trummor2::TIME_PARAM, 0.0, 1.0, 0.0));
+
+   addParam(createParam<VultKnobAlt>(Vec(110, 106), module, Trummor2::SHAPER_PARAM, -1.0, 1.0, 0.0));
+   addParam(createParam<VultKnobAlt>(Vec(17, 106), module, Trummor2::SUB_PARAM, 0.0, 1.0, 0.0));
 
    addParam(createParam<VultKnobAlt>(Vec(17, 153), module, Trummor2::ENV1_A_PARAM, 0.0, 1.0, 0.0));
    addParam(createParam<VultKnobAlt>(Vec(63, 153), module, Trummor2::ENV1_H_PARAM, 0.0, 1.0, 0.2));
    addParam(createParam<VultKnobAlt>(Vec(110, 153), module, Trummor2::ENV1_R_PARAM, 0.0, 1.0, 0.2));
 
+   addParam(createParam<VultSelector2>(Vec(12, 203), module, Trummor2::ENV1_SPEED_PARAM, 0.0, 1.0, 0.0));
+
+   addParam(createParam<VultKnobAlt>(Vec(53, 207), module, Trummor2::OSC_BLEND_PARAM, 0.0, 1.0, 0.0));
+   addParam(createParam<VultKnob>(Vec(101, 201), module, Trummor2::LEVEL1_PARAM, 0.0, 1.0, 0.7));
+
+   /* Noise section */
+   addParam(createParam<VultKnob>(Vec(244, 201), module, Trummor2::LEVEL2_PARAM, 0.0, 1.0, 0.1));
+
+   addParam(createParam<VultKnobAlt>(Vec(160, 59), module, Trummor2::MOOD_PARAM, 0.0, 1.0, 0.0));
+   addParam(createParam<VultKnobAlt>(Vec(208, 59), module, Trummor2::TONE_PARAM, -1.0, 1.0, 0.0));
+   addParam(createParam<VultKnobAlt>(Vec(160, 106), module, Trummor2::CUTOFF_PARAM, 0.0, 0.95, 0.95));
+   addParam(createParam<VultKnobAlt>(Vec(208, 106), module, Trummor2::RESONANCE_PARAM, 0.0, 1.0, 0.0));
+
    addParam(createParam<VultKnobAlt>(Vec(160, 153), module, Trummor2::ENV2_A_PARAM, 0.0, 1.0, 0.0));
    addParam(createParam<VultKnobAlt>(Vec(206, 153), module, Trummor2::ENV2_H_PARAM, 0.0, 1.0, 0.05));
    addParam(createParam<VultKnobAlt>(Vec(252, 153), module, Trummor2::ENV2_R_PARAM, 0.0, 1.0, 0.05));
 
-   addParam(createParam<VultKnobAlt>(Vec(17, 59), module, Trummor2::PITCH_PARAM, -0.1, 0.3, 0.0));
-   addParam(createParam<VultKnobAlt>(Vec(63, 59), module, Trummor2::BEND_PARAM, -1.0, 1.0, 0.5));
-   addParam(createParam<VultKnobAlt>(Vec(110, 59), module, Trummor2::DRIVE_PARAM, 0.0, 4.0, 0.0));
+   addParam(createParam<VultSelector3>(Vec(254, 102), module, Trummor2::FILTER_PARAM, 0.0, 2.0, 0.0));
 
-   addParam(createParam<VultKnobAlt>(Vec(160, 59), module, Trummor2::TONE_PARAM, -1.0, 1.0, -0.7));
-
-   addParam(createParam<VultKnobAlt>(Vec(53, 207), module, Trummor2::OSC_BLEND_PARAM, 0.0, 1.0, 0.0));
    addParam(createParam<VultKnobAlt>(Vec(195, 207), module, Trummor2::NOISE_BLEND_PARAM, 0.0, 1.0, 0.0));
 
-   addParam(createParam<VultSelector2>(Vec(12, 203), module, Trummor2::SEL_ENV1_PARAM, 0.0, 1.0, 0.0));
-   addParam(createParam<VultSelector2>(Vec(155, 203), module, Trummor2::SEL_ENV2_PARAM, 0.0, 1.0, 0.0));
+   addParam(createParam<VultSelector2>(Vec(155, 203), module, Trummor2::ENV2_SPEED_PARAM, 0.0, 1.0, 0.0));
 
+   /* Oscillator jacks */
+   addInput(createInput<VultJack>(Vec(14, 254), module, Trummor2::OSC_INPUT));
+   addOutput(createOutput<VultJack>(Vec(45, 254), module, Trummor2::ENV1_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(117, 254), module, Trummor2::PITCH_OUTPUT));
+
+   /* Noise jacks */
+   addInput(createInput<VultJack>(Vec(157, 254), module, Trummor2::NOISE_INPUT));
+   addOutput(createOutput<VultJack>(Vec(188, 254), module, Trummor2::ENV2_OUTPUT));
+
+   /* Modulation */
+   addInput(createInput<VultJack>(Vec(14, 292), module, Trummor2::MODA_INPUT));
+   addInput(createInput<VultJack>(Vec(263, 292), module, Trummor2::MODB_INPUT));
+   addInput(createInput<VultJack>(Vec(14, 320), module, Trummor2::MODC_INPUT));
+   addInput(createInput<VultJack>(Vec(263, 320), module, Trummor2::MODD_INPUT));
+
+   addParam(createParam<VultKnobSmall>(Vec(47, 295), module, Trummor2::MODA_AMT_PARAM, -1.0, 1.0, 0.0));
+   addParam(createParam<VultKnobSmall>(Vec(236, 295), module, Trummor2::MODB_AMT_PARAM, -1.0, 1.0, 0.0));
+   addParam(createParam<VultKnobSmall>(Vec(47, 323), module, Trummor2::MODC_AMT_PARAM, -1.0, 1.0, 0.0));
+   addParam(createParam<VultKnobSmall>(Vec(236, 323), module, Trummor2::MODD_AMT_PARAM, -1.0, 1.0, 0.0));
+
+   addParam(createParam<ButtonA>(Vec(74, 302), module, Trummor2::MODA_BUTTON_PARAM, 0.0, 1.0, 0.0));
+   addParam(createParam<ButtonB>(Vec(212, 302), module, Trummor2::MODB_BUTTON_PARAM, 0.0, 1.0, 0.0));
+   addParam(createParam<ButtonC>(Vec(74, 318), module, Trummor2::MODC_BUTTON_PARAM, 0.0, 1.0, 0.0));
+   addParam(createParam<ButtonD>(Vec(212, 318), module, Trummor2::MODD_BUTTON_PARAM, 0.0, 1.0, 0.0));
+
+   /* Main jacks */
    addInput(createInput<VultJack>(Vec(77, 350), module, Trummor2::GATE_INPUT));
-
-   addInput(createInput<VultJack>(Vec(14, 312), module, Trummor2::OSC_INPUT));
-   addInput(createInput<VultJack>(Vec(157, 312), module, Trummor2::NOISE_INPUT));
-
    addOutput(createOutput<VultJack>(Vec(197, 350), module, Trummor2::AUDIO_OUTPUT));
-
-   addOutput(createOutput<VultJack>(Vec(117, 312), module, Trummor2::PITCH_OUTPUT));
-
-   addOutput(createOutput<VultJack>(Vec(66, 312), module, Trummor2::ENV1_OUTPUT));
-   addOutput(createOutput<VultJack>(Vec(212, 312), module, Trummor2::ENV2_OUTPUT));
-
-   addInput(createInput<VultJack>(Vec(13, 256), module, Trummor2::OSC_MOD_INPUT));
-   addInput(createInput<VultJack>(Vec(156, 256), module, Trummor2::NOISE_MOD_INPUT));
-
-   addParam(createParam<VultKnobSmall>(Vec(50, 259), module, Trummor2::OSC_MOD_PARAM, -1.0, 1.0, 0.0));
-   addParam(createParam<VultKnobSmall>(Vec(193, 259), module, Trummor2::NOISE_MOD_PARAM, -1.0, 1.0, 0.0));
-
-   addParam(createParam<TrummodNoiseSelector>(Vec(218, 261), module, Trummor2::NOISE_SEL_PARAM, 0.0, 7.0, 0.0));
-   addParam(createParam<TrummodOscSelector>(Vec(75, 261), module, Trummor2::OSC_SEL_PARAM, 0.0, 8.0, 0.0));
-
-   addParam(createParam<VultKnobAlt>(Vec(208, 59), module, Trummor2::DECIMATE_PARAM, 0.0, 1.0, 0.0));
-
-   // Ring modulator
-   addParam(createParam<VultSelector2>(Vec(254, 62), module, Trummor2::RING_SEL_PARAM, 0.0, 1.0, 0.0));
-
-   // Bend time
-   addParam(createParam<VultKnobAlt>(Vec(63, 106), module, Trummor2::BEND_TIME_PARAM, 0.0, 1.0, 0.0));
-
-   // Sub-oscillator
-   addParam(createParam<VultKnobAlt>(Vec(17, 106), module, Trummor2::SUB_PARAM, 0.0, 1.0, 0.0));
-   // Cheby
-   addParam(createParam<VultKnobAlt>(Vec(110, 106), module, Trummor2::CHEBY_PARAM, 0.0, 1.0, 0.0));
-
-   // Filter
-   addParam(createParam<VultKnobAlt>(Vec(160, 106), module, Trummor2::CUTOFF_PARAM, 0.0, 0.7, 0.5));
-   addParam(createParam<VultKnobAlt>(Vec(208, 106), module, Trummor2::RESONANCE_PARAM, 0.0, 1.0, 0.0));
 }
