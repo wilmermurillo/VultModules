@@ -13,7 +13,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 fun tune(cut, fs, oversampling) {
    val f = Util.cvTokHz(cut);
-   val fh = tan((2.0 * pi()) * f / (oversampling * fs));
+   val fh = (2.0 * pi()) * f / (oversampling * fs);
    return fh;
 }
 

@@ -1215,7 +1215,7 @@ float Tangents_tune(float cut, float fs, float oversampling){
    float f;
    f = Util_cvTokHz(cut);
    float fh;
-   fh = tanf(((6.28318530718f * f) / (oversampling * fs)));
+   fh = ((6.28318530718f * f) / (oversampling * fs));
    return fh;
 }
 
