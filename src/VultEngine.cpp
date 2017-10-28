@@ -1630,7 +1630,7 @@ void Lateralus_heun_init(Lateralus__ctx_type_8 &_output_){
    return ;
 }
 
-void Lateralus_heun(Lateralus__ctx_type_8 &_ctx, float input, float fh, float res, _tuple___real_real__ &_output_){
+void Lateralus_heun(Lateralus__ctx_type_8 &_ctx, float input, float fh, float res, _tuple___real_real_real_real__ &_output_){
    float wt0;
    wt0 = Util_cubic_clipper((input + (-4.f * res * _ctx.p3)));
    float wt1;
@@ -1679,10 +1679,12 @@ void Lateralus_heun(Lateralus__ctx_type_8 &_ctx, float input, float fh, float re
    _ctx.p1 = (_ctx.p1 + ((dp1 + dpt1) * 0.5f));
    _ctx.p2 = (_ctx.p2 + ((dp2 + dpt2) * 0.5f));
    _ctx.p3 = (_ctx.p3 + ((dp3 + dpt3) * 0.5f));
-   _tuple___real_real__ _tuple_320;
+   _tuple___real_real_real_real__ _tuple_320;
    {
-      _tuple_320.field_0 = _ctx.p1;
-      _tuple_320.field_1 = _ctx.p3;
+      _tuple_320.field_0 = _ctx.p0;
+      _tuple_320.field_1 = _ctx.p1;
+      _tuple_320.field_2 = _ctx.p2;
+      _tuple_320.field_3 = _ctx.p3;
    }
    _output_ = _tuple_320;
    return ;
@@ -1705,7 +1707,7 @@ void Lateralus_process_heun_init(Lateralus__ctx_type_9 &_output_){
    return ;
 }
 
-void Lateralus_process_heun(Lateralus__ctx_type_9 &_ctx, float input, float cut, float res, _tuple___real_real__ &_output_){
+void Lateralus_process_heun(Lateralus__ctx_type_9 &_ctx, float input, float cut, float res, _tuple___real_real_real_real__ &_output_){
    float fs;
    fs = getSampleRate();
    uint8_t _cond_322;
@@ -1713,16 +1715,20 @@ void Lateralus_process_heun(Lateralus__ctx_type_9 &_ctx, float input, float cut,
    if(_cond_322){
       _ctx.fh = Lateralus_getTune(cut,fs);
    }
+   float db6;
    float db12;
+   float db18;
    float db24;
+   db6 = 0.f;
    db12 = 0.f;
+   db18 = 0.f;
    db24 = 0.f;
    uint8_t _cond_341;
    _cond_341 = ((fs == 176400.f) || (fs == 192000.f));
    if(_cond_341){
-      _tuple___real_real__ _call_324;
+      _tuple___real_real_real_real__ _call_324;
       Lateralus_heun(_ctx.h,input,_ctx.fh,res,_call_324);
-      db12 = _call_324.field_0;db24 = _call_324.field_1;
+      db6 = _call_324.field_0;db12 = _call_324.field_1;db18 = _call_324.field_2;db24 = _call_324.field_3;
    }
    else
    {
@@ -1731,12 +1737,12 @@ void Lateralus_process_heun(Lateralus__ctx_type_9 &_ctx, float input, float cut,
       if(_cond_340){
          float input1;
          input1 = Util_upsampleOrder1_2x(_ctx._inst308,input);
-         _tuple___real_real__ _call_326;
+         _tuple___real_real_real_real__ _call_326;
          Lateralus_heun(_ctx.h,input1,_ctx.fh,res,_call_326);
-         db12 = _call_326.field_0;db24 = _call_326.field_1;
-         _tuple___real_real__ _call_327;
+         db6 = _call_326.field_0;db12 = _call_326.field_1;db18 = _call_326.field_2;db24 = _call_326.field_3;
+         _tuple___real_real_real_real__ _call_327;
          Lateralus_heun(_ctx.h,input,_ctx.fh,res,_call_327);
-         db12 = _call_327.field_0;db24 = _call_327.field_1;
+         db6 = _call_327.field_0;db12 = _call_327.field_1;db18 = _call_327.field_2;db24 = _call_327.field_3;
       }
       else
       {
@@ -1746,24 +1752,26 @@ void Lateralus_process_heun(Lateralus__ctx_type_9 &_ctx, float input, float cut,
          _tuple___real_real_real__ _call_330;
          Util_upsampleOrder1_4x(_ctx._inst310,input,_call_330);
          input3 = _call_330.field_0;input2 = _call_330.field_1;input1 = _call_330.field_2;
-         _tuple___real_real__ _call_331;
+         _tuple___real_real_real_real__ _call_331;
          Lateralus_heun(_ctx.h,input3,_ctx.fh,res,_call_331);
-         db12 = _call_331.field_0;db24 = _call_331.field_1;
-         _tuple___real_real__ _call_332;
+         db6 = _call_331.field_0;db12 = _call_331.field_1;db18 = _call_331.field_2;db24 = _call_331.field_3;
+         _tuple___real_real_real_real__ _call_332;
          Lateralus_heun(_ctx.h,input2,_ctx.fh,res,_call_332);
-         db12 = _call_332.field_0;db24 = _call_332.field_1;
-         _tuple___real_real__ _call_333;
+         db6 = _call_332.field_0;db12 = _call_332.field_1;db18 = _call_332.field_2;db24 = _call_332.field_3;
+         _tuple___real_real_real_real__ _call_333;
          Lateralus_heun(_ctx.h,input1,_ctx.fh,res,_call_333);
-         db12 = _call_333.field_0;db24 = _call_333.field_1;
-         _tuple___real_real__ _call_334;
+         db6 = _call_333.field_0;db12 = _call_333.field_1;db18 = _call_333.field_2;db24 = _call_333.field_3;
+         _tuple___real_real_real_real__ _call_334;
          Lateralus_heun(_ctx.h,input,_ctx.fh,res,_call_334);
-         db12 = _call_334.field_0;db24 = _call_334.field_1;
+         db6 = _call_334.field_0;db12 = _call_334.field_1;db18 = _call_334.field_2;db24 = _call_334.field_3;
       }
    }
-   _tuple___real_real__ _tuple_342;
+   _tuple___real_real_real_real__ _tuple_342;
    {
-      _tuple_342.field_0 = (db12 * (1.f + (res * 0.5f)));
-      _tuple_342.field_1 = (db24 * (1.f + (res * 1.5f)));
+      _tuple_342.field_0 = db6;
+      _tuple_342.field_1 = (db12 * (1.f + (res * 0.5f)));
+      _tuple_342.field_2 = (db18 * (1.f + res));
+      _tuple_342.field_3 = (db24 * (1.f + (res * 1.5f)));
    }
    _output_ = _tuple_342;
    return ;
@@ -1782,7 +1790,7 @@ void Lateralus_process_init(Lateralus__ctx_type_10 &_output_){
    return ;
 }
 
-void Lateralus_process(Lateralus__ctx_type_10 &_ctx, float input, float cut_in, float res_in, _tuple___real_real__ &_output_){
+void Lateralus_process(Lateralus__ctx_type_10 &_ctx, float input, float cut_in, float res_in, _tuple___real_real_real_real__ &_output_){
    float res;
    res = Util_polylog(res_in);
    float comp;
@@ -1797,7 +1805,7 @@ void Lateralus_process(Lateralus__ctx_type_10 &_ctx, float input, float cut_in, 
    cut = float_clip(cut_in,0.f,limit);
    float noise;
    noise = (Util_simple_noise(_ctx._inst312) * 0.005f);
-   _tuple___real_real__ _call_344;
+   _tuple___real_real_real_real__ _call_344;
    Lateralus_process_heun(_ctx._inst313,(input + noise),cut,(res * 1.1f),_call_344);
    _output_ = _call_344;
    return ;
@@ -1929,8 +1937,8 @@ void VultEngine_lateralus_init(VultEngine__ctx_type_2 &_output_){
    return ;
 }
 
-void VultEngine_lateralus(VultEngine__ctx_type_2 &_ctx, float in, float cut, float res, _tuple___real_real__ &_output_){
-   _tuple___real_real__ _call_436;
+void VultEngine_lateralus(VultEngine__ctx_type_2 &_ctx, float in, float cut, float res, _tuple___real_real_real_real__ &_output_){
+   _tuple___real_real_real_real__ _call_436;
    Lateralus_process(_ctx._inst427,in,cut,res,_call_436);
    _output_ = _call_436;
    return ;

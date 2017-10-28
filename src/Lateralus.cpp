@@ -36,6 +36,8 @@ struct Lateralus : Module
    {
       DB12_OUTPUT,
       DB24_OUTPUT,
+      DB6_OUTPUT,
+      DB18_OUTPUT,
       NUM_OUTPUTS
    };
 
@@ -68,12 +70,13 @@ void Lateralus::step()
    float resonance_amt = params[RESONANCE_AMT_PARAM].value;
    float resonance = resonance_knob + resonance_amt * resonance_cv;
 
-   _tuple___real_real__ out;
+   _tuple___real_real_real_real__ out;
    VultEngine_lateralus(processor, audio, cutoff, resonance, out);
 
-   outputs[DB12_OUTPUT].value = out.field_0 * 7.0;
-
-   outputs[DB24_OUTPUT].value = out.field_1 * 7.0;
+   outputs[DB6_OUTPUT].value = out.field_0 * 7.0;
+   outputs[DB12_OUTPUT].value = out.field_1 * 7.0;
+   outputs[DB18_OUTPUT].value = out.field_2 * 7.0;
+   outputs[DB24_OUTPUT].value = out.field_3 * 7.0;
 }
 
 LateralusWidget::LateralusWidget()
@@ -104,6 +107,9 @@ LateralusWidget::LateralusWidget()
 
    addInput(createInput<VultJack>(Vec(62, 318), module, Lateralus::AUDIO_INPUT));
 
-   addOutput(createOutput<VultJack>(Vec(26, 253), module, Lateralus::DB12_OUTPUT));
-   addOutput(createOutput<VultJack>(Vec(104, 253), module, Lateralus::DB24_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(45, 253), module, Lateralus::DB12_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(118, 253), module, Lateralus::DB24_OUTPUT));
+
+   addOutput(createOutput<VultJack>(Vec(9, 253), module, Lateralus::DB6_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(82, 253), module, Lateralus::DB18_OUTPUT));
 }
