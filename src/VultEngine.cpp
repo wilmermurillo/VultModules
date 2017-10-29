@@ -1768,44 +1768,44 @@ float Lateralus_tune_192000(float cut){
 }
 
 float Lateralus_getTune(float cut, float fs){
-   uint8_t _cond_375;
-   _cond_375 = (fs == 44100.f);
-   if(_cond_375){
+   uint8_t _cond_383;
+   _cond_383 = (fs == 44100.f);
+   if(_cond_383){
       return Lateralus_tune_44100(cut);
    }
    else
    {
-      uint8_t _cond_374;
-      _cond_374 = (fs == 48000.f);
-      if(_cond_374){
+      uint8_t _cond_382;
+      _cond_382 = (fs == 48000.f);
+      if(_cond_382){
          return Lateralus_tune_48000(cut);
       }
       else
       {
-         uint8_t _cond_373;
-         _cond_373 = (fs == 88200.f);
-         if(_cond_373){
+         uint8_t _cond_381;
+         _cond_381 = (fs == 88200.f);
+         if(_cond_381){
             return Lateralus_tune_88200(cut);
          }
          else
          {
-            uint8_t _cond_372;
-            _cond_372 = (fs == 96000.f);
-            if(_cond_372){
+            uint8_t _cond_380;
+            _cond_380 = (fs == 96000.f);
+            if(_cond_380){
                return Lateralus_tune_96000(cut);
             }
             else
             {
-               uint8_t _cond_371;
-               _cond_371 = (fs == 176400.f);
-               if(_cond_371){
+               uint8_t _cond_379;
+               _cond_379 = (fs == 176400.f);
+               if(_cond_379){
                   return Lateralus_tune_176400(cut);
                }
                else
                {
-                  uint8_t _cond_370;
-                  _cond_370 = (fs == 192000.f);
-                  if(_cond_370){
+                  uint8_t _cond_378;
+                  _cond_378 = (fs == 192000.f);
+                  if(_cond_378){
                      return Lateralus_tune_192000(cut);
                   }
                   else
@@ -1883,14 +1883,14 @@ void Lateralus_heun(Lateralus__ctx_type_8 &_ctx, float input, float fh, float re
    _ctx.p1 = (_ctx.p1 + ((dp1 + dpt1) * 0.5f));
    _ctx.p2 = (_ctx.p2 + ((dp2 + dpt2) * 0.5f));
    _ctx.p3 = (_ctx.p3 + ((dp3 + dpt3) * 0.5f));
-   _tuple___real_real_real_real__ _tuple_376;
+   _tuple___real_real_real_real__ _tuple_384;
    {
-      _tuple_376.field_0 = _ctx.p0;
-      _tuple_376.field_1 = _ctx.p1;
-      _tuple_376.field_2 = _ctx.p2;
-      _tuple_376.field_3 = _ctx.p3;
+      _tuple_384.field_0 = _ctx.p0;
+      _tuple_384.field_1 = _ctx.p1;
+      _tuple_384.field_2 = _ctx.p2;
+      _tuple_384.field_3 = _ctx.p3;
    }
-   _output_ = _tuple_376;
+   _output_ = _tuple_384;
    return ;
 }
 
@@ -1906,7 +1906,7 @@ void Lateralus__ctx_type_9_init(Lateralus__ctx_type_9 &_output_){
    Util__ctx_type_27_init(_ctx.d18);
    Util__ctx_type_28_init(_ctx.d12_2);
    Util__ctx_type_27_init(_ctx.d12);
-   Util__ctx_type_25_init(_ctx._inst366);
+   Util__ctx_type_25_init(_ctx._inst370);
    Util__ctx_type_26_init(_ctx._inst364);
    Util__ctx_type_3_init(_ctx._inst359);
    Util__ctx_type_3_init(_ctx._inst358);
@@ -1919,12 +1919,12 @@ void Lateralus_process_heun_init(Lateralus__ctx_type_9 &_output_){
    return ;
 }
 
-void Lateralus_process_heun(Lateralus__ctx_type_9 &_ctx, float input, float cut, float res, _tuple___real_real_real_real__ &_output_){
+void Lateralus_process_heun(Lateralus__ctx_type_9 &_ctx, float input, float cut, float res, uint8_t db6_on, uint8_t db12_on, uint8_t db18_on, uint8_t db24_on, _tuple___real_real_real_real__ &_output_){
    float fs;
    fs = getSampleRate();
-   uint8_t _cond_378;
-   _cond_378 = (Util_change(_ctx._inst358,cut) || Util_change(_ctx._inst359,fs));
-   if(_cond_378){
+   uint8_t _cond_386;
+   _cond_386 = (Util_change(_ctx._inst358,cut) || Util_change(_ctx._inst359,fs));
+   if(_cond_386){
       _ctx.fh = Lateralus_getTune(cut,fs);
    }
    float db6;
@@ -1935,112 +1935,128 @@ void Lateralus_process_heun(Lateralus__ctx_type_9 &_ctx, float input, float cut,
    db12 = 0.f;
    db18 = 0.f;
    db24 = 0.f;
-   uint8_t _cond_397;
-   _cond_397 = ((fs == 176400.f) || (fs == 192000.f));
-   if(_cond_397){
-      _tuple___real_real_real_real__ _call_380;
-      Lateralus_heun(_ctx.h,input,_ctx.fh,res,_call_380);
-      db6 = _call_380.field_0;db12 = _call_380.field_1;db18 = _call_380.field_2;db24 = _call_380.field_3;
+   uint8_t _cond_405;
+   _cond_405 = ((fs == 176400.f) || (fs == 192000.f));
+   if(_cond_405){
+      _tuple___real_real_real_real__ _call_388;
+      Lateralus_heun(_ctx.h,input,_ctx.fh,res,_call_388);
+      db6 = _call_388.field_0;db12 = _call_388.field_1;db18 = _call_388.field_2;db24 = _call_388.field_3;
    }
    else
    {
-      uint8_t _cond_396;
-      _cond_396 = ((fs == 88200.f) || (fs == 96000.f));
-      if(_cond_396){
+      uint8_t _cond_404;
+      _cond_404 = ((fs == 88200.f) || (fs == 96000.f));
+      if(_cond_404){
          float input1;
          input1 = Util_upsampleOrder1_2x(_ctx._inst364,input);
          float db6_1;
          float db12_1;
          float db18_1;
          float db24_1;
-         _tuple___real_real_real_real__ _call_382;
-         Lateralus_heun(_ctx.h,input1,_ctx.fh,res,_call_382);
-         db6_1 = _call_382.field_0;db12_1 = _call_382.field_1;db18_1 = _call_382.field_2;db24_1 = _call_382.field_3;
+         _tuple___real_real_real_real__ _call_390;
+         Lateralus_heun(_ctx.h,input1,_ctx.fh,res,_call_390);
+         db6_1 = _call_390.field_0;db12_1 = _call_390.field_1;db18_1 = _call_390.field_2;db24_1 = _call_390.field_3;
          float db6_0;
          float db12_0;
          float db18_0;
          float db24_0;
-         _tuple___real_real_real_real__ _call_383;
-         Lateralus_heun(_ctx.h,input,_ctx.fh,res,_call_383);
-         db6_0 = _call_383.field_0;db12_0 = _call_383.field_1;db18_0 = _call_383.field_2;db24_0 = _call_383.field_3;
-         Util_decimate_2x_skip(_ctx.d6_2,db6_1);
-         db6 = Util_decimate_2x_do(_ctx.d6_2,db6_0);
-         Util_decimate_2x_skip(_ctx.d12_2,db12_1);
-         db12 = Util_decimate_2x_do(_ctx.d12_2,db12_0);
-         Util_decimate_2x_skip(_ctx.d18_2,db18_1);
-         db18 = Util_decimate_2x_do(_ctx.d18_2,db18_0);
-         Util_decimate_2x_skip(_ctx.d24_2,db24_1);
-         db24 = Util_decimate_2x_do(_ctx.d24_2,db24_0);
+         _tuple___real_real_real_real__ _call_391;
+         Lateralus_heun(_ctx.h,input,_ctx.fh,res,_call_391);
+         db6_0 = _call_391.field_0;db12_0 = _call_391.field_1;db18_0 = _call_391.field_2;db24_0 = _call_391.field_3;
+         if(db6_on){
+            Util_decimate_2x_skip(_ctx.d6_2,db6_1);
+            db6 = Util_decimate_2x_do(_ctx.d6_2,db6_0);
+         }
+         if(db12_on){
+            Util_decimate_2x_skip(_ctx.d12_2,db12_1);
+            db12 = Util_decimate_2x_do(_ctx.d12_2,db12_0);
+         }
+         if(db18_on){
+            Util_decimate_2x_skip(_ctx.d18_2,db18_1);
+            db18 = Util_decimate_2x_do(_ctx.d18_2,db18_0);
+         }
+         if(db24_on){
+            Util_decimate_2x_skip(_ctx.d24_2,db24_1);
+            db24 = Util_decimate_2x_do(_ctx.d24_2,db24_0);
+         }
       }
       else
       {
          float input3;
          float input2;
          float input1;
-         _tuple___real_real_real__ _call_386;
-         Util_upsampleOrder1_4x(_ctx._inst366,input,_call_386);
-         input3 = _call_386.field_0;input2 = _call_386.field_1;input1 = _call_386.field_2;
+         _tuple___real_real_real__ _call_394;
+         Util_upsampleOrder1_4x(_ctx._inst370,input,_call_394);
+         input3 = _call_394.field_0;input2 = _call_394.field_1;input1 = _call_394.field_2;
          float db6_3;
          float db12_3;
          float db18_3;
          float db24_3;
-         _tuple___real_real_real_real__ _call_387;
-         Lateralus_heun(_ctx.h,input3,_ctx.fh,res,_call_387);
-         db6_3 = _call_387.field_0;db12_3 = _call_387.field_1;db18_3 = _call_387.field_2;db24_3 = _call_387.field_3;
+         _tuple___real_real_real_real__ _call_395;
+         Lateralus_heun(_ctx.h,input3,_ctx.fh,res,_call_395);
+         db6_3 = _call_395.field_0;db12_3 = _call_395.field_1;db18_3 = _call_395.field_2;db24_3 = _call_395.field_3;
          float db6_2;
          float db12_2;
          float db18_2;
          float db24_2;
-         _tuple___real_real_real_real__ _call_388;
-         Lateralus_heun(_ctx.h,input2,_ctx.fh,res,_call_388);
-         db6_2 = _call_388.field_0;db12_2 = _call_388.field_1;db18_2 = _call_388.field_2;db24_2 = _call_388.field_3;
+         _tuple___real_real_real_real__ _call_396;
+         Lateralus_heun(_ctx.h,input2,_ctx.fh,res,_call_396);
+         db6_2 = _call_396.field_0;db12_2 = _call_396.field_1;db18_2 = _call_396.field_2;db24_2 = _call_396.field_3;
          float db6_1;
          float db12_1;
          float db18_1;
          float db24_1;
-         _tuple___real_real_real_real__ _call_389;
-         Lateralus_heun(_ctx.h,input1,_ctx.fh,res,_call_389);
-         db6_1 = _call_389.field_0;db12_1 = _call_389.field_1;db18_1 = _call_389.field_2;db24_1 = _call_389.field_3;
+         _tuple___real_real_real_real__ _call_397;
+         Lateralus_heun(_ctx.h,input1,_ctx.fh,res,_call_397);
+         db6_1 = _call_397.field_0;db12_1 = _call_397.field_1;db18_1 = _call_397.field_2;db24_1 = _call_397.field_3;
          float db6_0;
          float db12_0;
          float db18_0;
          float db24_0;
-         _tuple___real_real_real_real__ _call_390;
-         Lateralus_heun(_ctx.h,input,_ctx.fh,res,_call_390);
-         db6_0 = _call_390.field_0;db12_0 = _call_390.field_1;db18_0 = _call_390.field_2;db24_0 = _call_390.field_3;
-         Util_decimate_4x_skip(_ctx.d6,db6_3);
-         Util_decimate_4x_skip(_ctx.d6,db6_2);
-         Util_decimate_4x_skip(_ctx.d6,db6_1);
-         db6 = Util_decimate_4x_do(_ctx.d6,db6_0);
-         Util_decimate_4x_skip(_ctx.d12,db12_3);
-         Util_decimate_4x_skip(_ctx.d12,db12_2);
-         Util_decimate_4x_skip(_ctx.d12,db12_1);
-         db12 = Util_decimate_4x_do(_ctx.d12,db12_0);
-         Util_decimate_4x_skip(_ctx.d18,db18_3);
-         Util_decimate_4x_skip(_ctx.d18,db18_2);
-         Util_decimate_4x_skip(_ctx.d18,db18_1);
-         db18 = Util_decimate_4x_do(_ctx.d18,db18_0);
-         Util_decimate_4x_skip(_ctx.d24,db24_3);
-         Util_decimate_4x_skip(_ctx.d24,db24_2);
-         Util_decimate_4x_skip(_ctx.d24,db24_1);
-         db24 = Util_decimate_4x_do(_ctx.d24,db24_0);
+         _tuple___real_real_real_real__ _call_398;
+         Lateralus_heun(_ctx.h,input,_ctx.fh,res,_call_398);
+         db6_0 = _call_398.field_0;db12_0 = _call_398.field_1;db18_0 = _call_398.field_2;db24_0 = _call_398.field_3;
+         if(db6_on){
+            Util_decimate_4x_skip(_ctx.d6,db6_3);
+            Util_decimate_4x_skip(_ctx.d6,db6_2);
+            Util_decimate_4x_skip(_ctx.d6,db6_1);
+            db6 = Util_decimate_4x_do(_ctx.d6,db6_0);
+         }
+         if(db12_on){
+            Util_decimate_4x_skip(_ctx.d12,db12_3);
+            Util_decimate_4x_skip(_ctx.d12,db12_2);
+            Util_decimate_4x_skip(_ctx.d12,db12_1);
+            db12 = Util_decimate_4x_do(_ctx.d12,db12_0);
+         }
+         if(db18_on){
+            Util_decimate_4x_skip(_ctx.d18,db18_3);
+            Util_decimate_4x_skip(_ctx.d18,db18_2);
+            Util_decimate_4x_skip(_ctx.d18,db18_1);
+            db18 = Util_decimate_4x_do(_ctx.d18,db18_0);
+         }
+         if(db24_on){
+            Util_decimate_4x_skip(_ctx.d24,db24_3);
+            Util_decimate_4x_skip(_ctx.d24,db24_2);
+            Util_decimate_4x_skip(_ctx.d24,db24_1);
+            db24 = Util_decimate_4x_do(_ctx.d24,db24_0);
+         }
       }
    }
-   _tuple___real_real_real_real__ _tuple_398;
+   _tuple___real_real_real_real__ _tuple_406;
    {
-      _tuple_398.field_0 = db6;
-      _tuple_398.field_1 = (db12 * (1.f + (res * 0.5f)));
-      _tuple_398.field_2 = (db18 * (1.f + res));
-      _tuple_398.field_3 = (db24 * (1.f + (res * 1.5f)));
+      _tuple_406.field_0 = db6;
+      _tuple_406.field_1 = (db12 * (1.f + (res * 0.5f)));
+      _tuple_406.field_2 = (db18 * (1.f + res));
+      _tuple_406.field_3 = (db24 * (1.f + (res * 1.5f)));
    }
-   _output_ = _tuple_398;
+   _output_ = _tuple_406;
    return ;
 }
 
 void Lateralus__ctx_type_10_init(Lateralus__ctx_type_10 &_output_){
    Lateralus__ctx_type_10 _ctx;
-   Lateralus__ctx_type_9_init(_ctx._inst369);
-   Util__ctx_type_18_init(_ctx._inst368);
+   Lateralus__ctx_type_9_init(_ctx._inst377);
+   Util__ctx_type_18_init(_ctx._inst376);
    _output_ = _ctx;
    return ;
 }
@@ -2050,24 +2066,24 @@ void Lateralus_process_init(Lateralus__ctx_type_10 &_output_){
    return ;
 }
 
-void Lateralus_process(Lateralus__ctx_type_10 &_ctx, float input, float cut_in, float res_in, _tuple___real_real_real_real__ &_output_){
+void Lateralus_process(Lateralus__ctx_type_10 &_ctx, float input, float cut_in, float res_in, uint8_t db6_on, uint8_t db12_on, uint8_t db18_on, uint8_t db24_on, _tuple___real_real_real_real__ &_output_){
    float res;
    res = Util_polylog(res_in);
    float comp;
    comp = Util_map(res,0.9f,1.f,0.f,0.15f);
    float limit;
-   uint8_t _cond_401;
-   _cond_401 = (comp > 0.f);
-   if(_cond_401){ limit = (0.9f + (- comp)); }
+   uint8_t _cond_409;
+   _cond_409 = (comp > 0.f);
+   if(_cond_409){ limit = (0.9f + (- comp)); }
    else
    { limit = 0.9f; }
    float cut;
    cut = float_clip(cut_in,0.f,limit);
    float noise;
-   noise = (Util_simple_noise(_ctx._inst368) * 0.005f);
-   _tuple___real_real_real_real__ _call_400;
-   Lateralus_process_heun(_ctx._inst369,(input + noise),cut,(res * 1.1f),_call_400);
-   _output_ = _call_400;
+   noise = (Util_simple_noise(_ctx._inst376) * 0.005f);
+   _tuple___real_real_real_real__ _call_408;
+   Lateralus_process_heun(_ctx._inst377,(input + noise),cut,(res * 1.1f),db6_on,db12_on,db18_on,db24_on,_call_408);
+   _output_ = _call_408;
    return ;
 }
 
@@ -2086,9 +2102,9 @@ float Debriatus_factor(float cv){
 float Debriatus_crush(float i, float cv){
    float out;
    out = i;
-   uint8_t _cond_476;
-   _cond_476 = (cv == 0.f);
-   if(_cond_476){
+   uint8_t _cond_484;
+   _cond_484 = (cv == 0.f);
+   if(_cond_484){
       out = i;
    }
    else
@@ -2104,9 +2120,9 @@ float Debriatus_crush(float i, float cv){
 
 float Debriatus_fold(float signal, float level){
    float sign;
-   uint8_t _cond_477;
-   _cond_477 = (signal > 0.f);
-   if(_cond_477){ sign = 1.f; }
+   uint8_t _cond_485;
+   _cond_485 = (signal > 0.f);
+   if(_cond_485){ sign = 1.f; }
    else
    { sign = -1.f; }
    float amp;
@@ -2116,9 +2132,9 @@ float Debriatus_fold(float signal, float level){
    float delta;
    delta = (amp + (- base));
    float out;
-   uint8_t _cond_478;
-   _cond_478 = ((float_to_int(base) % 2) != 0);
-   if(_cond_478){ out = (1.f + (- delta)); }
+   uint8_t _cond_486;
+   _cond_486 = ((float_to_int(base) % 2) != 0);
+   if(_cond_486){ out = (1.f + (- delta)); }
    else
    { out = delta; }
    return (sign * out);
@@ -2162,7 +2178,7 @@ float VultEngine_rescomb(VultEngine__ctx_type_0 &_ctx, float in, float cv_in, fl
 
 void VultEngine__ctx_type_1_init(VultEngine__ctx_type_1 &_output_){
    VultEngine__ctx_type_1 _ctx;
-   Stabile__ctx_type_8_init(_ctx._inst481);
+   Stabile__ctx_type_8_init(_ctx._inst489);
    _output_ = _ctx;
    return ;
 }
@@ -2179,15 +2195,15 @@ void VultEngine_stabile(VultEngine__ctx_type_1 &_ctx, float in, float cut_in, fl
    res = float_clip(res_in,0.f,4.f);
    float semblance;
    semblance = float_clip(semblance_in,0.f,1.f);
-   _tuple___real_real_real_real__ _call_490;
-   Stabile_process(_ctx._inst481,in,cut,res,semblance,_call_490);
-   _output_ = _call_490;
+   _tuple___real_real_real_real__ _call_498;
+   Stabile_process(_ctx._inst489,in,cut,res,semblance,_call_498);
+   _output_ = _call_498;
    return ;
 }
 
 void VultEngine__ctx_type_2_init(VultEngine__ctx_type_2 &_output_){
    VultEngine__ctx_type_2 _ctx;
-   Lateralus__ctx_type_10_init(_ctx._inst483);
+   Lateralus__ctx_type_10_init(_ctx._inst491);
    _output_ = _ctx;
    return ;
 }
@@ -2197,16 +2213,16 @@ void VultEngine_lateralus_init(VultEngine__ctx_type_2 &_output_){
    return ;
 }
 
-void VultEngine_lateralus(VultEngine__ctx_type_2 &_ctx, float in, float cut, float res, _tuple___real_real_real_real__ &_output_){
-   _tuple___real_real_real_real__ _call_492;
-   Lateralus_process(_ctx._inst483,in,cut,res,_call_492);
-   _output_ = _call_492;
+void VultEngine_lateralus(VultEngine__ctx_type_2 &_ctx, float in, float cut, float res, uint8_t db6_on, uint8_t db12_on, uint8_t db18_on, uint8_t db24_on, _tuple___real_real_real_real__ &_output_){
+   _tuple___real_real_real_real__ _call_500;
+   Lateralus_process(_ctx._inst491,in,cut,res,db6_on,db12_on,db18_on,db24_on,_call_500);
+   _output_ = _call_500;
    return ;
 }
 
 void VultEngine__ctx_type_3_init(VultEngine__ctx_type_3 &_output_){
    VultEngine__ctx_type_3 _ctx;
-   Tangents__ctx_type_11_init(_ctx._inst485);
+   Tangents__ctx_type_11_init(_ctx._inst493);
    _output_ = _ctx;
    return ;
 }
@@ -2217,7 +2233,7 @@ void VultEngine_tangents_init(VultEngine__ctx_type_3 &_output_){
 }
 
 float VultEngine_tangents(VultEngine__ctx_type_3 &_ctx, float lp, float bp, float hp, float cut, float res){
-   return Tangents_process(_ctx._inst485,lp,bp,hp,cut,res);
+   return Tangents_process(_ctx._inst493,lp,bp,hp,cut,res);
 }
 
 float VultEngine_debriatus(float in, float fold_in, float crush_in, float distort_in, float saturate_in){
@@ -2245,15 +2261,15 @@ void VultEngine_trummor_init(VultEngine__ctx_type_5 &_output_){
 }
 
 void VultEngine_trummor(VultEngine__ctx_type_5 &_ctx, float gate, float osc_in, float noise_in, _tuple___real_real_real_real__ &_output_){
-   _tuple___real_real_real_real__ _call_494;
-   Trummor_do(_ctx.processor,gate,osc_in,noise_in,_call_494);
-   _output_ = _call_494;
+   _tuple___real_real_real_real__ _call_502;
+   Trummor_do(_ctx.processor,gate,osc_in,noise_in,_call_502);
+   _output_ = _call_502;
    return ;
 }
 
 void VultEngine__ctx_type_6_init(VultEngine__ctx_type_6 &_output_){
    VultEngine__ctx_type_6 _ctx;
-   Tohe__ctx_type_2_init(_ctx._inst489);
+   Tohe__ctx_type_2_init(_ctx._inst497);
    _output_ = _ctx;
    return ;
 }
@@ -2266,7 +2282,7 @@ void VultEngine_tohe_init(VultEngine__ctx_type_6 &_output_){
 float VultEngine_tohe(VultEngine__ctx_type_6 &_ctx, float x, float tone_in){
    float tone;
    tone = float_clip(tone_in,-1.f,1.f);
-   return Tohe_do(_ctx._inst489,x,tone);
+   return Tohe_do(_ctx._inst497,x,tone);
 }
 
 
