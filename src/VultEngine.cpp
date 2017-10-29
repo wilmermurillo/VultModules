@@ -1624,7 +1624,7 @@ void Trummor2_do(Trummor2__ctx_type_3 &_ctx, float gate, float osc_in, float noi
    _tuple___real_real__ _call_350;
    Ahr_do(_ctx._inst313,gate,(env1_scale * _ctx.env1_a),(env1_scale * _ctx.env1_h),(env1_scale * _ctx.env1_r),_ctx.env_enabled,_call_350);
    osc_env = _call_350.field_0;env_reset = _call_350.field_1;
-   if(bool_not(_ctx.env1_mode)){ osc_env = Util_shaper(osc_env); }
+   if(bool_not(_ctx.env1_mode)){ osc_env = Util_polylog(osc_env); }
    float swept;
    swept = Swept_process(_ctx._inst314,(1.f + (- env_reset)),(_ctx.bend * 0.6f),0.f,_ctx.bend_time);
    float cv;
@@ -1651,7 +1651,7 @@ void Trummor2_do(Trummor2__ctx_type_3 &_ctx, float gate, float osc_in, float noi
    _tuple___real_real__ _call_353;
    Ahr_do(_ctx._inst317,gate,(env2_scale * _ctx.env2_a),(env2_scale * _ctx.env2_h),(env2_scale * _ctx.env2_r),_ctx.env_enabled,_call_353);
    noise_env = _call_353.field_0;
-   if(bool_not(_ctx.env2_mode)){ noise_env = Util_shaper(noise_env); }
+   if(bool_not(_ctx.env2_mode)){ noise_env = Util_polylog(noise_env); }
    float noise_osc;
    noise_osc = (float_random() + -0.5f + (_ctx.ext_noise * noise_in));
    noise_osc = Tohe_do(_ctx._inst318,noise_osc,_ctx.tone);

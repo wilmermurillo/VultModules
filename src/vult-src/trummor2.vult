@@ -52,7 +52,7 @@ fun do(gate, osc_in, noise_in) {
    // -- Oscillator envelope
    val env1_scale = if env1_mode then 1.0 else 0.2;
    val osc_env, env_reset = Ahr.do(gate, env1_scale * env1_a, env1_scale * env1_h, env1_scale * env1_r, env_enabled);
-   osc_env = if env1_mode then osc_env else Util.shaper(osc_env);
+   osc_env = if env1_mode then osc_env else Util.polylog(osc_env);
 
    // -- Change of pitch
    val swept = Swept.process(1.0 - env_reset, bend * 0.6, 0.0, bend_time);
@@ -73,7 +73,7 @@ fun do(gate, osc_in, noise_in) {
    // -- Noise Envenlope
    val env2_scale = if env2_mode then 1.0 else 0.2;
    val noise_env, _ = Ahr.do(gate, env2_scale * env2_a, env2_scale * env2_h, env2_scale * env2_r, env_enabled);
-   noise_env = if env2_mode then noise_env else Util.shaper(noise_env);
+   noise_env = if env2_mode then noise_env else Util.polylog(noise_env);
 
    // -- Noise mix
    val noise_osc = random() - 0.5 + ext_noise * noise_in;
