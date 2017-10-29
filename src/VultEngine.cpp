@@ -1529,7 +1529,7 @@ void Tangents_process_heun_init(Tangents__ctx_type_9 &_output_){
    return ;
 }
 
-float Tangents_process_heun(Tangents__ctx_type_9 &_ctx, float lp, float bp, float hp, float cut, float res){
+float Tangents_process_heun(Tangents__ctx_type_9 &_ctx, float lp, float bp, float hp, float cut, float res, uint8_t lp_on, uint8_t bp_on, uint8_t hp_on){
    float fs;
    fs = getSampleRate();
    uint8_t _cond_298;
@@ -1539,22 +1539,28 @@ float Tangents_process_heun(Tangents__ctx_type_9 &_ctx, float lp, float bp, floa
    }
    float out;
    out = 0.f;
-   uint8_t _cond_306;
-   _cond_306 = ((fs == 176400.f) || (fs == 192000.f));
-   if(_cond_306){
+   uint8_t _cond_300;
+   _cond_300 = ((fs == 176400.f) || (fs == 192000.f));
+   if(_cond_300){
       out = Tangents_heun(_ctx.h,lp,bp,hp,_ctx.fh,cut,res);
    }
    else
    {
-      uint8_t _cond_305;
-      _cond_305 = ((fs == 88200.f) || (fs == 96000.f));
-      if(_cond_305){
+      uint8_t _cond_299;
+      _cond_299 = ((fs == 88200.f) || (fs == 96000.f));
+      if(_cond_299){
          float lp1;
-         lp1 = Util_upsampleOrder1_2x(_ctx._inst281,lp);
+         if(lp_on){ lp1 = Util_upsampleOrder1_2x(_ctx._inst281,lp); }
+         else
+         { lp1 = 0.f; }
          float bp1;
-         bp1 = Util_upsampleOrder1_2x(_ctx._inst282,bp);
+         if(bp_on){ bp1 = Util_upsampleOrder1_2x(_ctx._inst282,bp); }
+         else
+         { bp1 = 0.f; }
          float hp1;
-         hp1 = Util_upsampleOrder1_2x(_ctx._inst283,hp);
+         if(hp_on){ hp1 = Util_upsampleOrder1_2x(_ctx._inst283,hp); }
+         else
+         { hp1 = 0.f; }
          float out1;
          out1 = Tangents_heun(_ctx.h,lp1,bp1,hp1,_ctx.fh,cut,res);
          float out0;
@@ -1567,21 +1573,45 @@ float Tangents_process_heun(Tangents__ctx_type_9 &_ctx, float lp, float bp, floa
          float lp3;
          float lp2;
          float lp1;
-         _tuple___real_real_real__ _call_299;
-         Util_upsampleOrder1_4x(_ctx._inst285,lp,_call_299);
-         lp3 = _call_299.field_0;lp2 = _call_299.field_1;lp1 = _call_299.field_2;
+         if(lp_on){
+            _tuple___real_real_real__ _call_302;
+            Util_upsampleOrder1_4x(_ctx._inst285,lp,_call_302);
+            lp3 = _call_302.field_0;lp2 = _call_302.field_1;lp1 = _call_302.field_2;
+         }
+         else
+         {
+            lp3 = 0.f;
+            lp2 = 0.f;
+            lp1 = 0.f;
+         }
          float bp3;
          float bp2;
          float bp1;
-         _tuple___real_real_real__ _call_300;
-         Util_upsampleOrder1_4x(_ctx._inst286,bp,_call_300);
-         bp3 = _call_300.field_0;bp2 = _call_300.field_1;bp1 = _call_300.field_2;
+         if(bp_on){
+            _tuple___real_real_real__ _call_304;
+            Util_upsampleOrder1_4x(_ctx._inst286,bp,_call_304);
+            bp3 = _call_304.field_0;bp2 = _call_304.field_1;bp1 = _call_304.field_2;
+         }
+         else
+         {
+            bp3 = 0.f;
+            bp2 = 0.f;
+            bp1 = 0.f;
+         }
          float hp3;
          float hp2;
          float hp1;
-         _tuple___real_real_real__ _call_301;
-         Util_upsampleOrder1_4x(_ctx._inst287,hp,_call_301);
-         hp3 = _call_301.field_0;hp2 = _call_301.field_1;hp1 = _call_301.field_2;
+         if(hp_on){
+            _tuple___real_real_real__ _call_306;
+            Util_upsampleOrder1_4x(_ctx._inst287,hp,_call_306);
+            hp3 = _call_306.field_0;hp2 = _call_306.field_1;hp1 = _call_306.field_2;
+         }
+         else
+         {
+            hp3 = 0.f;
+            hp2 = 0.f;
+            hp1 = 0.f;
+         }
          float out3;
          out3 = Tangents_heun(_ctx.h,lp3,bp3,hp3,_ctx.fh,cut,res);
          float out2;
@@ -1631,22 +1661,22 @@ void Tangents_process_init(Tangents__ctx_type_11 &_output_){
    return ;
 }
 
-float Tangents_process(Tangents__ctx_type_11 &_ctx, float lp, float bp, float hp, float cut_in, float res_in){
+float Tangents_process(Tangents__ctx_type_11 &_ctx, float lp, float bp, float hp, float cut_in, float res_in, uint8_t lp_on, uint8_t bp_on, uint8_t hp_on){
    float res;
    res = Util_polylog(res_in);
    float comp;
    comp = Util_map(res,0.9f,1.f,0.f,0.15f);
    float limit;
-   uint8_t _cond_307;
-   _cond_307 = (comp > 0.f);
-   if(_cond_307){ limit = (0.9f + (- comp)); }
+   uint8_t _cond_301;
+   _cond_301 = (comp > 0.f);
+   if(_cond_301){ limit = (0.9f + (- comp)); }
    else
    { limit = 0.9f; }
    float cut;
    cut = float_clip(cut_in,0.f,limit);
    float noise;
    noise = (Util_simple_noise(_ctx._inst290) * 0.005f);
-   return Tangents_process_heun(_ctx._inst291,(lp + noise),bp,hp,cut,res);
+   return Tangents_process_heun(_ctx._inst291,(lp + noise),bp,hp,cut,res,lp_on,bp_on,hp_on);
 }
 
 void Rescomb__ctx_type_0_init(Rescomb__ctx_type_0 &_output_){
@@ -2232,8 +2262,8 @@ void VultEngine_tangents_init(VultEngine__ctx_type_3 &_output_){
    return ;
 }
 
-float VultEngine_tangents(VultEngine__ctx_type_3 &_ctx, float lp, float bp, float hp, float cut, float res){
-   return Tangents_process(_ctx._inst493,lp,bp,hp,cut,res);
+float VultEngine_tangents(VultEngine__ctx_type_3 &_ctx, float lp, float bp, float hp, float cut, float res, uint8_t lp_on, uint8_t bp_on, uint8_t hp_on){
+   return Tangents_process(_ctx._inst493,lp,bp,hp,cut,res,lp_on,bp_on,hp_on);
 }
 
 float VultEngine_debriatus(float in, float fold_in, float crush_in, float distort_in, float saturate_in){

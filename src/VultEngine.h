@@ -718,7 +718,7 @@ void Tangents__ctx_type_9_init(Tangents__ctx_type_9 &_output_);
 
 void Tangents_process_heun_init(Tangents__ctx_type_9 &_output_);
 
-float Tangents_process_heun(Tangents__ctx_type_9 &_ctx, float lp, float bp, float hp, float cut, float res);
+float Tangents_process_heun(Tangents__ctx_type_9 &_ctx, float lp, float bp, float hp, float cut, float res, uint8_t lp_on, uint8_t bp_on, uint8_t hp_on);
 
 typedef struct Tangents__ctx_type_10 {
    int x1;
@@ -743,7 +743,7 @@ void Tangents__ctx_type_11_init(Tangents__ctx_type_11 &_output_);
 
 void Tangents_process_init(Tangents__ctx_type_11 &_output_);
 
-float Tangents_process(Tangents__ctx_type_11 &_ctx, float lp, float bp, float hp, float cut_in, float res_in);
+float Tangents_process(Tangents__ctx_type_11 &_ctx, float lp, float bp, float hp, float cut_in, float res_in, uint8_t lp_on, uint8_t bp_on, uint8_t hp_on);
 
 typedef struct Rescomb__ctx_type_0 {
    int write_pos;
@@ -928,7 +928,7 @@ void VultEngine__ctx_type_3_init(VultEngine__ctx_type_3 &_output_);
 
 void VultEngine_tangents_init(VultEngine__ctx_type_3 &_output_);
 
-float VultEngine_tangents(VultEngine__ctx_type_3 &_ctx, float lp, float bp, float hp, float cut, float res);
+float VultEngine_tangents(VultEngine__ctx_type_3 &_ctx, float lp, float bp, float hp, float cut, float res, uint8_t lp_on, uint8_t bp_on, uint8_t hp_on);
 
 float VultEngine_debriatus(float in, float fold_in, float crush_in, float distort_in, float saturate_in);
 
