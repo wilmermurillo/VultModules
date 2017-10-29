@@ -400,7 +400,7 @@ Trummor2Widget::Trummor2Widget()
    addParam(createParam<VultKnobAlt>(Vec(63, 153), module, Trummor2::ENV1_H_PARAM, 0.0, 1.0, 0.2));
    addParam(createParam<VultKnobAlt>(Vec(110, 153), module, Trummor2::ENV1_R_PARAM, 0.0, 1.0, 0.2));
 
-   addParam(createParam<VultSelector2>(Vec(12, 203), module, Trummor2::ENV1_SPEED_PARAM, 0.0, 1.0, 0.0));
+   addParam(createParam<VultSelector3>(Vec(12, 203), module, Trummor2::ENV1_SPEED_PARAM, 0.0, 2.0, 0.0));
 
    addParam(createParam<VultKnobAlt>(Vec(53, 207), module, Trummor2::OSC_BLEND_PARAM, 0.0, 1.0, 0.0));
    addParam(createParam<VultKnob>(Vec(101, 201), module, Trummor2::LEVEL1_PARAM, 0.0, 1.0, 0.7));
@@ -422,7 +422,7 @@ Trummor2Widget::Trummor2Widget()
 
    addParam(createParam<VultKnobAlt>(Vec(195, 207), module, Trummor2::NOISE_BLEND_PARAM, 0.0, 1.0, 0.0));
 
-   addParam(createParam<VultSelector2>(Vec(155, 203), module, Trummor2::ENV2_SPEED_PARAM, 0.0, 1.0, 0.0));
+   addParam(createParam<VultSelector3>(Vec(155, 203), module, Trummor2::ENV2_SPEED_PARAM, 0.0, 2.0, 0.0));
 
    /* Oscillator jacks */
    addInput(createInput<VultJack>(Vec(14, 254), module, Trummor2::OSC_INPUT));

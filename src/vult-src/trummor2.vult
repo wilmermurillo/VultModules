@@ -50,9 +50,14 @@ fun do(gate, osc_in, noise_in) {
    mem cutoff, resonance, filter;
 
    // -- Oscillator envelope
-   val env1_scale = if env1_mode then 1.0 else 0.2;
-   val osc_env, env_reset = Ahr.do(gate, env1_scale * env1_a, env1_scale * env1_h, env1_scale * env1_r, env_enabled);
-   osc_env = if env1_mode then osc_env else Util.polylog(osc_env);
+   val env1_fast = env1_mode > 0.5;
+   val env1_scale = if env1_fast then 0.2 else 1.0;
+   val env1_loop = env1_mode > 1.5;
+   val env1_aa = env1_a * env1_a;
+   val env1_hh = env1_h * env1_h;
+   val env1_rr = env1_r * env1_r;
+   val osc_env, env_reset = Ahr.do(gate, env1_scale * env1_aa, env1_scale * env1_hh, env1_scale * env1_rr, env_enabled, env1_loop);
+   osc_env = if env1_fast then Util.polylog(osc_env) else osc_env;
 
    // -- Change of pitch
    val swept = Swept.process(1.0 - env_reset, bend * 0.6, 0.0, bend_time);
@@ -71,9 +76,14 @@ fun do(gate, osc_in, noise_in) {
    env_enabled = not(reset_sub) && not(reset_osc);
 
    // -- Noise Envenlope
-   val env2_scale = if env2_mode then 1.0 else 0.2;
-   val noise_env, _ = Ahr.do(gate, env2_scale * env2_a, env2_scale * env2_h, env2_scale * env2_r, env_enabled);
-   noise_env = if env2_mode then noise_env else Util.polylog(noise_env);
+   val env2_fast = env2_mode > 0.5;
+   val env2_scale = if env2_fast then 0.2 else 1.0;
+   val env2_loop = env2_mode > 1.5;
+   val env2_aa = env2_a * env2_a;
+   val env2_hh = env2_h * env2_h;
+   val env2_rr = env2_r * env2_r;
+   val noise_env, _ = Ahr.do(gate, env2_scale * env2_aa, env2_scale * env2_hh, env2_scale * env2_rr, env_enabled, env2_loop);
+   noise_env = if env2_fast then Util.polylog(noise_env) else noise_env;
 
    // -- Noise mix
    val noise_osc = random() - 0.5 + ext_noise * noise_in;
@@ -81,8 +91,8 @@ fun do(gate, osc_in, noise_in) {
 
    // -- Filter
    val filter_output = filterP(noise_osc * noise_env, cutoff, resonance, filter);
-   val comb = clip((3.0 * noise_tune) * (3.0 * noise_tune), 0.0, 1.0);
-   filter_output = Rescomb.do(filter_output, (1.0 - noise_tune), comb, rescomb);
+   val comb = clip((3.0 * rescomb) * (3.0 * rescomb), 0.0, 1.0);
+   filter_output = Rescomb.do(filter_output, noise_tune, comb, rescomb);
    // -- Final mix
    val output = level1 * osc_env * osc + 0.6 * level2 * filter_output;
    return output, cv, osc_env, noise_env;
@@ -138,10 +148,10 @@ and setNoiseBlend(value) {
    ext_noise = Util.fadeB(value);
 }
 and setEnv1Scale(value) {
-   env1_mode = value < 0.5;
+   env1_mode = value;
 }
 and setEnv2Scale(value) {
-   env2_mode = value < 0.5;
+   env2_mode = value;
 }
 and setRingSel(value) {
    ring_sel = value > 0.5;

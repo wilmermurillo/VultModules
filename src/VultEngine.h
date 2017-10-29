@@ -416,7 +416,7 @@ void Ahr__ctx_type_0_init(Ahr__ctx_type_0 &_output_);
 
 void Ahr_do_init(Ahr__ctx_type_0 &_output_);
 
-void Ahr_do(Ahr__ctx_type_0 &_ctx, float gate, float a, float h, float r, uint8_t enabled, _tuple___real_real__ &_output_);
+void Ahr_do(Ahr__ctx_type_0 &_ctx, float gate, float a, float h, float r, uint8_t enabled, uint8_t loop, _tuple___real_real__ &_output_);
 
 typedef struct Trummor__ctx_type_0 {
    float tone;
@@ -439,14 +439,14 @@ typedef struct Trummor__ctx_type_0 {
    float drive;
    float decimate;
    float bend;
-   Tohe__ctx_type_2 _inst185;
-   Decimate__ctx_type_0 _inst184;
-   Noise__ctx_type_0 _inst183;
-   Util__ctx_type_2 _inst182;
-   Ahr__ctx_type_0 _inst181;
-   Tricore__ctx_type_0 _inst180;
-   Swept__ctx_type_0 _inst179;
-   Ahr__ctx_type_0 _inst178;
+   Tohe__ctx_type_2 _inst187;
+   Decimate__ctx_type_0 _inst186;
+   Noise__ctx_type_0 _inst185;
+   Util__ctx_type_2 _inst184;
+   Ahr__ctx_type_0 _inst183;
+   Tricore__ctx_type_0 _inst182;
+   Swept__ctx_type_0 _inst181;
+   Ahr__ctx_type_0 _inst180;
 } Trummor__ctx_type_0;
 
 typedef Trummor__ctx_type_0 Trummor_do_type;
@@ -609,14 +609,14 @@ float Tangents_heun(Tangents__ctx_type_8 &_ctx, float lp, float bp, float hp, fl
 typedef struct Tangents__ctx_type_9 {
    Tangents__ctx_type_8 h;
    float fh;
+   Util__ctx_type_26 _inst258;
+   Util__ctx_type_26 _inst257;
    Util__ctx_type_26 _inst256;
-   Util__ctx_type_26 _inst255;
-   Util__ctx_type_26 _inst254;
+   Util__ctx_type_27 _inst254;
+   Util__ctx_type_27 _inst253;
    Util__ctx_type_27 _inst252;
-   Util__ctx_type_27 _inst251;
-   Util__ctx_type_27 _inst250;
-   Util__ctx_type_3 _inst245;
-   Util__ctx_type_3 _inst244;
+   Util__ctx_type_3 _inst247;
+   Util__ctx_type_3 _inst246;
 } Tangents__ctx_type_9;
 
 typedef Tangents__ctx_type_9 Tangents_process_heun_type;
@@ -640,8 +640,8 @@ void Tangents_simple_noise_init(Tangents__ctx_type_10 &_output_);
 float Tangents_simple_noise(Tangents__ctx_type_10 &_ctx);
 
 typedef struct Tangents__ctx_type_11 {
-   Tangents__ctx_type_9 _inst260;
-   Util__ctx_type_18 _inst259;
+   Tangents__ctx_type_9 _inst262;
+   Util__ctx_type_18 _inst261;
 } Tangents__ctx_type_11;
 
 typedef Tangents__ctx_type_11 Tangents_process_type;
@@ -673,9 +673,9 @@ float Rescomb_toneCurve(float tone);
 typedef struct Rescomb__ctx_type_2 {
    float stone;
    float output;
-   Rescomb__ctx_type_0 _inst301;
-   Util__ctx_type_9 _inst300;
-   Util__ctx_type_3 _inst298;
+   Rescomb__ctx_type_0 _inst303;
+   Util__ctx_type_9 _inst302;
+   Util__ctx_type_3 _inst300;
 } Rescomb__ctx_type_2;
 
 typedef Rescomb__ctx_type_2 Rescomb_do_type;
@@ -689,7 +689,7 @@ float Rescomb_do(Rescomb__ctx_type_2 &_ctx, float in, float cv, float tone, floa
 float Trummor2_shape(float x, float shaper, float sub);
 
 typedef struct Trummor2__ctx_type_1 {
-   Stabile__ctx_type_8 _inst309;
+   Stabile__ctx_type_8 _inst311;
 } Trummor2__ctx_type_1;
 
 typedef Trummor2__ctx_type_1 Trummor2_filterS_type;
@@ -701,7 +701,7 @@ void Trummor2_filterS_init(Trummor2__ctx_type_1 &_output_);
 float Trummor2_filterS(Trummor2__ctx_type_1 &_ctx, float x, float cutoff, float resonance, float filter_type);
 
 typedef struct Trummor2__ctx_type_2 {
-   Tangents__ctx_type_11 _inst311;
+   Tangents__ctx_type_11 _inst313;
 } Trummor2__ctx_type_2;
 
 typedef Trummor2__ctx_type_2 Trummor2_filterP_type;
@@ -730,24 +730,24 @@ typedef struct Trummor2__ctx_type_3 {
    float ext_noise;
    uint8_t env_enabled;
    float env2_r;
-   uint8_t env2_mode;
+   float env2_mode;
    float env2_h;
    float env2_a;
    float env1_r;
-   uint8_t env1_mode;
+   float env1_mode;
    float env1_h;
    float env1_a;
    float cutoff;
    float bend_time;
    float bend;
-   Rescomb__ctx_type_2 _inst320;
-   Trummor2__ctx_type_2 _inst319;
-   Tohe__ctx_type_2 _inst318;
-   Ahr__ctx_type_0 _inst317;
-   Tricore__ctx_type_0 _inst316;
-   Tricore__ctx_type_0 _inst315;
-   Swept__ctx_type_0 _inst314;
-   Ahr__ctx_type_0 _inst313;
+   Rescomb__ctx_type_2 _inst322;
+   Trummor2__ctx_type_2 _inst321;
+   Tohe__ctx_type_2 _inst320;
+   Ahr__ctx_type_0 _inst319;
+   Tricore__ctx_type_0 _inst318;
+   Tricore__ctx_type_0 _inst317;
+   Swept__ctx_type_0 _inst316;
+   Ahr__ctx_type_0 _inst315;
 } Trummor2__ctx_type_3;
 
 typedef Trummor2__ctx_type_3 Trummor2_do_type;
@@ -954,10 +954,10 @@ void Lateralus_heun(Lateralus__ctx_type_8 &_ctx, float input, float fh, float re
 typedef struct Lateralus__ctx_type_9 {
    Lateralus__ctx_type_8 h;
    float fh;
-   Util__ctx_type_26 _inst431;
-   Util__ctx_type_27 _inst429;
-   Util__ctx_type_3 _inst424;
-   Util__ctx_type_3 _inst423;
+   Util__ctx_type_26 _inst433;
+   Util__ctx_type_27 _inst431;
+   Util__ctx_type_3 _inst426;
+   Util__ctx_type_3 _inst425;
 } Lateralus__ctx_type_9;
 
 typedef Lateralus__ctx_type_9 Lateralus_process_heun_type;
@@ -969,8 +969,8 @@ void Lateralus_process_heun_init(Lateralus__ctx_type_9 &_output_);
 void Lateralus_process_heun(Lateralus__ctx_type_9 &_ctx, float input, float cut, float res, _tuple___real_real__ &_output_);
 
 typedef struct Lateralus__ctx_type_10 {
-   Lateralus__ctx_type_9 _inst434;
-   Util__ctx_type_18 _inst433;
+   Lateralus__ctx_type_9 _inst436;
+   Util__ctx_type_18 _inst435;
 } Lateralus__ctx_type_10;
 
 typedef Lateralus__ctx_type_10 Lateralus_process_type;
@@ -1010,7 +1010,7 @@ void VultEngine_rescomb_init(VultEngine__ctx_type_0 &_output_);
 float VultEngine_rescomb(VultEngine__ctx_type_0 &_ctx, float in, float cv_in, float tone_in, float res_in);
 
 typedef struct VultEngine__ctx_type_1 {
-   Stabile__ctx_type_8 _inst546;
+   Stabile__ctx_type_8 _inst548;
 } VultEngine__ctx_type_1;
 
 typedef VultEngine__ctx_type_1 VultEngine_stabile_type;
@@ -1022,7 +1022,7 @@ void VultEngine_stabile_init(VultEngine__ctx_type_1 &_output_);
 void VultEngine_stabile(VultEngine__ctx_type_1 &_ctx, float in, float cut_in, float res_in, float semblance_in, _tuple___real_real_real_real__ &_output_);
 
 typedef struct VultEngine__ctx_type_2 {
-   Lateralus__ctx_type_10 _inst548;
+   Lateralus__ctx_type_10 _inst550;
 } VultEngine__ctx_type_2;
 
 typedef VultEngine__ctx_type_2 VultEngine_lateralus_type;
@@ -1034,7 +1034,7 @@ void VultEngine_lateralus_init(VultEngine__ctx_type_2 &_output_);
 void VultEngine_lateralus(VultEngine__ctx_type_2 &_ctx, float in, float cut, float res, _tuple___real_real__ &_output_);
 
 typedef struct VultEngine__ctx_type_3 {
-   Tangents__ctx_type_11 _inst550;
+   Tangents__ctx_type_11 _inst552;
 } VultEngine__ctx_type_3;
 
 typedef VultEngine__ctx_type_3 VultEngine_tangents_type;
@@ -1072,7 +1072,7 @@ void VultEngine_trummor2_init(VultEngine__ctx_type_6 &_output_);
 void VultEngine_trummor2(VultEngine__ctx_type_6 &_ctx, float gate, float osc_in, float noise_in, _tuple___real_real_real_real__ &_output_);
 
 typedef struct VultEngine__ctx_type_7 {
-   Tohe__ctx_type_2 _inst555;
+   Tohe__ctx_type_2 _inst557;
 } VultEngine__ctx_type_7;
 
 typedef VultEngine__ctx_type_7 VultEngine_tohe_type;
