@@ -1,0 +1,106 @@
+/*
+Copyright (c) 2017 Leonardo Laguna Ruiz (modlfo@gmail.com), All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1.- Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+2.- Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+3.- Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+4.- Commercial use requires explicit permission of the author.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+fun sine_wave(x) @[table(size=512,min=0.0,max=1.0)] {
+   return sin(2.0 * pi() * x);
+}
+
+fun tri_wave(x) @[table(size=512,min=0.0,max=1.0)] {
+   val out = 0.0;
+   if(x < 1.0 /4.0) {
+      out = x;
+   }
+   else if(x < 3.0 / 4.0) {
+      out = 2.0 / 4.0 - x;
+   }
+   else {
+      out = -1.0 + x;
+   }
+   return 4.0 * out;
+}
+
+fun saw_wave_raw(x, n) {
+   val i = 1;
+   val acc = 0.0;
+   while(i < n){
+      acc = acc + sin(2.0 * pi() * x * real(i))/real(i);
+      i = i + 1;
+   }
+   return acc;
+}
+
+fun saw_wave_8(x) @[table(size=512,min=0.0,max=1.1)] return saw_wave_raw(x, 8);
+fun saw_wave_16(x) @[table(size=512,min=0.0,max=1.1)] return saw_wave_raw(x, 16);
+fun saw_wave_32(x) @[table(size=512,min=0.0,max=1.1)] return saw_wave_raw(x, 32);
+fun saw_wave_64(x) @[table(size=512,min=0.0,max=1.1)] return saw_wave_raw(x, 64);
+fun saw_wave_128(x) @[table(size=512,min=0.0,max=1.1)] return saw_wave_raw(x, 128);
+fun saw_wave_256(x) @[table(size=512,min=0.0,max=1.1)] return saw_wave_raw(x, 256);
+
+fun saw_wave(cv, phase) {
+   val n = int(Util.cvToHarmonics(cv));
+   if(n >= 256) return saw_wave_256(phase);
+   if(n >= 128) return saw_wave_128(phase);
+   if(n >= 64) return saw_wave_64(phase);
+   if(n >= 32) return saw_wave_32(phase);
+   if(n >= 16) return saw_wave_16(phase);
+   if(n >= 8) return saw_wave_8(phase);
+   return sine_wave(phase);
+}
+
+
+fun pulse_wave_raw(x, n) {
+   val i = 1;
+   val acc = 0.0;
+   while(i < n){
+      if(i % 2 <> 0)
+         acc = acc + sin(2.0 * pi() * x * real(i))/real(i);
+      i = i + 1;
+   }
+   return acc;
+}
+
+fun pulse_wave_8(x) @[table(size=512,min=0.0,max=1.1)] return pulse_wave_raw(x, 8);
+fun pulse_wave_16(x) @[table(size=512,min=0.0,max=1.1)] return pulse_wave_raw(x, 16);
+fun pulse_wave_32(x) @[table(size=512,min=0.0,max=1.1)] return pulse_wave_raw(x, 32);
+fun pulse_wave_64(x) @[table(size=512,min=0.0,max=1.1)] return pulse_wave_raw(x, 64);
+fun pulse_wave_128(x) @[table(size=512,min=0.0,max=1.1)] return pulse_wave_raw(x, 128);
+fun pulse_wave_256(x) @[table(size=512,min=0.0,max=1.1)] return pulse_wave_raw(x, 256);
+
+fun pulse_wave(cv, phase) {
+   val n = int(Util.cvToHarmonics(cv));
+   if(n >= 256) return pulse_wave_256(phase);
+   if(n >= 128) return pulse_wave_128(phase);
+   if(n >= 64) return pulse_wave_64(phase);
+   if(n >= 32) return pulse_wave_32(phase);
+   if(n >= 16) return pulse_wave_16(phase);
+   if(n >= 8) return pulse_wave_8(phase);
+   return sine_wave(phase);
+}
+
+fun scale(n) @[table(size=512,min=0.1,max=100.0)] {
+   return 1.0 / sqrt(n);
+}
+
+fun wave(cv, phase, aura) {
+   if(aura == 0.0) {
+      return sine_wave(phase);
+   }
+   else if(aura > 0.0) {
+      return Util.fadeA(aura) * sine_wave(phase) + Util.fadeB(aura) * pulse_wave(cv, phase);
+   }
+   else
+   {
+      val a = abs(aura);
+      return Util.fadeA(a) * sine_wave(phase) + Util.fadeB(a) * tri_wave(phase);
+   }
+}

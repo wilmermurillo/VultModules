@@ -24,7 +24,7 @@ struct Trummor2 : Module
       BEND_PARAM,
       TIME_PARAM,
       SUB_PARAM,
-      POW_PARAM,
+      WAVE_PARAM,
       SHAPER_PARAM,
       ENV1_A_PARAM,
       ENV1_H_PARAM,
@@ -142,6 +142,9 @@ struct Trummor2 : Module
          break;
       case SHAPER_PARAM:
          Trummor2_setShaper(processor, value);
+         break;
+      case WAVE_PARAM:
+         Trummor2_setWave(processor, value);
          break;
       case PITCH_PARAM:
          Trummor2_setNoiseTune(processor, value);
@@ -304,7 +307,7 @@ static const char *parameters[] = {
     "O-BEND",
     "O-TIME",
     "O-SUB",
-    "O-POW",
+    "O-WAVE",
     "O-SHAPE",
     "O-ATTACK",
     "O-HOLD",
@@ -401,6 +404,7 @@ Trummor2Widget::Trummor2Widget()
 
    addParam(createParam<VultKnobAlt>(Vec(110, 106), module, Trummor2::SHAPER_PARAM, -1.0, 1.0, 0.0));
    addParam(createParam<VultKnobAlt>(Vec(17, 106), module, Trummor2::SUB_PARAM, 0.0, 1.0, 0.0));
+   addParam(createParam<VultKnobAlt>(Vec(63, 106), module, Trummor2::WAVE_PARAM, 0.0, 1.0, 0.0));
 
    addParam(createParam<VultKnobAlt>(Vec(17, 153), module, Trummor2::ENV1_A_PARAM, 0.0, 1.0, 0.0));
    addParam(createParam<VultKnobAlt>(Vec(63, 153), module, Trummor2::ENV1_H_PARAM, 0.0, 1.0, 0.2));

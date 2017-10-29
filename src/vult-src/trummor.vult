@@ -27,7 +27,7 @@ fun do(gate, osc_in, noise_in) {
    // Change of pitch
    val cv = Swept.process(1.0 - env_reset, pitch + bend * 0.4, pitch, 0.1);
    // Note: the oscillator is dissabled while the nevelop resets
-   val osc, reset_osc = Tricore.process(cv, 0.0, env_reset);
+   val osc, reset_osc = Tricore.process(cv, 0.0, env_reset, 0.0);
    osc = int_osc * osc + ext_osc * osc_in;
    env_enabled = not(reset_osc);
 

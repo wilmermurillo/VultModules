@@ -48,6 +48,7 @@ fun do(gate, osc_in, noise_in) {
    mem sub;
    mem env_enabled;
    mem cutoff, resonance, filter;
+   mem wave;
 
    // -- Oscillator envelope
    val env1_fast = env1_mode > 0.5;
@@ -64,14 +65,15 @@ fun do(gate, osc_in, noise_in) {
    val cv = pitch + swept;
 
    // -- Oscillators
-   val sub_osc, reset_sub = Tricore.process(cv - 0.1 + sub * 0.001, 0.0, env_reset);
-   val osc, reset_osc = Tricore.process(cv, 0.0, env_reset);
+   val sub_osc, reset_sub = Tricore.process(cv - 0.1, 0.0, env_reset, wave);
+   val osc, reset_osc = Tricore.process(cv, 0.0, env_reset, wave);
    // sub mix
-   osc = sub * sub_osc + osc;
+   val blend = Util.fadeA(sub) * 0.5 + 0.5;
+   osc = (1.0 - blend) * sub_osc + osc * blend;
    // ext mix
    osc = int_osc * osc + ext_osc * osc_in;
    // shaper
-   osc = shape(osc, shaper, sub);
+   osc = shape(0.9 * osc, shaper, sub);
 
    env_enabled = not(reset_sub) && not(reset_osc);
 
@@ -129,6 +131,9 @@ and setBend(value) {
 }
 and setShaper(value) {
    shaper = clip(value, -1.0, 1.0);
+}
+and setWave(value) {
+   wave = clip(value, -1.0, 1.0);
 }
 and setNoiseTune(value) {
    noise_tune = clip(value, 0.0, 1.0);
