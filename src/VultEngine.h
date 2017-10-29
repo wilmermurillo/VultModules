@@ -221,6 +221,44 @@ void Util_upsampleOrder1_2x_init(Util__ctx_type_26 &_output_);
 
 float Util_upsampleOrder1_2x(Util__ctx_type_26 &_ctx, float y0);
 
+typedef struct Util__ctx_type_27 {
+   float z[32];
+   int index;
+} Util__ctx_type_27;
+
+typedef Util__ctx_type_27 Util_decimate_4x_do_type;
+
+void Util__ctx_type_27_init(Util__ctx_type_27 &_output_);
+
+void Util_decimate_4x_do_init(Util__ctx_type_27 &_output_);
+
+float Util_decimate_4x_do(Util__ctx_type_27 &_ctx, float x);
+
+typedef Util__ctx_type_27 Util_decimate_4x_skip_type;
+
+void Util_decimate_4x_skip_init(Util__ctx_type_27 &_output_);
+
+void Util_decimate_4x_skip(Util__ctx_type_27 &_ctx, float x);
+
+typedef struct Util__ctx_type_28 {
+   float z[32];
+   int index;
+} Util__ctx_type_28;
+
+typedef Util__ctx_type_28 Util_decimate_2x_do_type;
+
+void Util__ctx_type_28_init(Util__ctx_type_28 &_output_);
+
+void Util_decimate_2x_do_init(Util__ctx_type_28 &_output_);
+
+float Util_decimate_2x_do(Util__ctx_type_28 &_ctx, float x);
+
+typedef Util__ctx_type_28 Util_decimate_2x_skip_type;
+
+void Util_decimate_2x_skip_init(Util__ctx_type_28 &_output_);
+
+void Util_decimate_2x_skip(Util__ctx_type_28 &_ctx, float x);
+
 float Stabile_calc_g(float cv, float fs);
 
 static const float Stabile_calc_g_44100_c0[129] = {0.0023297121342f,0.00232990877298f,0.00233073630983f,0.00233269968028f,0.00233638229726f,0.00234245457359f,0.00235168322608f,0.00236494142632f,0.00238321986834f,0.00240763882889f,0.00243946130176f,0.00248010729458f,0.00253116938262f,0.00259442962235f,0.00267187793507f,0.00276573207984f,0.00287845934428f,0.00301280009195f,0.00317179331621f,0.00335880436225f,0.00357755499186f,0.00383215597998f,0.00412714244708f,0.00446751214818f,0.00485876695787f,0.00530695781034f,0.00581873337572f,0.00640139277766f,0.00706294268463f,0.00781215913512f,0.00865865449151f,0.009612949952f,0.0106865540907f,0.0118920479415f,0.0132431771918f,0.0147549521087f,0.0164437558847f,0.0183274621643f,0.0204255625945f,0.022759305337f,0.0253518455914f,0.0282284093001f,0.0314164713533f,0.0349459497795f,0.0388494175998f,0.043162334253f,0.0479232987633f,0.0531743271336f,0.0589611568109f,0.0653335815059f,0.0723458201533f,0.0800569244031f,0.0885312297538f,0.0978388562821f,0.108056265945f,0.119266884639f,0.131561798648f,0.145040536861f,0.159811952209f,0.175995218308f,0.193720960296f,0.213132542527f,0.234387540206f,0.257659427412f,0.28313952047f,0.311039223598f,0.341592633412f,0.375059570744f,0.411729122804f,0.451923796555f,0.496004406314f,0.544375845921f,0.597493929733f,0.655873529108f,0.720098283963f,0.790832235656f,0.868833811375f,0.954972696995f,1.05025027098f,1.15582444622f,1.27303999064f,1.40346568838f,1.54894008179f,1.7116280323f,1.8940909949f,2.0993747759f,2.33111971677f,2.59369983247f,2.89239959505f,3.23364002708f,3.62526989908f,4.0769436159f,4.60061558471f,5.21119262107f,5.92740301372f,6.77296594099f,7.77818227812f,8.98212429377f,10.435688453f,12.205911059f,14.3821622302f,17.0851843167f,20.4805234393f,24.7988948969f,30.3677589398f,37.6615131884f,47.383544519f,60.604687882f,79.0054977487f,105.31829363f,144.174148124f,203.822646897f,299.876648122f,464.200161855f,768.436151272f,1395.90540879f,2909.77223601f,7604.60964187f,31131.4055538f,585739.484048f,3886427.45042f,-117085.944353f,-17366.3754804f,-5654.03027988f,-2534.62900488f,-1353.02065547f,-803.751969365f,-510.259188932f,-335.387892325f};
@@ -260,8 +298,8 @@ typedef struct Stabile__ctx_type_8 {
    float z1;
    float inv_den;
    float g;
-   Util__ctx_type_3 _inst85;
-   Util__ctx_type_3 _inst84;
+   Util__ctx_type_3 _inst111;
+   Util__ctx_type_3 _inst110;
    float R;
 } Stabile__ctx_type_8;
 
@@ -283,9 +321,9 @@ typedef struct Tricore__ctx_type_0 {
    uint8_t reset_state;
    float reset_phase;
    float phase;
-   Util__ctx_type_2 _inst106;
-   Util__ctx_type_2 _inst105;
-   Util__ctx_type_17 _inst103;
+   Util__ctx_type_2 _inst132;
+   Util__ctx_type_2 _inst131;
+   Util__ctx_type_17 _inst129;
 } Tricore__ctx_type_0;
 
 typedef Tricore__ctx_type_0 Tricore_process_type;
@@ -311,7 +349,7 @@ typedef struct Tohe__ctx_type_2 {
    float k1;
    float k0;
    float comp;
-   Util__ctx_type_3 _inst119;
+   Util__ctx_type_3 _inst145;
 } Tohe__ctx_type_2;
 
 typedef Tohe__ctx_type_2 Tohe_do_type;
@@ -330,7 +368,7 @@ void Tohe_start(Tohe__ctx_type_2 &_ctx);
 
 typedef struct Swept__ctx_type_0 {
    float out;
-   Util__ctx_type_2 _inst125;
+   Util__ctx_type_2 _inst151;
 } Swept__ctx_type_0;
 
 typedef Swept__ctx_type_0 Swept_process_type;
@@ -368,7 +406,7 @@ void Swept_default(Swept__ctx_type_0 &_ctx);
 typedef struct Noise__ctx_type_0 {
    int x2;
    int x1;
-   Util__ctx_type_2 _inst133;
+   Util__ctx_type_2 _inst159;
 } Noise__ctx_type_0;
 
 typedef Noise__ctx_type_0 Noise_process_type;
@@ -422,8 +460,8 @@ typedef struct Ahr__ctx_type_0 {
    float rate;
    float out;
    float hold_phase;
-   Util__ctx_type_2 _inst146;
-   Util__ctx_type_2 _inst144;
+   Util__ctx_type_2 _inst172;
+   Util__ctx_type_2 _inst170;
 } Ahr__ctx_type_0;
 
 typedef Ahr__ctx_type_0 Ahr_do_type;
@@ -438,7 +476,7 @@ typedef struct Ahr__ctx_type_1 {
    float knob3;
    float knob2;
    float knob1;
-   Ahr__ctx_type_0 _inst155;
+   Ahr__ctx_type_0 _inst181;
 } Ahr__ctx_type_1;
 
 typedef Ahr__ctx_type_1 Ahr_process_type;
@@ -493,13 +531,13 @@ typedef struct Trummor__ctx_type_0 {
    float drive;
    float decimate;
    float bend;
-   Tohe__ctx_type_2 _inst194;
-   Decimate__ctx_type_0 _inst193;
-   Noise__ctx_type_0 _inst192;
-   Ahr__ctx_type_0 _inst191;
-   Tricore__ctx_type_0 _inst190;
-   Swept__ctx_type_0 _inst189;
-   Ahr__ctx_type_0 _inst188;
+   Tohe__ctx_type_2 _inst220;
+   Decimate__ctx_type_0 _inst219;
+   Noise__ctx_type_0 _inst218;
+   Ahr__ctx_type_0 _inst217;
+   Tricore__ctx_type_0 _inst216;
+   Swept__ctx_type_0 _inst215;
+   Ahr__ctx_type_0 _inst214;
 } Trummor__ctx_type_0;
 
 typedef Trummor__ctx_type_0 Trummor_do_type;
@@ -662,14 +700,16 @@ float Tangents_heun(Tangents__ctx_type_8 &_ctx, float lp, float bp, float hp, fl
 typedef struct Tangents__ctx_type_9 {
    Tangents__ctx_type_8 h;
    float fh;
-   Util__ctx_type_25 _inst261;
-   Util__ctx_type_25 _inst260;
-   Util__ctx_type_25 _inst259;
-   Util__ctx_type_26 _inst257;
-   Util__ctx_type_26 _inst256;
-   Util__ctx_type_26 _inst255;
-   Util__ctx_type_3 _inst250;
-   Util__ctx_type_3 _inst249;
+   Util__ctx_type_27 d4;
+   Util__ctx_type_28 d2;
+   Util__ctx_type_25 _inst287;
+   Util__ctx_type_25 _inst286;
+   Util__ctx_type_25 _inst285;
+   Util__ctx_type_26 _inst283;
+   Util__ctx_type_26 _inst282;
+   Util__ctx_type_26 _inst281;
+   Util__ctx_type_3 _inst276;
+   Util__ctx_type_3 _inst275;
 } Tangents__ctx_type_9;
 
 typedef Tangents__ctx_type_9 Tangents_process_heun_type;
@@ -693,8 +733,8 @@ void Tangents_simple_noise_init(Tangents__ctx_type_10 &_output_);
 float Tangents_simple_noise(Tangents__ctx_type_10 &_ctx);
 
 typedef struct Tangents__ctx_type_11 {
-   Tangents__ctx_type_9 _inst265;
-   Util__ctx_type_18 _inst264;
+   Tangents__ctx_type_9 _inst291;
+   Util__ctx_type_18 _inst290;
 } Tangents__ctx_type_11;
 
 typedef Tangents__ctx_type_11 Tangents_process_type;
@@ -726,9 +766,9 @@ float Rescomb_toneCurve(float tone);
 typedef struct Rescomb__ctx_type_2 {
    float stone;
    float output;
-   Rescomb__ctx_type_0 _inst306;
-   Util__ctx_type_9 _inst305;
-   Util__ctx_type_3 _inst303;
+   Rescomb__ctx_type_0 _inst332;
+   Util__ctx_type_9 _inst331;
+   Util__ctx_type_3 _inst329;
 } Rescomb__ctx_type_2;
 
 typedef Rescomb__ctx_type_2 Rescomb_do_type;
@@ -791,10 +831,10 @@ void Lateralus_heun(Lateralus__ctx_type_8 &_ctx, float input, float fh, float re
 typedef struct Lateralus__ctx_type_9 {
    Lateralus__ctx_type_8 h;
    float fh;
-   Util__ctx_type_25 _inst340;
-   Util__ctx_type_26 _inst338;
-   Util__ctx_type_3 _inst333;
-   Util__ctx_type_3 _inst332;
+   Util__ctx_type_25 _inst366;
+   Util__ctx_type_26 _inst364;
+   Util__ctx_type_3 _inst359;
+   Util__ctx_type_3 _inst358;
 } Lateralus__ctx_type_9;
 
 typedef Lateralus__ctx_type_9 Lateralus_process_heun_type;
@@ -806,8 +846,8 @@ void Lateralus_process_heun_init(Lateralus__ctx_type_9 &_output_);
 void Lateralus_process_heun(Lateralus__ctx_type_9 &_ctx, float input, float cut, float res, _tuple___real_real_real_real__ &_output_);
 
 typedef struct Lateralus__ctx_type_10 {
-   Lateralus__ctx_type_9 _inst343;
-   Util__ctx_type_18 _inst342;
+   Lateralus__ctx_type_9 _inst369;
+   Util__ctx_type_18 _inst368;
 } Lateralus__ctx_type_10;
 
 typedef Lateralus__ctx_type_10 Lateralus_process_type;
@@ -847,7 +887,7 @@ void VultEngine_rescomb_init(VultEngine__ctx_type_0 &_output_);
 float VultEngine_rescomb(VultEngine__ctx_type_0 &_ctx, float in, float cv_in, float tone_in, float res_in);
 
 typedef struct VultEngine__ctx_type_1 {
-   Stabile__ctx_type_8 _inst455;
+   Stabile__ctx_type_8 _inst481;
 } VultEngine__ctx_type_1;
 
 typedef VultEngine__ctx_type_1 VultEngine_stabile_type;
@@ -859,7 +899,7 @@ void VultEngine_stabile_init(VultEngine__ctx_type_1 &_output_);
 void VultEngine_stabile(VultEngine__ctx_type_1 &_ctx, float in, float cut_in, float res_in, float semblance_in, _tuple___real_real_real_real__ &_output_);
 
 typedef struct VultEngine__ctx_type_2 {
-   Lateralus__ctx_type_10 _inst457;
+   Lateralus__ctx_type_10 _inst483;
 } VultEngine__ctx_type_2;
 
 typedef VultEngine__ctx_type_2 VultEngine_lateralus_type;
@@ -871,7 +911,7 @@ void VultEngine_lateralus_init(VultEngine__ctx_type_2 &_output_);
 void VultEngine_lateralus(VultEngine__ctx_type_2 &_ctx, float in, float cut, float res, _tuple___real_real_real_real__ &_output_);
 
 typedef struct VultEngine__ctx_type_3 {
-   Tangents__ctx_type_11 _inst459;
+   Tangents__ctx_type_11 _inst485;
 } VultEngine__ctx_type_3;
 
 typedef VultEngine__ctx_type_3 VultEngine_tangents_type;
@@ -897,7 +937,7 @@ void VultEngine_trummor_init(VultEngine__ctx_type_5 &_output_);
 void VultEngine_trummor(VultEngine__ctx_type_5 &_ctx, float gate, float osc_in, float noise_in, _tuple___real_real_real_real__ &_output_);
 
 typedef struct VultEngine__ctx_type_6 {
-   Tohe__ctx_type_2 _inst463;
+   Tohe__ctx_type_2 _inst489;
 } VultEngine__ctx_type_6;
 
 typedef VultEngine__ctx_type_6 VultEngine_tohe_type;
