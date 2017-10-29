@@ -831,6 +831,14 @@ void Lateralus_heun(Lateralus__ctx_type_8 &_ctx, float input, float fh, float re
 typedef struct Lateralus__ctx_type_9 {
    Lateralus__ctx_type_8 h;
    float fh;
+   Util__ctx_type_28 d6_2;
+   Util__ctx_type_27 d6;
+   Util__ctx_type_28 d24_2;
+   Util__ctx_type_27 d24;
+   Util__ctx_type_28 d18_2;
+   Util__ctx_type_27 d18;
+   Util__ctx_type_28 d12_2;
+   Util__ctx_type_27 d12;
    Util__ctx_type_25 _inst366;
    Util__ctx_type_26 _inst364;
    Util__ctx_type_3 _inst359;
