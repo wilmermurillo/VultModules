@@ -11,35 +11,6 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-external noise1_wave(channel:int, index:int) : real @[wave(channels=1, file="noise1.wav")];
-external noise2_wave(channel:int, index:int) : real @[wave(channels=1, file="noise2.wav")];
-external noise3_wave(channel:int, index:int) : real @[wave(channels=1, file="noise3.wav")];
-external noise4_wave(channel:int, index:int) : real @[wave(channels=1, file="noise4.wav")];
-
-fun noise1(gate) {
-   mem index = if gate then 0 else (index + 1) % noise1_wave_samples();
-   val index2 = index + noise1_wave_samples() / 2;
-   return noise1_wave(0, index) + noise1_wave(0, index2);
-}
-
-fun noise2(gate) {
-   mem index = if gate then 0 else (index + 1) % noise2_wave_samples();
-   val index2 = index + noise2_wave_samples() / 2;
-   return noise2_wave(0, index) + noise2_wave(0, index2);
-}
-
-fun noise3(gate) {
-   mem index = if gate then 0 else (index + 1) % noise3_wave_samples();
-   val index2 = index + noise3_wave_samples() / 2;
-   return noise3_wave(0, index) + noise3_wave(0, index2);
-}
-
-fun noise4(gate) {
-   mem index = if gate then 0 else (index + 1) % noise4_wave_samples();
-   val index2 = index + noise4_wave_samples() / 2;
-   return noise4_wave(0, index) + noise4_wave(0, index2);
-}
-
 fun syncronized(gate) {
    mem x1 = (x1 * 17389 + 7919) % 32768;
    val y1 = real(x1) / 32768.0;
@@ -53,23 +24,3 @@ fun syncronized(gate) {
    return out;
 }
 
-fun multi(rgate, grain) {
-   val gate = Util.edge(rgate > 0.5);
-   val i = clip(4.0 * grain, 0.0, 4.0);
-   if(i < 1.0) {
-      val a, b = Util.fade(i);
-      return a * syncronized(gate) + b * noise4(gate);
-   }
-   else if(i < 2.0) {
-      val a, b = Util.fade(i - 1.0);
-      return a * noise4(gate) + b * noise1(gate);
-   }
-   else if(i < 3.0) {
-      val a, b = Util.fade(i - 2.0);
-      return a * noise1(gate) + b * noise2(gate);
-   }
-   else {
-      val a, b = Util.fade(i - 3.0);
-      return a * noise2(gate) + b * noise3(gate);
-   }
-}

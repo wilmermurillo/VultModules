@@ -40,7 +40,7 @@ fun do(gate, osc_in, noise_in) {
    mem env1_a, env1_h, env1_r, env1_mode;
    mem env2_a, env2_h, env2_r, env2_mode;
    mem pitch, bend, shaper;
-   mem grain, tone;
+   mem noise_tune, tone, rescomb;
    mem int_osc, ext_osc;
    mem int_noise, ext_noise;
    mem ring_sel;
@@ -76,13 +76,15 @@ fun do(gate, osc_in, noise_in) {
    noise_env = if env2_mode then noise_env else Util.shaper(noise_env);
 
    // -- Noise mix
-   val noise_osc = Noise.multi(gate, grain) + ext_noise * noise_in;
+   val noise_osc = random() - 0.5 + ext_noise * noise_in;
    noise_osc = Tohe.do(noise_osc, tone);
 
    // -- Filter
    val filter_output = filterP(noise_osc * noise_env, cutoff, resonance, filter);
+   val comb = clip((3.0 * noise_tune) * (3.0 * noise_tune), 0.0, 1.0);
+   filter_output = Rescomb.do(filter_output, (1.0 - noise_tune), comb, rescomb);
    // -- Final mix
-   val output = level1 * osc_env * osc + (1.4 * level2) * filter_output;
+   val output = level1 * osc_env * osc + 0.6 * level2 * filter_output;
    return output, cv, osc_env, noise_env;
 }
 and setLevel1(value) {
@@ -118,8 +120,11 @@ and setBend(value) {
 and setShaper(value) {
    shaper = clip(value, -1.0, 1.0);
 }
-and setGrain(value) {
-   grain = clip(value, 0.0, 1.0);
+and setNoiseTune(value) {
+   noise_tune = clip(value, 0.0, 1.0);
+}
+and setRescomb(value) {
+   rescomb = clip(value, 0.0, 1.0);
 }
 and setTone(value) {
    tone = clip(value, -1.0, 1.0);

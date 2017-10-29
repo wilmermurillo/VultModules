@@ -33,7 +33,8 @@ struct Trummor2 : Module
       LEVEL1_PARAM,
 
       // Noise
-      MOOD_PARAM,
+      PITCH_PARAM,
+      RESCOMB_PARAM,
       TONE_PARAM,
       CUTOFF_PARAM,
       RESONANCE_PARAM,
@@ -135,8 +136,11 @@ struct Trummor2 : Module
       case SHAPER_PARAM:
          Trummor2_setShaper(processor, value);
          break;
-      case MOOD_PARAM:
-         Trummor2_setGrain(processor, value);
+      case PITCH_PARAM:
+         Trummor2_setNoiseTune(processor, value);
+         break;
+      case RESCOMB_PARAM:
+         Trummor2_setRescomb(processor, value);
          break;
       case TONE_PARAM:
          Trummor2_setTone(processor, value);
@@ -267,16 +271,16 @@ void Trummor2::step()
       state = NORMAL;
    }
 
-   float mod_a_value = params[MODA_AMT_PARAM].value * inputs[MODA_INPUT].value / 5.0;
+   float mod_a_value = params[MODA_AMT_PARAM].value * inputs[MODA_INPUT].value / 10.0;
    setParam((ParamIds)mod[LEARN_A], current[mod[LEARN_A]] + mod_a_value);
 
-   float mod_b_value = params[MODB_AMT_PARAM].value * inputs[MODB_INPUT].value / 5.0;
+   float mod_b_value = params[MODB_AMT_PARAM].value * inputs[MODB_INPUT].value / 10.0;
    setParam((ParamIds)mod[LEARN_B], current[mod[LEARN_B]] + mod_b_value);
 
-   float mod_c_value = params[MODC_AMT_PARAM].value * inputs[MODC_INPUT].value / 5.0;
+   float mod_c_value = params[MODC_AMT_PARAM].value * inputs[MODC_INPUT].value / 10.0;
    setParam((ParamIds)mod[LEARN_C], current[mod[LEARN_C]] + mod_c_value);
 
-   float mod_d_value = params[MODD_AMT_PARAM].value * inputs[MODD_INPUT].value / 5.0;
+   float mod_d_value = params[MODD_AMT_PARAM].value * inputs[MODD_INPUT].value / 10.0;
    setParam((ParamIds)mod[LEARN_D], current[mod[LEARN_D]] + mod_d_value);
 
    _tuple___real_real_real_real__ out;
@@ -300,7 +304,8 @@ static const char *parameters[] = {
     "O-SPEED",
     "O-SOURCE",
     "O-LEVEL",
-    "N-MOOD",
+    "N-PITCH",
+    "N-RESCOM",
     "N-TONE",
     "N-CUTOFF",
     "N-RES",
@@ -401,8 +406,9 @@ Trummor2Widget::Trummor2Widget()
    /* Noise section */
    addParam(createParam<VultKnob>(Vec(244, 201), module, Trummor2::LEVEL2_PARAM, 0.0, 1.0, 0.1));
 
-   addParam(createParam<VultKnobAlt>(Vec(160, 59), module, Trummor2::MOOD_PARAM, 0.0, 1.0, 0.0));
-   addParam(createParam<VultKnobAlt>(Vec(208, 59), module, Trummor2::TONE_PARAM, -1.0, 1.0, 0.0));
+   addParam(createParam<VultKnobAlt>(Vec(208, 59), module, Trummor2::PITCH_PARAM, 0.0, 1.0, 0.0));
+   addParam(createParam<VultKnobAlt>(Vec(160, 59), module, Trummor2::TONE_PARAM, -1.0, 1.0, 0.0));
+   addParam(createParam<VultKnobAlt>(Vec(252, 59), module, Trummor2::RESCOMB_PARAM, 0.0, 1.0, 0.0));
    addParam(createParam<VultKnobAlt>(Vec(160, 106), module, Trummor2::CUTOFF_PARAM, 0.0, 0.95, 0.95));
    addParam(createParam<VultKnobAlt>(Vec(208, 106), module, Trummor2::RESONANCE_PARAM, 0.0, 1.0, 0.0));
 
