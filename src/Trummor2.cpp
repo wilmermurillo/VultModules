@@ -99,6 +99,12 @@ struct Trummor2 : Module
 
    Trummor2();
    void step() override;
+   void randomize() override
+   {
+
+      for (int i = 0; i < 5; i++)
+         mod[i] = rand() % LAST_MOD_PARAM;
+   };
    void setParam(ParamIds p, float value)
    {
       current[p] = value;
