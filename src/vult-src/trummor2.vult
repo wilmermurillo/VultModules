@@ -37,16 +37,17 @@ fun filterP(x, cutoff, resonance, filter_type) {
 
 fun env(gate, sep_gate, env_mode, env_a, env_h, env_r, env_enabled) {
    val env_fast = env_mode > 0.5;
-   val env_scale = if env_fast then 0.2 else 1.0;
    val env_loop = env_mode > 1.5;
+   val env_ar_scale = if env_fast && env_loop then 0.01 else if env_fast then 0.2 else 1.0;
+   val env_ah_scale =  if env_fast then 0.2 else 1.0;
    val env_aa = env_a * env_a;
    val env_hh = env_h * env_h;
    val env_rr = env_r * env_r;
    val out_env, env_reset =
       if env_loop then
-         Ahr.loop(gate || sep_gate, env_scale * env_aa, env_scale * env_hh, env_scale * env_rr, env_enabled, env_loop)
+         Ahr.loop(gate || sep_gate, env_ar_scale * env_aa, env_ah_scale * env_hh, env_ar_scale * env_rr, env_enabled, env_loop)
       else
-         Ahr.do(gate || sep_gate, env_scale * env_aa, env_scale * env_hh, env_scale * env_rr, env_enabled, env_loop);
+         Ahr.do(gate || sep_gate, env_ar_scale * env_aa, env_ah_scale * env_hh, env_ar_scale * env_rr, env_enabled, env_loop);
    out_env = if env_fast then Util.polylog(out_env) else out_env;
    return out_env, env_reset;
 }

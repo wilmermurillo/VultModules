@@ -32,15 +32,15 @@ fun do(gate:bool, a:real, h:real, r:real, enabled:bool, loop:bool) {
    // states
 
    if(state == reset) {
-      rate = 1.0 / (100.0 * 0.005 + 0.05);
+      rate = 1.0 / (100.0 * 0.005 + 0.01);
       target = 0.0;
    }
    if(state == attack && enabled) {
-      rate = 1.0 / (100.0 * a + 0.1);
+      rate = 1.0 / (100.0 * a + 0.01);
       target = 1.2;
    }
    if(state == hold) {
-      val hrate = 1.0 / (100.0 * h + 0.05);
+      val hrate = 1.0 / (100.0 * h + 0.01);
       hold_phase = hold_phase + hrate;
    }
    if(state == release) {
@@ -89,10 +89,10 @@ fun loop(gate:bool, a:real, h:real, r:real, ignore:bool, loop:bool) {
    }
 
 
-   val hrate = 1.0 / (100.0 * h + 0.05);
+   val hrate = 1.0 / (100.0 * h + 0.01);
    hold_phase = hold_phase + hrate;
 
-   if(hold_phase > 800.0)
+   if(hold_phase > 1600.0)
       enabled = false;
 
    val resetting = if state == reset then 1.0 else 0.0;
