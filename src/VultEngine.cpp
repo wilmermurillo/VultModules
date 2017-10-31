@@ -1135,7 +1135,7 @@ void Ahr_loop_init(Ahr__ctx_type_1 &_output_){
    return ;
 }
 
-void Ahr_loop(Ahr__ctx_type_1 &_ctx, uint8_t gate, float a, float h, float r, uint8_t ignore, uint8_t loop, _tuple___real_real__ &_output_){
+void Ahr_loop(Ahr__ctx_type_1 &_ctx, uint8_t gate, float a, float h, float r_fast, float r_slow, uint8_t ignore, _tuple___real_real__ &_output_){
    int release;
    release = 0;
    int attack;
@@ -1151,11 +1151,15 @@ void Ahr_loop(Ahr__ctx_type_1 &_ctx, uint8_t gate, float a, float h, float r, ui
       _ctx.hold_phase = 0.f;
       _ctx.enabled = 1;
    }
+   float r;
+   if(_ctx.enabled){ r = a; }
+   else
+   { r = r_slow; }
    float hrate;
    hrate = (1.f / ((100.f * h) + 0.01f));
    _ctx.hold_phase = (_ctx.hold_phase + hrate);
    uint8_t _cond_252;
-   _cond_252 = (_ctx.hold_phase > 1600.f);
+   _cond_252 = ((_ctx.hold_phase > 1600.f) && (_ctx.out > 0.9f));
    if(_cond_252){
       _ctx.enabled = 0;
    }
@@ -1194,7 +1198,7 @@ void Ahr_loop(Ahr__ctx_type_1 &_ctx, uint8_t gate, float a, float h, float r, ui
       _ctx.state = attack;
    }
    uint8_t _cond_258;
-   _cond_258 = (loop && gate && (_ctx.state == release) && (_ctx.out < 0.001f));
+   _cond_258 = ((_ctx.state == release) && (_ctx.out < 0.001f));
    if(_cond_258){
       _ctx.state = reset;
    }
@@ -1909,7 +1913,7 @@ void Trummor2_env(Trummor2__ctx_type_3 &_ctx, uint8_t gate, uint8_t sep_gate, fl
    float env_ar_scale;
    uint8_t _cond_448;
    _cond_448 = (env_fast && env_loop);
-   if(_cond_448){ env_ar_scale = 0.01f; }
+   if(_cond_448){ env_ar_scale = 0.05f; }
    else
    { if(env_fast){ env_ar_scale = 0.2f; }
    else
@@ -1928,7 +1932,7 @@ void Trummor2_env(Trummor2__ctx_type_3 &_ctx, uint8_t gate, uint8_t sep_gate, fl
    float env_reset;
    if(env_loop){
       _tuple___real_real__ _call_465;
-      Ahr_loop(_ctx._inst406,(gate || sep_gate),(env_ar_scale * env_aa),(env_ah_scale * env_hh),(env_ar_scale * env_rr),env_enabled,env_loop,_call_465);
+      Ahr_loop(_ctx._inst406,(gate || sep_gate),(env_ar_scale * env_aa),(env_ah_scale * env_hh),(env_ar_scale * env_rr),env_rr,env_enabled,_call_465);
       out_env = _call_465.field_0;env_reset = _call_465.field_1;
    }
    else

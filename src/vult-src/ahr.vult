@@ -69,7 +69,7 @@ fun do(gate:bool, a:real, h:real, r:real, enabled:bool, loop:bool) {
    return clip(out, 0.0, 1.0), resetting;
 }
 
-fun loop(gate:bool, a:real, h:real, r:real, ignore:bool, loop:bool) {
+fun loop(gate:bool, a:real, h:real, r_fast:real, r_slow:real, ignore:bool) {
    mem state;
    mem out;
    mem rate;
@@ -88,11 +88,12 @@ fun loop(gate:bool, a:real, h:real, r:real, ignore:bool, loop:bool) {
       enabled = true;
    }
 
+   val r = if enabled then a else r_slow;
 
    val hrate = 1.0 / (100.0 * h + 0.01);
    hold_phase = hold_phase + hrate;
 
-   if(hold_phase > 1600.0)
+   if(hold_phase > 1600.0 && out > 0.9)
       enabled = false;
 
    val resetting = if state == reset then 1.0 else 0.0;
@@ -120,7 +121,7 @@ fun loop(gate:bool, a:real, h:real, r:real, ignore:bool, loop:bool) {
    if(out < 0.001 && state == reset) {
       state = attack;
    }
-   if(loop && gate && state == release && out < 0.001) {
+   if(state == release && out < 0.001) {
       state = reset;
    }
 

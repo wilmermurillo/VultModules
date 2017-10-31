@@ -534,7 +534,7 @@ void Ahr__ctx_type_1_init(Ahr__ctx_type_1 &_output_);
 
 void Ahr_loop_init(Ahr__ctx_type_1 &_output_);
 
-void Ahr_loop(Ahr__ctx_type_1 &_ctx, uint8_t gate, float a, float h, float r, uint8_t ignore, uint8_t loop, _tuple___real_real__ &_output_);
+void Ahr_loop(Ahr__ctx_type_1 &_ctx, uint8_t gate, float a, float h, float r_fast, float r_slow, uint8_t ignore, _tuple___real_real__ &_output_);
 
 typedef struct Trummor__ctx_type_0 {
    float tone;
