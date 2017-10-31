@@ -523,7 +523,8 @@ typedef struct Ahr__ctx_type_1 {
    float rate;
    float out;
    float hold_phase;
-   Util__ctx_type_2 _inst234;
+   uint8_t enabled;
+   Util__ctx_type_2 _inst235;
    Util__ctx_type_2 _inst229;
 } Ahr__ctx_type_1;
 
@@ -533,7 +534,7 @@ void Ahr__ctx_type_1_init(Ahr__ctx_type_1 &_output_);
 
 void Ahr_loop_init(Ahr__ctx_type_1 &_output_);
 
-void Ahr_loop(Ahr__ctx_type_1 &_ctx, uint8_t gate, float a, float h, float r, uint8_t enabled, uint8_t loop, _tuple___real_real__ &_output_);
+void Ahr_loop(Ahr__ctx_type_1 &_ctx, uint8_t gate, float a, float h, float r, uint8_t ignore, uint8_t loop, _tuple___real_real__ &_output_);
 
 typedef struct Trummor__ctx_type_0 {
    float tone;
@@ -830,6 +831,19 @@ void Trummor2_filterP_init(Trummor2__ctx_type_2 &_output_);
 float Trummor2_filterP(Trummor2__ctx_type_2 &_ctx, float x, float cutoff, float resonance, float filter_type);
 
 typedef struct Trummor2__ctx_type_3 {
+   Ahr__ctx_type_0 _inst407;
+   Ahr__ctx_type_1 _inst406;
+} Trummor2__ctx_type_3;
+
+typedef Trummor2__ctx_type_3 Trummor2_env_type;
+
+void Trummor2__ctx_type_3_init(Trummor2__ctx_type_3 &_output_);
+
+void Trummor2_env_init(Trummor2__ctx_type_3 &_output_);
+
+void Trummor2_env(Trummor2__ctx_type_3 &_ctx, uint8_t gate, uint8_t sep_gate, float env_mode, float env_a, float env_h, float env_r, uint8_t env_enabled, _tuple___real_real__ &_output_);
+
+typedef struct Trummor2__ctx_type_4 {
    float wave;
    float tone;
    float sub;
@@ -858,173 +872,173 @@ typedef struct Trummor2__ctx_type_3 {
    float cutoff;
    float bend_time;
    float bend;
-   Rescomb__ctx_type_2 _inst413;
-   Trummor2__ctx_type_2 _inst412;
-   Tohe__ctx_type_2 _inst411;
-   Ahr__ctx_type_0 _inst410;
-   Tricore__ctx_type_0 _inst409;
-   Tricore__ctx_type_0 _inst408;
-   Swept__ctx_type_0 _inst407;
-   Ahr__ctx_type_0 _inst406;
-} Trummor2__ctx_type_3;
+   Rescomb__ctx_type_2 _inst416;
+   Trummor2__ctx_type_2 _inst415;
+   Tohe__ctx_type_2 _inst414;
+   Trummor2__ctx_type_3 _inst413;
+   Tricore__ctx_type_0 _inst412;
+   Tricore__ctx_type_0 _inst411;
+   Swept__ctx_type_0 _inst410;
+   Trummor2__ctx_type_3 _inst409;
+} Trummor2__ctx_type_4;
 
-typedef Trummor2__ctx_type_3 Trummor2_do_type;
+typedef Trummor2__ctx_type_4 Trummor2_do_type;
 
-void Trummor2__ctx_type_3_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2__ctx_type_4_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_do_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_do_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_do(Trummor2__ctx_type_3 &_ctx, float main_gate, float osc_in, float noise_in, float osc_gate, float noise_gate, _tuple___real_real_real_real_real_real__ &_output_);
+void Trummor2_do(Trummor2__ctx_type_4 &_ctx, float main_gate, float osc_in, float noise_in, float osc_gate, float noise_gate, _tuple___real_real_real_real_real_real__ &_output_);
 
-typedef Trummor2__ctx_type_3 Trummor2_setLevel1_type;
+typedef Trummor2__ctx_type_4 Trummor2_setLevel1_type;
 
-void Trummor2_setLevel1_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setLevel1_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setLevel1(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setLevel1(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setLevel2_type;
+typedef Trummor2__ctx_type_4 Trummor2_setLevel2_type;
 
-void Trummor2_setLevel2_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setLevel2_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setLevel2(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setLevel2(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setEnv1A_type;
+typedef Trummor2__ctx_type_4 Trummor2_setEnv1A_type;
 
-void Trummor2_setEnv1A_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setEnv1A_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setEnv1A(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setEnv1A(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setEnv1H_type;
+typedef Trummor2__ctx_type_4 Trummor2_setEnv1H_type;
 
-void Trummor2_setEnv1H_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setEnv1H_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setEnv1H(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setEnv1H(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setEnv1R_type;
+typedef Trummor2__ctx_type_4 Trummor2_setEnv1R_type;
 
-void Trummor2_setEnv1R_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setEnv1R_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setEnv1R(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setEnv1R(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setEnv2A_type;
+typedef Trummor2__ctx_type_4 Trummor2_setEnv2A_type;
 
-void Trummor2_setEnv2A_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setEnv2A_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setEnv2A(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setEnv2A(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setEnv2H_type;
+typedef Trummor2__ctx_type_4 Trummor2_setEnv2H_type;
 
-void Trummor2_setEnv2H_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setEnv2H_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setEnv2H(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setEnv2H(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setEnv2R_type;
+typedef Trummor2__ctx_type_4 Trummor2_setEnv2R_type;
 
-void Trummor2_setEnv2R_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setEnv2R_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setEnv2R(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setEnv2R(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setPitch_type;
+typedef Trummor2__ctx_type_4 Trummor2_setPitch_type;
 
-void Trummor2_setPitch_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setPitch_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setPitch(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setPitch(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setBend_type;
+typedef Trummor2__ctx_type_4 Trummor2_setBend_type;
 
-void Trummor2_setBend_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setBend_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setBend(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setBend(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setShaper_type;
+typedef Trummor2__ctx_type_4 Trummor2_setShaper_type;
 
-void Trummor2_setShaper_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setShaper_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setShaper(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setShaper(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setWave_type;
+typedef Trummor2__ctx_type_4 Trummor2_setWave_type;
 
-void Trummor2_setWave_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setWave_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setWave(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setWave(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setNoiseTune_type;
+typedef Trummor2__ctx_type_4 Trummor2_setNoiseTune_type;
 
-void Trummor2_setNoiseTune_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setNoiseTune_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setNoiseTune(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setNoiseTune(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setRescomb_type;
+typedef Trummor2__ctx_type_4 Trummor2_setRescomb_type;
 
-void Trummor2_setRescomb_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setRescomb_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setRescomb(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setRescomb(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setTone_type;
+typedef Trummor2__ctx_type_4 Trummor2_setTone_type;
 
-void Trummor2_setTone_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setTone_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setTone(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setTone(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setOscBlend_type;
+typedef Trummor2__ctx_type_4 Trummor2_setOscBlend_type;
 
-void Trummor2_setOscBlend_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setOscBlend_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setOscBlend(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setOscBlend(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setNoiseBlend_type;
+typedef Trummor2__ctx_type_4 Trummor2_setNoiseBlend_type;
 
-void Trummor2_setNoiseBlend_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setNoiseBlend_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setNoiseBlend(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setNoiseBlend(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setEnv1Scale_type;
+typedef Trummor2__ctx_type_4 Trummor2_setEnv1Scale_type;
 
-void Trummor2_setEnv1Scale_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setEnv1Scale_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setEnv1Scale(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setEnv1Scale(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setEnv2Scale_type;
+typedef Trummor2__ctx_type_4 Trummor2_setEnv2Scale_type;
 
-void Trummor2_setEnv2Scale_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setEnv2Scale_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setEnv2Scale(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setEnv2Scale(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setRingSel_type;
+typedef Trummor2__ctx_type_4 Trummor2_setRingSel_type;
 
-void Trummor2_setRingSel_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setRingSel_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setRingSel(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setRingSel(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setBendTime_type;
+typedef Trummor2__ctx_type_4 Trummor2_setBendTime_type;
 
-void Trummor2_setBendTime_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setBendTime_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setBendTime(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setBendTime(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setSub_type;
+typedef Trummor2__ctx_type_4 Trummor2_setSub_type;
 
-void Trummor2_setSub_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setSub_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setSub(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setSub(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setCutoff_type;
+typedef Trummor2__ctx_type_4 Trummor2_setCutoff_type;
 
-void Trummor2_setCutoff_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setCutoff_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setCutoff(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setCutoff(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setResonance_type;
+typedef Trummor2__ctx_type_4 Trummor2_setResonance_type;
 
-void Trummor2_setResonance_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setResonance_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setResonance(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setResonance(Trummor2__ctx_type_4 &_ctx, float value);
 
-typedef Trummor2__ctx_type_3 Trummor2_setFilter_type;
+typedef Trummor2__ctx_type_4 Trummor2_setFilter_type;
 
-void Trummor2_setFilter_init(Trummor2__ctx_type_3 &_output_);
+void Trummor2_setFilter_init(Trummor2__ctx_type_4 &_output_);
 
-void Trummor2_setFilter(Trummor2__ctx_type_3 &_ctx, float value);
+void Trummor2_setFilter(Trummor2__ctx_type_4 &_ctx, float value);
 
 float Lateralus_tune(float cut, float fs, float oversampling);
 
@@ -1078,10 +1092,10 @@ void Lateralus_heun(Lateralus__ctx_type_8 &_ctx, float input, float fh, float re
 typedef struct Lateralus__ctx_type_9 {
    Lateralus__ctx_type_8 h;
    float fh;
-   Util__ctx_type_27 _inst533;
-   Util__ctx_type_28 _inst531;
-   Util__ctx_type_3 _inst526;
-   Util__ctx_type_3 _inst525;
+   Util__ctx_type_27 _inst558;
+   Util__ctx_type_28 _inst556;
+   Util__ctx_type_3 _inst551;
+   Util__ctx_type_3 _inst550;
 } Lateralus__ctx_type_9;
 
 typedef Lateralus__ctx_type_9 Lateralus_process_heun_type;
@@ -1093,8 +1107,8 @@ void Lateralus_process_heun_init(Lateralus__ctx_type_9 &_output_);
 void Lateralus_process_heun(Lateralus__ctx_type_9 &_ctx, float input, float cut, float res, _tuple___real_real__ &_output_);
 
 typedef struct Lateralus__ctx_type_10 {
-   Lateralus__ctx_type_9 _inst536;
-   Util__ctx_type_19 _inst535;
+   Lateralus__ctx_type_9 _inst561;
+   Util__ctx_type_19 _inst560;
 } Lateralus__ctx_type_10;
 
 typedef Lateralus__ctx_type_10 Lateralus_process_type;
@@ -1134,7 +1148,7 @@ void VultEngine_rescomb_init(VultEngine__ctx_type_0 &_output_);
 float VultEngine_rescomb(VultEngine__ctx_type_0 &_ctx, float in, float cv_in, float tone_in, float res_in);
 
 typedef struct VultEngine__ctx_type_1 {
-   Stabile__ctx_type_8 _inst648;
+   Stabile__ctx_type_8 _inst673;
 } VultEngine__ctx_type_1;
 
 typedef VultEngine__ctx_type_1 VultEngine_stabile_type;
@@ -1146,7 +1160,7 @@ void VultEngine_stabile_init(VultEngine__ctx_type_1 &_output_);
 void VultEngine_stabile(VultEngine__ctx_type_1 &_ctx, float in, float cut_in, float res_in, float semblance_in, _tuple___real_real_real_real__ &_output_);
 
 typedef struct VultEngine__ctx_type_2 {
-   Lateralus__ctx_type_10 _inst650;
+   Lateralus__ctx_type_10 _inst675;
 } VultEngine__ctx_type_2;
 
 typedef VultEngine__ctx_type_2 VultEngine_lateralus_type;
@@ -1158,7 +1172,7 @@ void VultEngine_lateralus_init(VultEngine__ctx_type_2 &_output_);
 void VultEngine_lateralus(VultEngine__ctx_type_2 &_ctx, float in, float cut, float res, _tuple___real_real__ &_output_);
 
 typedef struct VultEngine__ctx_type_3 {
-   Tangents__ctx_type_11 _inst652;
+   Tangents__ctx_type_11 _inst677;
 } VultEngine__ctx_type_3;
 
 typedef VultEngine__ctx_type_3 VultEngine_tangents_type;
@@ -1184,7 +1198,7 @@ void VultEngine_trummor_init(VultEngine__ctx_type_5 &_output_);
 void VultEngine_trummor(VultEngine__ctx_type_5 &_ctx, float gate, float osc_in, float noise_in, _tuple___real_real_real_real__ &_output_);
 
 typedef struct VultEngine__ctx_type_6 {
-   Trummor2__ctx_type_3 processor;
+   Trummor2__ctx_type_4 processor;
 } VultEngine__ctx_type_6;
 
 typedef VultEngine__ctx_type_6 VultEngine_trummor2_type;
@@ -1196,7 +1210,7 @@ void VultEngine_trummor2_init(VultEngine__ctx_type_6 &_output_);
 void VultEngine_trummor2(VultEngine__ctx_type_6 &_ctx, float gate, float osc_in, float noise_in, float osc_gate, float noise_gate, _tuple___real_real_real_real_real_real__ &_output_);
 
 typedef struct VultEngine__ctx_type_7 {
-   Tohe__ctx_type_2 _inst657;
+   Tohe__ctx_type_2 _inst682;
 } VultEngine__ctx_type_7;
 
 typedef VultEngine__ctx_type_7 VultEngine_tohe_type;

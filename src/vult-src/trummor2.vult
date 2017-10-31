@@ -35,6 +35,22 @@ fun filterP(x, cutoff, resonance, filter_type) {
    return Tangents.process(lp, bp, hp, cutoff, 0.6 * Util.polylog(resonance));
 }
 
+fun env(gate, sep_gate, env_mode, env_a, env_h, env_r, env_enabled) {
+   val env_fast = env_mode > 0.5;
+   val env_scale = if env_fast then 0.2 else 1.0;
+   val env_loop = env_mode > 1.5;
+   val env_aa = env_a * env_a;
+   val env_hh = env_h * env_h;
+   val env_rr = env_r * env_r;
+   val out_env, env_reset =
+      if env_loop then
+         Ahr.loop(gate || sep_gate, env_scale * env_aa, env_scale * env_hh, env_scale * env_rr, env_enabled, env_loop)
+      else
+         Ahr.do(gate || sep_gate, env_scale * env_aa, env_scale * env_hh, env_scale * env_rr, env_enabled, env_loop);
+   out_env = if env_fast then Util.polylog(out_env) else out_env;
+   return out_env, env_reset;
+}
+
 fun do(main_gate, osc_in, noise_in, osc_gate, noise_gate) {
    mem level1, level2;
    mem env1_a, env1_h, env1_r, env1_mode;
@@ -55,14 +71,7 @@ fun do(main_gate, osc_in, noise_in, osc_gate, noise_gate) {
    val ngate = noise_gate > 0.5;
 
    // -- Oscillator envelope
-   val env1_fast = env1_mode > 0.5;
-   val env1_scale = if env1_fast then 0.2 else 1.0;
-   val env1_loop = env1_mode > 1.5;
-   val env1_aa = env1_a * env1_a;
-   val env1_hh = env1_h * env1_h;
-   val env1_rr = env1_r * env1_r;
-   val osc_env, env_reset = Ahr.do(gate || ogate, env1_scale * env1_aa, env1_scale * env1_hh, env1_scale * env1_rr, env_enabled, env1_loop);
-   osc_env = if env1_fast then Util.polylog(osc_env) else osc_env;
+   val osc_env, env_reset = env(gate, ogate, env1_mode, env1_a, env1_h, env1_r, env_enabled);
 
    // -- Change of pitch
    val swept = Swept.process(1.0 - env_reset, bend * 0.6, 0.0, bend_time);
@@ -82,14 +91,7 @@ fun do(main_gate, osc_in, noise_in, osc_gate, noise_gate) {
    env_enabled = not(reset_sub) && not(reset_osc);
 
    // -- Noise Envenlope
-   val env2_fast = env2_mode > 0.5;
-   val env2_scale = if env2_fast then 0.2 else 1.0;
-   val env2_loop = env2_mode > 1.5;
-   val env2_aa = env2_a * env2_a;
-   val env2_hh = env2_h * env2_h;
-   val env2_rr = env2_r * env2_r;
-   val noise_env, _ = Ahr.do(gate || ngate, env2_scale * env2_aa, env2_scale * env2_hh, env2_scale * env2_rr, env_enabled || not(gate), env2_loop);
-   noise_env = if env2_fast then Util.polylog(noise_env) else noise_env;
+   val noise_env, _ = env(gate, ngate, env2_mode, env2_a, env2_h, env2_r, env_enabled || not(gate));
 
    // -- Noise mix
    val noise_osc = random() - 0.5 + ext_noise * noise_in;
