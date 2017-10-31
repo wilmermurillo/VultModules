@@ -46,8 +46,8 @@ fun trummor(gate, osc_in, noise_in) {
    return processor:Trummor.do(gate, osc_in, noise_in);
 }
 
-fun trummor2(gate, osc_in, noise_in) {
-   return processor:Trummor2.do(gate, osc_in, noise_in);
+fun trummor2(gate, osc_in, noise_in, osc_gate, noise_gate) {
+   return processor:Trummor2.do(gate, osc_in, noise_in, osc_gate, noise_gate);
 }
 
 fun tohe(x, tone_in) {

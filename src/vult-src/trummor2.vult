@@ -35,7 +35,7 @@ fun filterP(x, cutoff, resonance, filter_type) {
    return Tangents.process(lp, bp, hp, cutoff, 0.6 * Util.polylog(resonance));
 }
 
-fun do(gate, osc_in, noise_in) {
+fun do(main_gate, osc_in, noise_in, osc_gate, noise_gate) {
    mem level1, level2;
    mem env1_a, env1_h, env1_r, env1_mode;
    mem env2_a, env2_h, env2_r, env2_mode;
@@ -50,6 +50,10 @@ fun do(gate, osc_in, noise_in) {
    mem cutoff, resonance, filter;
    mem wave;
 
+   val gate = main_gate > 0.5;
+   val ogate = osc_gate > 0.5;
+   val ngate = noise_gate > 0.5;
+
    // -- Oscillator envelope
    val env1_fast = env1_mode > 0.5;
    val env1_scale = if env1_fast then 0.2 else 1.0;
@@ -57,7 +61,7 @@ fun do(gate, osc_in, noise_in) {
    val env1_aa = env1_a * env1_a;
    val env1_hh = env1_h * env1_h;
    val env1_rr = env1_r * env1_r;
-   val osc_env, env_reset = Ahr.do(gate, env1_scale * env1_aa, env1_scale * env1_hh, env1_scale * env1_rr, env_enabled, env1_loop);
+   val osc_env, env_reset = Ahr.do(gate || ogate, env1_scale * env1_aa, env1_scale * env1_hh, env1_scale * env1_rr, env_enabled, env1_loop);
    osc_env = if env1_fast then Util.polylog(osc_env) else osc_env;
 
    // -- Change of pitch
@@ -84,7 +88,7 @@ fun do(gate, osc_in, noise_in) {
    val env2_aa = env2_a * env2_a;
    val env2_hh = env2_h * env2_h;
    val env2_rr = env2_r * env2_r;
-   val noise_env, _ = Ahr.do(gate, env2_scale * env2_aa, env2_scale * env2_hh, env2_scale * env2_rr, env_enabled, env2_loop);
+   val noise_env, _ = Ahr.do(gate || ngate, env2_scale * env2_aa, env2_scale * env2_hh, env2_scale * env2_rr, env_enabled || not(gate), env2_loop);
    noise_env = if env2_fast then Util.polylog(noise_env) else noise_env;
 
    // -- Noise mix
@@ -96,8 +100,10 @@ fun do(gate, osc_in, noise_in) {
    val comb = clip((3.0 * rescomb) * (3.0 * rescomb), 0.0, 1.0);
    filter_output = Rescomb.do(filter_output, noise_tune, comb, rescomb);
    // -- Final mix
-   val output = level1 * osc_env * osc + 0.6 * level2 * filter_output;
-   return output, cv, osc_env, noise_env;
+   val osc_output = level1 * osc_env * osc;
+   val noise_output = 0.5 * level2 * filter_output;
+   val output = osc_output + noise_output;
+   return output, cv, osc_env, noise_env, osc_output, noise_output;
 }
 and setLevel1(value) {
    level1 = clip(value, 0.0, 1.0);
@@ -145,8 +151,8 @@ and setTone(value) {
    tone = clip(value, -1.0, 1.0);
 }
 and setOscBlend(value) {
-   int_osc = Util.fadeA(value);
-   ext_osc = Util.fadeB(value);
+   val mix = clip(value, 0.0, 1.0);
+   int_osc, ext_osc = Util.fade(mix);
 }
 and setNoiseBlend(value) {
    int_noise = Util.fadeA(value);

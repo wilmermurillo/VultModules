@@ -14,6 +14,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #include "VultModules.hpp"
 #include "math.hpp"
 #include "VultEngine.h"
+#include <string.h>
 
 struct Trummor2 : Module
 {
@@ -68,6 +69,8 @@ struct Trummor2 : Module
       MODB_INPUT,
       MODC_INPUT,
       MODD_INPUT,
+      OSC_GATE_INPUT,
+      NOISE_GATE_INPUT,
       NUM_INPUTS
    };
    enum OutputIds
@@ -76,6 +79,8 @@ struct Trummor2 : Module
       PITCH_OUTPUT,
       ENV1_OUTPUT,
       ENV2_OUTPUT,
+      OSC_OUTPUT,
+      NOISE_OUTPUT,
       NUM_OUTPUTS
    };
    enum States
@@ -243,6 +248,16 @@ Trummor2::Trummor2() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS)
    outputs.resize(NUM_OUTPUTS);
    Trummor2_do_init(processor);
    state = NORMAL;
+   for (int i = 0; i < 5; i++)
+   {
+      mod[i] = 0;
+      pre_mod[i] = 0;
+   }
+   for (int i = 0; i < 64; i++)
+   {
+      previous[i] = 0;
+      current[i] = 0;
+   }
 }
 
 void Trummor2::step()
@@ -293,13 +308,15 @@ void Trummor2::step()
    float mod_d_value = params[MODD_AMT_PARAM].value * inputs[MODD_INPUT].value / 10.0;
    setParam((ParamIds)mod[LEARN_D], current[mod[LEARN_D]] + mod_d_value);
 
-   _tuple___real_real_real_real__ out;
-   Trummor2_do(processor, inputs[GATE_INPUT].value / 10.0f, inputs[OSC_INPUT].value / 10.0f, inputs[NOISE_INPUT].value / 10.0f, out);
+   _tuple___real_real_real_real_real_real__ out;
+   Trummor2_do(processor, inputs[GATE_INPUT].value / 10.0f, inputs[OSC_INPUT].value / 10.0f, inputs[NOISE_INPUT].value / 10.0f, inputs[OSC_GATE_INPUT].value / 10.0, inputs[NOISE_GATE_INPUT].value / 10.0, out);
 
    outputs[AUDIO_OUTPUT].value = out.field_0 * 10.0f;
    outputs[PITCH_OUTPUT].value = (out.field_1 - 0.3f) * 10.0f;
    outputs[ENV1_OUTPUT].value = out.field_2 * 10.0f;
    outputs[ENV2_OUTPUT].value = out.field_3 * 10.0f;
+   outputs[OSC_OUTPUT].value = out.field_4 * 10.0f;
+   outputs[NOISE_OUTPUT].value = out.field_5 * 10.0f;
 }
 
 static const char *parameters[] = {
@@ -435,13 +452,17 @@ Trummor2Widget::Trummor2Widget()
    addParam(createParam<VultSelector3>(Vec(155, 203), module, Trummor2::ENV2_SPEED_PARAM, 0.0, 2.0, 0.0));
 
    /* Oscillator jacks */
-   addInput(createInput<VultJack>(Vec(14, 254), module, Trummor2::OSC_INPUT));
-   addOutput(createOutput<VultJack>(Vec(45, 254), module, Trummor2::ENV1_OUTPUT));
-   addOutput(createOutput<VultJack>(Vec(117, 254), module, Trummor2::PITCH_OUTPUT));
+   addInput(createInput<VultJack>(Vec(9, 254), module, Trummor2::OSC_INPUT));
+   addInput(createInput<VultJack>(Vec(37, 254), module, Trummor2::OSC_GATE_INPUT));
+   addOutput(createOutput<VultJack>(Vec(94, 254), module, Trummor2::ENV1_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(66, 254), module, Trummor2::PITCH_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(121, 254), module, Trummor2::OSC_OUTPUT));
 
    /* Noise jacks */
-   addInput(createInput<VultJack>(Vec(157, 254), module, Trummor2::NOISE_INPUT));
-   addOutput(createOutput<VultJack>(Vec(188, 254), module, Trummor2::ENV2_OUTPUT));
+   addInput(createInput<VultJack>(Vec(152, 254), module, Trummor2::NOISE_INPUT));
+   addInput(createInput<VultJack>(Vec(180, 254), module, Trummor2::NOISE_GATE_INPUT));
+   addOutput(createOutput<VultJack>(Vec(236, 254), module, Trummor2::ENV2_OUTPUT));
+   addOutput(createOutput<VultJack>(Vec(264, 254), module, Trummor2::NOISE_OUTPUT));
 
    /* Modulation */
    addInput(createInput<VultJack>(Vec(14, 292), module, Trummor2::MODA_INPUT));

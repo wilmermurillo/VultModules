@@ -11,7 +11,7 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-fun do(gate, osc_in, noise_in) {
+fun do(main_gate, osc_in, noise_in) {
    mem level1, level2;
    mem env1_a, env1_h, env1_r;
    mem env2_a, env2_h, env2_r;
@@ -21,6 +21,8 @@ fun do(gate, osc_in, noise_in) {
    mem int_noise, ext_noise;
    mem env1_scale, env2_scale;
    mem env_enabled;
+
+   val gate = main_gate > 0.5;
 
    // Envelope of the drum. One parameter affects the hold and relase
    val osc_env, env_reset = Ahr.do(gate, env1_scale * env1_a, env1_scale * env1_h, env1_scale * env1_r, env_enabled, false);
@@ -39,7 +41,7 @@ fun do(gate, osc_in, noise_in) {
       if decimate == 0.0 then
          int_noise * (random() - 0.5) + ext_noise * noise_in
       else
-         Decimate.decimate(int_noise * Noise.syncronized(Util.edge(gate > 0.1)) + ext_noise * noise_in, decimate);
+         Decimate.decimate(int_noise * Noise.syncronized(Util.edge(gate)) + ext_noise * noise_in, decimate);
    noise_osc = Tohe.do(noise_osc, tone);
 
    val output = level1 * osc_env * osc_sat + level2 * noise_env * noise_osc;
