@@ -1,0 +1,37 @@
+{{ partial "header.html" . }}
+
+<div class="container">
+   {{ partial "menu.html" . }}
+   <div class="row">
+      <div class="col-md-8">
+         <center>
+            <img src="images/modules.png" alt="Vult Modules" style="width:100%;margin-top:40px;margin-bottom:40px;"> </center>
+
+         <p>
+            This is a set of modules that have been carefully designed to fit the Eurorack style of VCV Rack. The modules are coded in
+            the Vult programming language.
+         </p>
+         <p>
+            The Vult modules are "Virtual Analog". The internals of the modules are modeled using electrical circuits and differential
+            equations, but some behaviors have been simplified when they are easy to do in code. These modules are not emulations
+            of an specific Eurorack module. In the case of the filters the modules try to capture the essence and the sound
+            of the analog versions, and at the same time provide very good performance. Some of the modules, like Trummor
+            2, were inspired by existing hardware but have evolved into complete original designs.
+         </p>
+         <h2>Design Philosophy</h2>
+
+         <p>
+            When designing these modules I have established the following rules:
+         </p>
+         <ul>
+            <li>it should look like a real Eurorack module</li>
+            <li>the interaction has to be limited to real hardware components (knobs, switches, etc.)</li>
+            <li>if I cannot build the real hardware, I will not build the software</li>
+            <li>and of course, the module needs to sound good</li>
+         </ul>
+         <p>Following these rules helps me constrain the ideas for modules I have. But I may break them in the future.</p>
+      </div>
+   </div>
+</div>
+
+{{ partial "footer.html" . }}
