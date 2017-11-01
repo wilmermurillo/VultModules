@@ -45,7 +45,7 @@ fun env(gate, sep_gate, env_mode, env_a, env_h, env_r, env_enabled) {
    val env_rr = env_r * env_r;
    val out_env, env_reset =
       if env_loop then
-         Ahr.loop(gate || sep_gate, env_ar_scale * env_aa, env_ah_scale * env_hh, env_ar_scale * env_rr, env_rr, env_enabled)
+         Ahr.loop(gate || sep_gate, env_ar_scale * env_aa, env_ah_scale * env_hh, env_rr)
       else
          Ahr.do(gate || sep_gate, env_ar_scale * env_aa, env_ah_scale * env_hh, env_ar_scale * env_rr, env_enabled, env_loop);
    out_env = if env_fast then Util.polylog(out_env) else out_env;
@@ -82,12 +82,12 @@ fun do(main_gate, osc_in, noise_in, osc_gate, noise_gate) {
    val sub_osc, reset_sub = Tricore.process(cv - 0.1, 0.0, env_reset, wave);
    val osc, reset_osc = Tricore.process(cv, 0.0, env_reset, wave);
    // sub mix
-   val blend = Util.fadeA(sub) * 0.5 + 0.5;
-   osc = (1.0 - blend) * sub_osc + osc * blend;
+   val osc_level, sub_level = Util.fade(sub / 2.0);
+   osc = sub_level * sub_osc + osc * osc_level;
    // ext mix
    osc = int_osc * osc + ext_osc * osc_in;
    // shaper
-   osc = shape(0.9 * osc, shaper, sub);
+   osc = shape(0.7 * osc, shaper, sub);
 
    env_enabled = not(reset_sub) && not(reset_osc);
 
@@ -100,8 +100,9 @@ fun do(main_gate, osc_in, noise_in, osc_gate, noise_gate) {
 
    // -- Filter
    val filter_output = filterP(noise_osc * noise_env, cutoff, resonance, filter);
-   val comb = clip((3.0 * rescomb) * (3.0 * rescomb), 0.0, 1.0);
-   filter_output = Rescomb.do(filter_output, noise_tune, comb, rescomb);
+   val comb = clip((3.0 * rescomb) * (3.0 * rescomb), -1.0, 1.0);
+   comb = if rescomb < 0.0 then -comb else comb;
+   filter_output = Rescomb.do(filter_output, noise_tune, comb, abs(rescomb));
    // -- Final mix
    val osc_output = level1 * osc_env * osc;
    val noise_output = 0.5 * level2 * filter_output;
@@ -148,7 +149,7 @@ and setNoiseTune(value) {
    noise_tune = clip(value, 0.0, 1.0);
 }
 and setRescomb(value) {
-   rescomb = clip(value, 0.0, 1.0);
+   rescomb = clip(value, -1.0, 1.0);
 }
 and setTone(value) {
    tone = clip(value, -1.0, 1.0);

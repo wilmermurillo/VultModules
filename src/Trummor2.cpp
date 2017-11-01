@@ -425,7 +425,7 @@ Trummor2Widget::Trummor2Widget()
 
    addParam(createParam<VultKnobAlt>(Vec(17, 153), module, Trummor2::ENV1_A_PARAM, 0.0, 1.0, 0.0));
    addParam(createParam<VultKnobAlt>(Vec(63, 153), module, Trummor2::ENV1_H_PARAM, 0.0, 1.0, 0.2));
-   addParam(createParam<VultKnobAlt>(Vec(110, 153), module, Trummor2::ENV1_R_PARAM, 0.0, 1.0, 0.2));
+   addParam(createParam<VultKnobAlt>(Vec(110, 153), module, Trummor2::ENV1_R_PARAM, 0.0, 1.0, 0.4));
 
    addParam(createParam<VultSelector3>(Vec(12, 203), module, Trummor2::ENV1_SPEED_PARAM, 0.0, 2.0, 0.0));
 
@@ -437,7 +437,7 @@ Trummor2Widget::Trummor2Widget()
 
    addParam(createParam<VultKnobAlt>(Vec(208, 59), module, Trummor2::PITCH_PARAM, 0.0, 1.0, 0.0));
    addParam(createParam<VultKnobAlt>(Vec(160, 59), module, Trummor2::TONE_PARAM, -1.0, 1.0, 0.0));
-   addParam(createParam<VultKnobAlt>(Vec(252, 59), module, Trummor2::RESCOMB_PARAM, 0.0, 1.0, 0.0));
+   addParam(createParam<VultKnobAlt>(Vec(252, 59), module, Trummor2::RESCOMB_PARAM, -1.0, 1.0, 0.0));
    addParam(createParam<VultKnobAlt>(Vec(160, 106), module, Trummor2::CUTOFF_PARAM, 0.0, 0.95, 0.95));
    addParam(createParam<VultKnobAlt>(Vec(208, 106), module, Trummor2::RESONANCE_PARAM, 0.0, 1.0, 0.0));
 
