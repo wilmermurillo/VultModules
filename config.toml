@@ -1,4 +1,4 @@
 languageCode = "en-us"
-baseurl = "http://replace-this-with-your-hugo-site.com/"
+baseurl = "https://modlfo.github.io/VultModules/"
 title = "My New Hugo Site"
 theme = "vultmodules"
