@@ -435,7 +435,7 @@ Trummor2Widget::Trummor2Widget()
    /* Noise section */
    addParam(createParam<VultKnob>(Vec(244, 201), module, Trummor2::LEVEL2_PARAM, 0.0, 1.0, 0.1));
 
-   addParam(createParam<VultKnobAlt>(Vec(208, 59), module, Trummor2::PITCH_PARAM, 0.0, 1.0, 0.0));
+   addParam(createParam<VultKnobAlt>(Vec(208, 59), module, Trummor2::PITCH_PARAM, -0.1, 0.9, -0.1));
    addParam(createParam<VultKnobAlt>(Vec(160, 59), module, Trummor2::TONE_PARAM, -1.0, 1.0, 0.0));
    addParam(createParam<VultKnobAlt>(Vec(252, 59), module, Trummor2::RESCOMB_PARAM, -1.0, 1.0, 0.0));
    addParam(createParam<VultKnobAlt>(Vec(160, 106), module, Trummor2::CUTOFF_PARAM, 0.0, 0.95, 0.95));

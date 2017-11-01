@@ -13,7 +13,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 
 fun delay(x:real, cv:real) : real {
-   mem buffer : array(real, 3000);
+   mem buffer : array(real, 16000);
    mem write_pos = (write_pos+1) % size(buffer);
    _ = set(buffer, write_pos, x);
    // Gets the position in the buffer to read

@@ -130,7 +130,7 @@ float Util_cvToPitch(float cv){
 
 float Util_cvToperiodUnit(float cv){
    int index;
-   index = int_clip(float_to_int((31.f * cv)),0,31);
+   index = int_clip(float_to_int((63.5f * (cv + 1.f))),0,127);
    return (float_wrap_array(Util_cvToperiodUnit_c0)[index] + (cv * (float_wrap_array(Util_cvToperiodUnit_c1)[index] + (float_wrap_array(Util_cvToperiodUnit_c2)[index] * cv))));
 }
 
@@ -1726,7 +1726,7 @@ float Tangents_process(Tangents__ctx_type_11 &_ctx, float lp, float bp, float hp
 void Rescomb__ctx_type_0_init(Rescomb__ctx_type_0 &_output_){
    Rescomb__ctx_type_0 _ctx;
    _ctx.write_pos = 0;
-   float_init_array(3000,0.f,_ctx.buffer);
+   float_init_array(16000,0.f,_ctx.buffer);
    _output_ = _ctx;
    return ;
 }
@@ -1737,19 +1737,19 @@ void Rescomb_delay_init(Rescomb__ctx_type_0 &_output_){
 }
 
 float Rescomb_delay(Rescomb__ctx_type_0 &_ctx, float x, float cv){
-   _ctx.write_pos = ((_ctx.write_pos + 1) % 3000);
+   _ctx.write_pos = ((_ctx.write_pos + 1) % 16000);
    float_set(_ctx.buffer,_ctx.write_pos,x);
    float r_size;
-   r_size = 3000.f;
+   r_size = 16000.f;
    float r_index;
    r_index = fmodf((int_to_float(_ctx.write_pos) + (- (Util_cvToperiodUnit(cv) * getSampleRate()))),r_size);
    uint8_t _cond_395;
    _cond_395 = (r_index < 0.f);
    if(_cond_395){ r_index = (r_size + r_index); }
    int t1;
-   t1 = (float_to_int(floorf(r_index)) % 3000);
+   t1 = (float_to_int(floorf(r_index)) % 16000);
    int t2;
-   t2 = ((t1 + 1) % 3000);
+   t2 = ((t1 + 1) % 16000);
    float decimal;
    decimal = (r_index + (- int_to_float(t1)));
    float x1;
@@ -2181,7 +2181,7 @@ void Trummor2_setNoiseTune_init(Trummor2__ctx_type_4 &_output_){
 }
 
 void Trummor2_setNoiseTune(Trummor2__ctx_type_4 &_ctx, float value){
-   _ctx.noise_tune = float_clip(value,0.f,1.f);
+   _ctx.noise_tune = float_clip(value,-0.1f,0.9f);
 }
 
 void Trummor2_setRescomb_init(Trummor2__ctx_type_4 &_output_){

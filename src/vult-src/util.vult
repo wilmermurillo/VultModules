@@ -73,7 +73,7 @@ fun cvToPitch(cv) {
    return cv * 120.0 + 24.0;
 }
 
-fun cvToperiodUnit(cv) @[table(size=32,min=0.0,max=1.0)] {
+fun cvToperiodUnit(cv) @[table(size=128,min=-1.0,max=1.0)] {
    val pitch = cvToPitch(cv);
    val f = 8.175798915643707 * exp(0.057762265046662105 * pitch); //440. 2^((pitch - 69)/12.)
    return 1.0 / f / 2.0;

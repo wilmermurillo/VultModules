@@ -146,7 +146,7 @@ and setWave(value) {
    wave = clip(value, -1.0, 1.0);
 }
 and setNoiseTune(value) {
-   noise_tune = clip(value, 0.0, 1.0);
+   noise_tune = clip(value, -0.1, 0.9);
 }
 and setRescomb(value) {
    rescomb = clip(value, -1.0, 1.0);
