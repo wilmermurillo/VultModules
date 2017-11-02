@@ -2,6 +2,10 @@ a {
    color: #CE9400
 }
 
+button a {
+   color: #FFFFFF
+}
+
 h1 {
    margin-bottom: 20px;
 }
