@@ -1,8 +1,7 @@
 # Vult Modules for Rack
 
-A set of modules for [VCVRack](https://vcvrack.com) written in [Vult](http://modlfo.github.io/vult/). Read more about these modules here: http://modlfo.github.io/projects/vult-modules/
+A set of modules for VCV Rack written in Vult. You can read more about the modules here: https://modlfo.github.io/VultModules/
 
-I provide precompiled binaries for: [Linux, Mac and Windows](https://github.com/modlfo/VultModules/releases).
 
 ![Rescomb](/images/Rescomb-render.png?raw=true "Rescomb")
 ![Stabile](/images/Stabile-render.png?raw=true "Stabile")
@@ -15,7 +14,11 @@ I provide precompiled binaries for: [Linux, Mac and Windows](https://github.com/
 
 ## Donate
 
-I’m glad to publish these modules for free so anyone can use them. Behind every module there are many hours of work (and many litters of coffee). If you enjoy these modules you can support the development by making a donation. As a suggestion, you can send me the amount to buy 1 kg of roasted coffee beans in your country. That will make me very happy. Here's the link: [DONATE](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RRMY2QPYEZT2S)
+I’m glad to publish these modules for free so anyone can use them. But these modules don’t come cheap for me. Behind every module there are many hours of work (and many litters of coffee). If you enjoy these modules you can support the development by making a donation.
+
+The suggested donation is 20 euro for the full pack, but of course you can donate as much as you want any donation help me buy more coffeeeeee :)
+
+Here's the link: [DONATE](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RRMY2QPYEZT2S) 
 
 ## Use
 
