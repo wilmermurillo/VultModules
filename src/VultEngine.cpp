@@ -1726,7 +1726,7 @@ void Tangents_heun_init(Tangents__ctx_type_8 &_output_){
 
 float Tangents_heun(Tangents__ctx_type_8 &_ctx, float lp, float bp, float hp, float wh, float cut, float res){
    float resfactor;
-   resfactor = 3.f;
+   resfactor = 2.f;
    float yt;
    yt = Util_cubic_clipper((hp + _ctx.p0));
    float feedt;
