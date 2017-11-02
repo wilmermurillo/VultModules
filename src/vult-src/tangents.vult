@@ -60,7 +60,7 @@ fun getTune(cut, fs) {
 
 fun heun(lp, bp, hp, wh, cut, res) {
    mem p0, p1;
-   val resfactor = 2.0;
+   val resfactor = 3.0;
 
    val yt = Util.cubic_clipper(hp + p0);
    val feedt = resfactor * res * yt;
@@ -81,7 +81,7 @@ fun heun(lp, bp, hp, wh, cut, res) {
    return Util.cubic_clipper(hp + p0);
 }
 
-fun process_heun(lp, bp, hp, cut, res) {
+fun process_heun(lp, bp, hp, cut, res, lp_on, bp_on, hp_on) {
    mem fh;
    val fs = Util.getSampleRate();
    if(Util.change(cut) || Util.change(fs)) {
@@ -93,20 +93,28 @@ fun process_heun(lp, bp, hp, cut, res) {
       out = h:heun(lp, bp, hp, fh, cut, res);
    }
    else if(fs == 88200.0 || fs == 96000.0) {
-      val lp1 = Util.upsampleOrder1_2x(lp);
-      val bp1 = Util.upsampleOrder1_2x(bp);
-      val hp1 = Util.upsampleOrder1_2x(hp);
-      out = h:heun(lp1, bp1, hp1, fh, cut, res);
-      out = h:heun(lp, bp, hp, fh, cut, res);
+      val lp1 = if lp_on then Util.upsampleOrder1_2x(lp) else 0.0;
+      val bp1 = if bp_on then Util.upsampleOrder1_2x(bp) else 0.0;
+      val hp1 = if hp_on then Util.upsampleOrder1_2x(hp) else 0.0;
+      val out1 = h:heun(lp1, bp1, hp1, fh, cut, res);
+      val out0 = h:heun(lp, bp, hp, fh, cut, res);
+      _ = d2:Util.decimate_2x_skip(out1);
+      out = d2:Util.decimate_2x_do(out0);
    }
    else {
-      val lp3, lp2, lp1 = Util.upsampleOrder1_4x(lp);
-      val bp3, bp2, bp1 = Util.upsampleOrder1_4x(bp);
-      val hp3, hp2, hp1 = Util.upsampleOrder1_4x(bp);
-      out = h:heun(lp3, bp3, hp3, fh, cut, res);
-      out = h:heun(lp2, bp2, hp2, fh, cut, res);
-      out = h:heun(lp1, bp1, hp1, fh, cut, res);
-      out = h:heun(lp, bp, hp, fh, cut, res);
+      val lp3, lp2, lp1 = if lp_on then Util.upsampleOrder1_4x(lp) else 0.0, 0.0, 0.0;
+      val bp3, bp2, bp1 = if bp_on then Util.upsampleOrder1_4x(bp) else 0.0, 0.0, 0.0;
+      val hp3, hp2, hp1 = if hp_on then Util.upsampleOrder1_4x(hp) else 0.0, 0.0, 0.0;
+      val out3 = h:heun(lp3, bp3, hp3, fh, cut, res);
+      val out2 = h:heun(lp2, bp2, hp2, fh, cut, res);
+      val out1 = h:heun(lp1, bp1, hp1, fh, cut, res);
+      val out0 = h:heun(lp, bp, hp, fh, cut, res);
+
+      _ = d4:Util.decimate_4x_skip(out3);
+      _ = d4:Util.decimate_4x_skip(out2);
+      _ = d4:Util.decimate_4x_skip(out1);
+      out = d4:Util.decimate_4x_do(out0);
+
    }
    return out;
 }
@@ -117,11 +125,11 @@ fun simple_noise() {
    return y1;
 }
 
-fun process(lp, bp, hp, cut_in, res_in) {
+fun process(lp, bp, hp, cut_in, res_in, lp_on, bp_on, hp_on) {
    val res = Util.polylog(res_in);
-   val comp = Util.map(res, 0.9, 1.0, 0.0, 0.25);
-   val limit = if comp > 0.0 then 0.9 - comp else 0.88;
+   val comp = Util.map(res, 0.9, 1.0, 0.0, 0.15);
+   val limit = if comp > 0.0 then 0.9 - comp else 0.9;
    val cut = clip(cut_in, 0.0, limit);
-   val noise = Util.simple_noise() * 0.001;
-   return process_heun(lp + noise,bp, hp, cut, res);
+   val noise = Util.simple_noise() * 0.005;
+   return process_heun(lp + noise,bp, hp, cut, res, lp_on, bp_on, hp_on);
 }

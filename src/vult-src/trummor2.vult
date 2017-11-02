@@ -31,8 +31,11 @@ fun filterS(x, cutoff, resonance, filter_type) {
 }
 
 fun filterP(x, cutoff, resonance, filter_type) {
-   val lp, bp, hp = if filter_type < 1.0 then x, 0.0, 0.0 else if filter_type < 2.0 then 0.0, x, 0.0 else 0.0, 0.0, x;
-   return Tangents.process(lp, bp, hp, cutoff, 0.6 * Util.polylog(resonance));
+   val lp_on = filter_type < 1.0;
+   val bp_on = filter_type < 2.0 && filter_type >= 1.0;
+   val hp_on = filter_type < 3.0 && filter_type >= 2.0;
+   val lp, bp, hp = if lp_on then x, 0.0, 0.0 else if bp_on then 0.0, x, 0.0 else 0.0, 0.0, x;
+   return Tangents.process(lp, bp, hp, cutoff, 0.6 * Util.polylog(resonance), lp_on, bp_on, hp_on);
 }
 
 fun env(gate, sep_gate, env_mode, env_a, env_h, env_r, env_enabled) {

@@ -71,7 +71,7 @@ void Tangents::step()
    float resonance_amt = params[RESONANCE_AMT_PARAM].value;
    float resonance = resonance_knob + resonance_amt * resonance_cv;
 
-   float out = VultEngine_tangents(processor, lp, bp, hp, cutoff, resonance);
+   float out = VultEngine_tangents(processor, lp, bp, hp, cutoff, resonance, inputs[LP_INPUT].active, inputs[BP_INPUT].active, inputs[HP_INPUT].active);
 
    outputs[AUDIO_OUTPUT].value = out * 15.0;
 }
