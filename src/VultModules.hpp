@@ -139,6 +139,50 @@ struct TrummodNoiseSelector : SVGSwitch, ToggleSwitch
    }
 };
 
+struct ButtonA : SVGSwitch, MomentarySwitch
+{
+   ButtonA()
+   {
+      addFrame(SVG::load(assetPlugin(plugin, "res/ButtonA_OFF.svg")));
+      addFrame(SVG::load(assetPlugin(plugin, "res/ButtonA_ON.svg")));
+      sw->wrap();
+      box.size = sw->box.size;
+   }
+};
+
+struct ButtonB : SVGSwitch, MomentarySwitch
+{
+   ButtonB()
+   {
+      addFrame(SVG::load(assetPlugin(plugin, "res/ButtonB_OFF.svg")));
+      addFrame(SVG::load(assetPlugin(plugin, "res/ButtonB_ON.svg")));
+      sw->wrap();
+      box.size = sw->box.size;
+   }
+};
+
+struct ButtonC : SVGSwitch, MomentarySwitch
+{
+   ButtonC()
+   {
+      addFrame(SVG::load(assetPlugin(plugin, "res/ButtonC_OFF.svg")));
+      addFrame(SVG::load(assetPlugin(plugin, "res/ButtonC_ON.svg")));
+      sw->wrap();
+      box.size = sw->box.size;
+   }
+};
+
+struct ButtonD : SVGSwitch, MomentarySwitch
+{
+   ButtonD()
+   {
+      addFrame(SVG::load(assetPlugin(plugin, "res/ButtonD_OFF.svg")));
+      addFrame(SVG::load(assetPlugin(plugin, "res/ButtonD_ON.svg")));
+      sw->wrap();
+      box.size = sw->box.size;
+   }
+};
+
 struct RescombWidget : ModuleWidget
 {
    RescombWidget();
@@ -167,6 +211,11 @@ struct SplieWidget : ModuleWidget
 struct TrummorWidget : ModuleWidget
 {
    TrummorWidget();
+};
+
+struct Trummor2Widget : ModuleWidget
+{
+   Trummor2Widget();
 };
 
 struct ToheWidget : ModuleWidget

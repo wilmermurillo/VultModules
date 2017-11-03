@@ -60,7 +60,7 @@ fun getTune(cut, fs) {
 
 fun heun(lp, bp, hp, wh, cut, res) {
    mem p0, p1;
-   val resfactor = 3.0;
+   val resfactor = 2.0;
 
    val yt = Util.cubic_clipper(hp + p0);
    val feedt = resfactor * res * yt;

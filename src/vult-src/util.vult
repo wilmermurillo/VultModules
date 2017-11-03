@@ -33,11 +33,11 @@ fun change(x:real):bool {
 
 fun cubic_clipper(x) {
    if(x <= -2.0/3.0)
-      return -2.0/3.0;
+      return -1.0;
    else if(x >= 2.0/3.0)
-      return 2.0/3.0;
+      return 1.0;
    else
-      return 27.0/23.0 * (x - (x * x * x) / 3.0);
+      return 3.0 / 2.0 * 27.0/23.0 * (x - (x * x * x) / 3.0);
 }
 
 fun stanh(x) @[table(min = -24.0, max = 24.0, size = 241)] {
@@ -73,7 +73,7 @@ fun cvToPitch(cv) {
    return cv * 120.0 + 24.0;
 }
 
-fun cvToperiodUnit(cv) @[table(size=32,min=0.0,max=1.0)] {
+fun cvToperiodUnit(cv) @[table(size=128,min=-1.0,max=1.0)] {
    val pitch = cvToPitch(cv);
    val f = 8.175798915643707 * exp(0.057762265046662105 * pitch); //440. 2^((pitch - 69)/12.)
    return 1.0 / f / 2.0;
@@ -110,6 +110,11 @@ fun cvToRate(cv) {
    return rate;
 }
 
+fun cvToHarmonics(cv) @[table(size=32,min=0.0,max=1.0)] {
+   val f = cvTokHz(cv);
+   return 22.0/f;
+}
+
 fun simple_noise() {
    mem x1 = (x1 * 17389 + 7919) % 32768;
    val y1 = real(x1) / 32768.0;
@@ -133,6 +138,10 @@ fun fadeA(x) @[table(size=32, min=0.0, max=1.0)]{
 
 fun fadeB(x) @[table(size=32, min=0.0, max=1.0)]{
    return sin(2.0 * pi() * x / 4.0);
+}
+
+fun fade(x) {
+   return fadeA(x), fadeB(x);
 }
 
 fun upsampleOrder2_4x(y0) {
@@ -165,6 +174,10 @@ fun upsampleOrder1_2x(y0) {
    val p0 = (y0 + y1) / 2.0;
    y1 = y0;
    return p0;
+}
+
+fun cheby3(x){
+   return 4.0 * x * x * x - 3.0 * x;
 }
 
 fun decimate_4x_do(x) {

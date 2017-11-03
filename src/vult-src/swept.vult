@@ -14,7 +14,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 fun process(gate, start, end, rate) {
    mem out;
    val bgate = gate > 0.5;
-   out = out + (end  - out) * rate * 0.004 * Util.sampleRateScale();
+   val g = 1.0 - Util.polylog(0.5 + rate * 0.5);
+   out = out + (end  - out) * g * 0.004 * Util.sampleRateScale();
    if(Util.edge(bgate))
       out = start;
    return out;

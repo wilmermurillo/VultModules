@@ -46,6 +46,10 @@ fun trummor(gate, osc_in, noise_in) {
    return processor:Trummor.do(gate, osc_in, noise_in);
 }
 
+fun trummor2(gate, osc_in, noise_in, osc_gate, noise_gate) {
+   return processor:Trummor2.do(gate, osc_in, noise_in, osc_gate, noise_gate);
+}
+
 fun tohe(x, tone_in) {
    val tone = clip(tone_in, -1.0, 1.0);
    return Tohe.do(x, tone);
