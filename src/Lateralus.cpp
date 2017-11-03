@@ -71,7 +71,7 @@ void Lateralus::step()
    float resonance = resonance_knob + resonance_amt * resonance_cv;
 
    _tuple___real_real_real_real__ out;
-   VultEngine_lateralus(processor, audio, cutoff, resonance, outputs[DB6_OUTPUT].active, outputs[DB12_OUTPUT].active, outputs[DB18_OUTPUT].active, outputs[DB24_OUTPUT].active, out);
+   VultEngine_lateralus(processor, audio, cutoff, resonance, outputs[DB6_OUTPUT].active, outputs[DB12_OUTPUT].active, outputs[DB18_OUTPUT].active, outputs[DB24_OUTPUT].active, inputs[AUDIO_INPUT].active, out);
 
    outputs[DB6_OUTPUT].value = out.field_0 * 7.0;
    outputs[DB12_OUTPUT].value = out.field_1 * 7.0;

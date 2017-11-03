@@ -1921,7 +1921,11 @@ float Tangents_process(Tangents__ctx_type_11 &_ctx, float lp, float bp, float hp
    float cut;
    cut = float_clip(cut_in,0.f,limit);
    float noise;
-   noise = (Util_simple_noise(_ctx._inst0) * 0.005f);
+   uint8_t _cond_1;
+   _cond_1 = (bool_not(lp_on) && bool_not(bp_on) && bool_not(hp_on));
+   if(_cond_1){ noise = (Util_simple_noise(_ctx._inst0) * 0.001f); }
+   else
+   { noise = 0.f; }
    return Tangents_process_heun(_ctx._inst1,(lp + noise),bp,hp,cut,res,lp_on,bp_on,hp_on);
 }
 
@@ -2845,7 +2849,7 @@ void Lateralus_process_init(Lateralus__ctx_type_10 &_output_){
    return ;
 }
 
-void Lateralus_process(Lateralus__ctx_type_10 &_ctx, float input, float cut_in, float res_in, uint8_t db6_on, uint8_t db12_on, uint8_t db18_on, uint8_t db24_on, _tuple___real_real_real_real__ &_output_){
+void Lateralus_process(Lateralus__ctx_type_10 &_ctx, float input, float cut_in, float res_in, uint8_t db6_on, uint8_t db12_on, uint8_t db18_on, uint8_t db24_on, uint8_t input_on, _tuple___real_real_real_real__ &_output_){
    float res;
    res = Util_polylog(res_in);
    float comp;
@@ -2859,7 +2863,11 @@ void Lateralus_process(Lateralus__ctx_type_10 &_ctx, float input, float cut_in, 
    float cut;
    cut = float_clip(cut_in,0.f,limit);
    float noise;
-   noise = (Util_simple_noise(_ctx._inst0) * 0.005f);
+   uint8_t _cond_1;
+   _cond_1 = bool_not(input_on);
+   if(_cond_1){ noise = (Util_simple_noise(_ctx._inst0) * 0.001f); }
+   else
+   { noise = 0.f; }
    _tuple___real_real_real_real__ _call_0;
    Lateralus_process_heun(_ctx._inst1,(input + noise),cut,(res * 1.1f),db6_on,db12_on,db18_on,db24_on,_call_0);
    _output_ = _call_0;
@@ -2992,9 +3000,9 @@ void VultEngine_lateralus_init(VultEngine__ctx_type_2 &_output_){
    return ;
 }
 
-void VultEngine_lateralus(VultEngine__ctx_type_2 &_ctx, float in, float cut, float res, uint8_t db6_on, uint8_t db12_on, uint8_t db18_on, uint8_t db24_on, _tuple___real_real_real_real__ &_output_){
+void VultEngine_lateralus(VultEngine__ctx_type_2 &_ctx, float in, float cut, float res, uint8_t db6_on, uint8_t db12_on, uint8_t db18_on, uint8_t db24_on, uint8_t input_on, _tuple___real_real_real_real__ &_output_){
    _tuple___real_real_real_real__ _call_0;
-   Lateralus_process(_ctx._inst0,in,cut,res,db6_on,db12_on,db18_on,db24_on,_call_0);
+   Lateralus_process(_ctx._inst0,in,cut,res,db6_on,db12_on,db18_on,db24_on,input_on,_call_0);
    _output_ = _call_0;
    return ;
 }

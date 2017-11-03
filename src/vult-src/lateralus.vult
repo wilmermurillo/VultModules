@@ -164,11 +164,11 @@ fun process_heun(input:real, cut:real, res:real, db6_on, db12_on, db18_on, db24_
 }
 
 
-fun process(input:real, cut_in:real, res_in:real, db6_on, db12_on, db18_on, db24_on) {
+fun process(input:real, cut_in:real, res_in:real, db6_on, db12_on, db18_on, db24_on, input_on) {
    val res = Util.polylog(res_in);
    val comp = Util.map(res, 0.9, 1.0, 0.0, 0.15);
    val limit = if comp > 0.0 then 0.9 - comp else 0.9;
    val cut = clip(cut_in, 0.0, limit);
-   val noise = Util.simple_noise() * 0.005;
+   val noise = if not(input_on) then Util.simple_noise() * 0.001 else 0.0;
    return process_heun(input + noise, cut, res * 1.1, db6_on, db12_on, db18_on, db24_on);
 }

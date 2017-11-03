@@ -130,6 +130,6 @@ fun process(lp, bp, hp, cut_in, res_in, lp_on, bp_on, hp_on) {
    val comp = Util.map(res, 0.9, 1.0, 0.0, 0.15);
    val limit = if comp > 0.0 then 0.9 - comp else 0.9;
    val cut = clip(cut_in, 0.0, limit);
-   val noise = Util.simple_noise() * 0.005;
+   val noise = if not(lp_on) && not(bp_on) && not(hp_on) then Util.simple_noise() * 0.001 else 0.0;
    return process_heun(lp + noise,bp, hp, cut, res, lp_on, bp_on, hp_on);
 }

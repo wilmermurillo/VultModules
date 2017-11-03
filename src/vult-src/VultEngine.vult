@@ -26,8 +26,8 @@ fun stabile(in, cut_in, res_in, semblance_in) {
    return Stabile.process(in, cut, res, semblance);
 }
 
-fun lateralus(in, cut, res, db6_on, db12_on, db18_on, db24_on) {
-   return Lateralus.process(in, cut, res, db6_on, db12_on, db18_on, db24_on);
+fun lateralus(in, cut, res, db6_on, db12_on, db18_on, db24_on, input_on) {
+   return Lateralus.process(in, cut, res, db6_on, db12_on, db18_on, db24_on, input_on);
 }
 
 fun tangents(lp, bp, hp, cut, res, lp_on, bp_on, hp_on) {
