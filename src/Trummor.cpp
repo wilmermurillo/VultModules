@@ -104,8 +104,6 @@ void Trummor::step()
 
    Trummor_setDecimate(processor, params[DECIMATE_PARAM].value);
 
-   params[LEVEL1_PARAM].value = params[LEVEL2_PARAM].value;
-
    int osc_sel = round(params[OSC_SEL_PARAM].value);
    float osc_mod = params[OSC_MOD_PARAM].value * inputs[OSC_MOD_INPUT].value / 5.0;
    switch (osc_sel)

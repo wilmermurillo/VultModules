@@ -1417,8 +1417,10 @@ void Trummor_do(Trummor__ctx_type_0 &_ctx, float main_gate, float osc_in, float 
    _tuple___real_real__ _call_0;
    Ahr_do(_ctx._inst0,gate,(_ctx.env1_scale * _ctx.env1_a),(_ctx.env1_scale * _ctx.env1_h),(_ctx.env1_scale * _ctx.env1_r),_ctx.env_enabled,0,_call_0);
    osc_env = _call_0.field_0;env_reset = _call_0.field_1;
+   float bend_cv;
+   bend_cv = Swept_process(_ctx._inst1,(1.f + (- env_reset)),(_ctx.bend * 0.4f),0.f,0.1f);
    float cv;
-   cv = Swept_process(_ctx._inst1,(1.f + (- env_reset)),(_ctx.pitch + (_ctx.bend * 0.4f)),_ctx.pitch,0.1f);
+   cv = (_ctx.pitch + bend_cv);
    float osc;
    uint8_t reset_osc;
    _tuple___real_bool__ _call_1;
@@ -1566,8 +1568,9 @@ void Trummor_setOscBlend_init(Trummor__ctx_type_0 &_output_){
 }
 
 void Trummor_setOscBlend(Trummor__ctx_type_0 &_ctx, float value){
-   _ctx.int_osc = Util_fadeA(value);
-   _ctx.ext_osc = Util_fadeB(value);
+   _tuple___real_real__ _call_0;
+   Util_fade(value,_call_0);
+   _ctx.int_osc = _call_0.field_0;_ctx.ext_osc = _call_0.field_1;
 }
 
 void Trummor_setNoiseBlend_init(Trummor__ctx_type_0 &_output_){
@@ -1576,8 +1579,9 @@ void Trummor_setNoiseBlend_init(Trummor__ctx_type_0 &_output_){
 }
 
 void Trummor_setNoiseBlend(Trummor__ctx_type_0 &_ctx, float value){
-   _ctx.int_noise = Util_fadeA(value);
-   _ctx.ext_noise = Util_fadeB(value);
+   _tuple___real_real__ _call_0;
+   Util_fade(value,_call_0);
+   _ctx.int_noise = _call_0.field_0;_ctx.ext_noise = _call_0.field_1;
 }
 
 void Trummor_setEnv1Scale_init(Trummor__ctx_type_0 &_output_){
