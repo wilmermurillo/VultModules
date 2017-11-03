@@ -98,7 +98,7 @@ fun do(main_gate, osc_in, noise_in, osc_gate, noise_gate) {
    val noise_env, _ = env(gate, ngate, env2_mode, env2_a, env2_h, env2_r, env_enabled || not(gate));
 
    // -- Noise mix
-   val noise_osc = random() - 0.5 + ext_noise * noise_in;
+   val noise_osc = (random() - 0.5) * int_noise + ext_noise * noise_in;
    noise_osc = Tohe.do(noise_osc, tone);
 
    // -- Filter
@@ -162,8 +162,8 @@ and setOscBlend(value) {
    int_osc, ext_osc = Util.fade(mix);
 }
 and setNoiseBlend(value) {
-   int_noise = Util.fadeA(value);
-   ext_noise = Util.fadeB(value);
+   val mix = clip(value, 0.0, 1.0);
+   int_noise, ext_noise = Util.fade(mix);
 }
 and setEnv1Scale(value) {
    env1_mode = value;
