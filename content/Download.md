@@ -12,5 +12,5 @@ The suggested donation is 20 euro for the full pack, but of course you can donat
 
 You can get binaries for Linux, Windows and Mac.
 
-<button type="button" class="btn btn-primary"> <a href="https://github.com/modlfo/VultModules/releases"> Download </a> </button>
-<button type="button" class="btn btn-primary"> <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RRMY2QPYEZT2S"> Donate </a> </button>
+<a href="https://github.com/modlfo/VultModules/releases" class="btn btn-info" role="button">Download</a>
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RRMY2QPYEZT2S" class="btn btn-info" role="button">Donate</a>
