@@ -2,8 +2,18 @@
 title = "HyperPower"
 date = "2017-10-28T22:37:03+03:00"
 layout = "module"
-
+image = "../images/HyperPower.png"
 +++
 
-![Rescomb](https://github.com/modlfo/VultModules/blob/master/images/Rescomb-render.png?raw=true "Rescomb")
+HyperPower is a very special module that can only be obtained by making a donation.
 
+HyperPower provides the best power supply in the market for your VCV Rack. If you love your Vult modules don’t let them get damaged. This is the recommended power supply.
+
+Specifications:
+
+- Outputs: -12, +12, +5 V, variable output -12 V to 12 V
+- Efficiency: 100 %
+- Output ripple: 0.0 pV
+- Output power: Infinite
+
+*All supporters will get HyperPower once Rack v0.5.0 is released.*
