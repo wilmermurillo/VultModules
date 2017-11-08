@@ -6,7 +6,7 @@ image = "../images/Leonardo.jpg"
 +++
 
 
-The Vult modules are designed by me [Leonardo Laguna Ruiz](http://modlfo.github.io). I create all these modules during my free time, driven by the passion I have for music, synthesizers, electronics and  technology.
+The Vult modules are designed by me [Leonardo Laguna Ruiz](http://modlfo.github.io) in collaboration with other members of the VCV community. I create all these modules during my free time, driven by the passion I have for music, synthesizers, electronics and  technology. These modules are not created by a professional music software company, but they are created by a professional in the modeling and simulation.
 
 If you want to know more, you can find an interview with me here:[Switched On Rack: Meet the Devs](http://www.switchedonrack.com/meet-the-devs-vult.html)
 

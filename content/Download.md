@@ -14,3 +14,5 @@ You can get binaries for Linux, Windows and Mac.
 
 <a href="https://github.com/modlfo/VultModules/releases" class="btn btn-info" role="button">Download</a>
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RRMY2QPYEZT2S" class="btn btn-info" role="button">Donate</a>
+
+Remember, if something is cheap is not good. Since these modules are donation based, you can make them as expensive as you want. The more that you donate, the better sounding they get.
