@@ -28,13 +28,13 @@ void init(rack::Plugin *p)
 #ifdef VERSION
    p->version = TOSTRING(VERSION);
 #endif
-   p->addModel(createModel<DebriatusWidget>("VultModules", "Vult", "Debriatus", "Debriatus"));
-   p->addModel(createModel<LateralusWidget>("VultModules", "Vult", "Lateralus", "Lateralus"));
-   p->addModel(createModel<RescombWidget>("VultModules", "Vult", "Rescomb", "Rescomb"));
-   p->addModel(createModel<SplieWidget>("VultModules", "Vult", "Splie", "Splie"));
-   p->addModel(createModel<StabileWidget>("VultModules", "Vult", "Stabile", "Stabile"));
-   p->addModel(createModel<TangentsWidget>("VultModules", "Vult", "Tangents", "Tangents"));
-   p->addModel(createModel<ToheWidget>("VultModules", "Vult", "Tohe", "Tohe"));
-   p->addModel(createModel<TrummorWidget>("VultModules", "Vult", "Trummor", "Trummor"));
-   p->addModel(createModel<Trummor2Widget>("VultModules", "Vult", "Trummor2", "Trummor 2"));
+   p->addModel(createModel<DebriatusWidget>("Vult", "Debriatus", "Debriatus", DISTORTION_TAG, WAVESHAPER_TAG, EFFECT_TAG));
+   p->addModel(createModel<LateralusWidget>("Vult", "Lateralus", "Lateralus", FILTER_TAG, OSCILLATOR_TAG));
+   p->addModel(createModel<RescombWidget>("Vult", "Rescomb", "Rescomb", FILTER_TAG, EFFECT_TAG));
+   p->addModel(createModel<SplieWidget>("Vult", "Splie", "Splie", UTILITY_TAG));
+   p->addModel(createModel<StabileWidget>("Vult", "Stabile", "Stabile", FILTER_TAG));
+   p->addModel(createModel<TangentsWidget>("Vult", "Tangents", "Tangents", FILTER_TAG, OSCILLATOR_TAG));
+   p->addModel(createModel<ToheWidget>("Vult", "Tohe", "Tohe", FILTER_TAG, EQUALIZER_TAG));
+   p->addModel(createModel<TrummorWidget>("Vult", "Trummor", "Trummor", DRUM_TAG, ENVELOPE_GENERATOR_TAG, NOISE_TAG));
+   p->addModel(createModel<Trummor2Widget>("Vult", "Trummor2", "Trummor 2", DRUM_TAG, ENVELOPE_GENERATOR_TAG, NOISE_TAG));
 }
