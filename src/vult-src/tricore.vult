@@ -21,8 +21,10 @@ fun process(cv:real, reset:real, disable:real, w) {
       if (phase > 1.0)
          phase = phase - 1.0;
    }
-   if(Util.edge(not(bdisable)))
+   if(Util.edge(not(bdisable))){
       phase = 0.0;
+      reset_state = false;
+   }
 
    val a, b = Util.fade(w);
    val sine_out = a * Waves.sine_wave(phase) + b * Waves.tri_wave(phase);

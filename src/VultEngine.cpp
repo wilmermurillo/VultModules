@@ -966,6 +966,7 @@ void Tricore_process(Tricore__ctx_type_0 &_ctx, float cv, float reset, float dis
    _cond_212 = Util_edge(_ctx._inst202,bool_not(bdisable));
    if(_cond_212){
       _ctx.phase = 0.f;
+      _ctx.reset_state = 0;
    }
    float a;
    float b;
@@ -1225,7 +1226,7 @@ void Ahr_do(Ahr__ctx_type_0 &_ctx, uint8_t gate, float a, float h, float r, uint
    uint8_t _cond_269;
    _cond_269 = (_ctx.state == reset);
    if(_cond_269){
-      _ctx.rate = 1.96078431373f;
+      _ctx.rate = 10.f;
       _ctx.target = 0.f;
    }
    uint8_t _cond_270;
@@ -1302,8 +1303,6 @@ void Ahr_loop(Ahr__ctx_type_1 &_ctx, uint8_t gate, float a, float h, float r, _t
    release = 0;
    int attack;
    attack = 1;
-   int hold;
-   hold = 2;
    int reset;
    reset = 3;
    uint8_t _cond_280;
@@ -1334,7 +1333,7 @@ void Ahr_loop(Ahr__ctx_type_1 &_ctx, uint8_t gate, float a, float h, float r, _t
    uint8_t _cond_282;
    _cond_282 = (_ctx.state == reset);
    if(_cond_282){
-      _ctx.rate = 1.96078431373f;
+      _ctx.rate = 10.f;
       _ctx.target = 0.f;
    }
    uint8_t _cond_283;

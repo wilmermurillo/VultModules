@@ -32,7 +32,7 @@ fun do(gate:bool, a:real, h:real, r:real, enabled:bool, loop:bool) {
    // states
 
    if(state == reset) {
-      rate = 1.0 / (100.0 * 0.005 + 0.01);
+      rate = 1.0 / 0.1;
       target = 0.0;
    }
    if(state == attack && enabled) {
@@ -79,7 +79,6 @@ fun loop(gate:bool, a:real, h:real, r:real) {
 
    val release = 0;
    val attack  = 1;
-   val hold    = 2;
    val reset   = 3;
 
    if(Util.edge(gate)) {
@@ -101,7 +100,7 @@ fun loop(gate:bool, a:real, h:real, r:real) {
    // states
 
    if(state == reset) {
-      rate = 1.0 / (100.0 * 0.005 + 0.01);
+      rate = 1.0 / 0.1;
       target = 0.0;
    }
    if(state == attack && enabled) {
