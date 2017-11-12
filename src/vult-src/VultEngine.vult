@@ -54,3 +54,9 @@ fun tohe(x, tone_in) {
    val tone = clip(tone_in, -1.0, 1.0);
    return Tohe.do(x, tone);
 }
+
+
+fun spank(gate, in, attack, hold, release, mode) {
+   val env, _ = Trummor2.env(gate > 0.2, false, mode, clip(attack, 0.001, 1.0), clip(hold, 0.001, 1.0), clip(release, 0.001, 1.0), true);
+   return env, in * env;
+}

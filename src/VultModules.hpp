@@ -227,3 +227,8 @@ struct TangentsWidget : ModuleWidget
 {
    TangentsWidget();
 };
+
+struct SpankWidget : ModuleWidget
+{
+   SpankWidget();
+};
