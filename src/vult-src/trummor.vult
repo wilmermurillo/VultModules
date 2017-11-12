@@ -27,7 +27,7 @@ fun do(main_gate, osc_in, noise_in) {
    // Envelope of the drum. One parameter affects the hold and relase
    val osc_env, env_reset = Ahr.do(gate, env1_scale * env1_a, env1_scale * env1_h, env1_scale * env1_r, env_enabled, false);
    // Change of pitch
-   val bend_cv = Swept.process(1.0 - env_reset, bend * 0.4, 0.0, 0.1);
+   val bend_cv = Swept.process(gate, bend * 0.4, 0.0, 0.1);
    val cv = pitch + bend_cv;
    // Note: the oscillator is dissabled while the nevelop resets
    val osc, reset_osc = Tricore.process(cv, 0.0, env_reset, 0.0);

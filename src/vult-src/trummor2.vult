@@ -78,7 +78,7 @@ fun do(main_gate, osc_in, noise_in, osc_gate, noise_gate) {
    val osc_env, env_reset = env(gate, ogate, env1_mode, env1_a, env1_h, env1_r, env_enabled);
 
    // -- Change of pitch
-   val swept = Swept.process(1.0 - env_reset, bend * 0.6, 0.0, bend_time);
+   val swept = Swept.process((gate || ogate) && env_enabled, bend * 0.6, 0.0, bend_time);
    val cv = pitch + swept;
 
    // -- Oscillators

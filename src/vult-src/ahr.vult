@@ -27,7 +27,7 @@ fun do(gate:bool, a:real, h:real, r:real, enabled:bool, loop:bool) {
       state = reset;
    }
 
-   val resetting = if state == reset then 1.0 else 0.0;
+   val resetting = if state == reset || (state == release && out < 0.001) then 1.0 else 0.0;
 
    // states
 
