@@ -3,14 +3,8 @@
 A set of modules for VCV Rack written in Vult. You can read more about the modules here: https://modlfo.github.io/VultModules/
 
 
-![Rescomb](/images/Rescomb-render.png?raw=true "Rescomb")
-![Stabile](/images/Stabile-render.png?raw=true "Stabile")
-![Lateralus](/images/Lateralus-render.png?raw=true "Lateralus")
-![Debriatus](/images/Debriatus-render.png?raw=true "Debriatus")
-![Splie](/images/Splie-render.png?raw=true "Splie")
-![Tohe](/images/Tohe-render.png?raw=true "Tohe")
-![Trummor](/images/Trummor-render.png?raw=true "Trummor")
-![Tangents](/images/Tangents-render.png?raw=true "Tangents")
+![Modules](https://modlfo.github.io/VultModules/images/modules.png "Modules")
+
 
 ## Donate
 
