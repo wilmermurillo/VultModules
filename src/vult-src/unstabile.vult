@@ -1,0 +1,174 @@
+/*
+Copyright (c) 2017 Leonardo Laguna Ruiz (modlfo@gmail.com), All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1.- Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+2.- Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+3.- Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+4.- Commercial use requires explicit permission of the author.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+
+fun calc_g(cv, fs) {
+   val pitch = Util.cvToPitch(cv);
+   val f = 8.175798915643707 * exp(0.057762265046662105 * pitch);
+   val wd = 2.0 * pi() * f;
+	val T  = 1.0 / fs;
+	val wa = (2.0 / T) * tan(wd * T / 2.0);
+	val g  = wa * T / 2.0;
+   return g;
+}
+
+fun calc_g_44100(cv) @[table(size=128, min=0.0, max=1.0)]{
+   return calc_g(cv, 4.0 * 44100.0);
+}
+
+fun calc_g_48000(cv) @[table(size=128, min=0.0, max=1.0)]{
+   return calc_g(cv, 4.0 * 48000.0);
+}
+
+fun calc_g_88200(cv) @[table(size=128, min=0.0, max=1.0)]{
+   return calc_g(cv, 2.0 * 88200.0);
+}
+
+fun calc_g_96000(cv) @[table(size=128, min=0.0, max=1.0)]{
+   return calc_g(cv, 2.0 * 96000.0);
+}
+
+fun calc_g_176400(cv) @[table(size=128, min=0.0, max=1.0)]{
+   return calc_g(cv, 176400.0);
+}
+
+fun calc_g_192000(cv) @[table(size=128, min=0.0, max=1.0)]{
+   return calc_g(cv, 192000.0);
+}
+
+fun tune(cv, fs) {
+   val g = 0.0;
+   if (fs == 44100.0)
+      g = calc_g_44100(cv);
+   else if (fs == 48000.0)
+      g = calc_g_48000(cv);
+   else if (fs == 88200.0)
+      g = calc_g_88200(cv);
+   else if (fs == 96000.0)
+      g = calc_g_96000(cv);
+   else if (fs == 176400.0)
+      g = calc_g_176400(cv);
+   else if (fs == 192000.0)
+      g = calc_g_192000(cv);
+   else
+      g = calc_g(cv, 4.0 * fs);
+   return g;
+}
+
+fun nonlinearity(x) {
+   return 3.0 * Util.shaper(x / 3.0);
+}
+
+fun step(in, h, g, semblance, sem_on) {
+   mem z1, z2;
+
+   val xt = nonlinearity(-in - 3.0 * h * z1 - z2);
+   val dzt1 = g * xt;
+   val dzt2 = g * z1;
+
+   val zt1 = z1 + dzt1;
+   val zt2 = z2 + dzt2;
+
+   val x = nonlinearity(-in - 3.0 * h * zt1 - zt2);
+   val dz1 = g * x;
+   val dz2 = g * zt1;
+
+   z1 = clip(z1 + (dz1 + dzt1) / 2.0, -2.0, 2.0);
+   z2 = clip(z2 + (dz2 + dzt2) / 2.0, -2.0, 2.0);
+
+   val band = Util.shaper(-z1);
+   val low  = - Util.shaper(z2);
+   val high = - Util.shaper(-in - 3.0 * h * z1 - z2);
+   val sem = if sem_on then Util.fadeA(semblance) * low + Util.fadeB(semblance) * high else 0.0;
+   return band, low, high, sem;
+}
+
+fun process(input_in, cv, q, semblance, band_on, low_on, high_on, sem_on, input_on) {
+   mem g;
+   val fs = Util.getSampleRate();
+   mem out;
+   if(Util.change(cv) || Util.change(fs)) {
+      g = tune(cv, fs);
+   }
+
+   val noise = if not(input_on) then Util.simple_noise() * 0.001 else 0.0;
+   val input = input_in + noise;
+
+   val h = 1.0 - Util.polylog(q);
+   val band, low, high, sem = 0.0, 0.0, 0.0, 0.0;
+   if(fs == 176400.0 || fs == 192000.0) {
+      band, low, high, sem = step(input, h, g, semblance, sem_on);
+   }
+   else if (fs == 88200.0 || fs == 96000.0) {
+      val input1 = Util.upsampleOrder1_2x(input);
+      val band1, low1, high1, sem1 = step2:step(input1, h, g, semblance, sem_on);
+      val band0, low0, high0, sem0 = step2:step(input, h, g, semblance, sem_on);
+
+      if(band_on) {
+         _ = dband2:Util.decimate_2x_skip(band1);
+         band = dband2:Util.decimate_2x_do(band0);
+      }
+      if(low_on) {
+         _ = dlow2:Util.decimate_2x_skip(low1);
+         low = dlow2:Util.decimate_2x_do(low0);
+      }
+      if(high_on) {
+         _ = dhigh2:Util.decimate_2x_skip(high1);
+         high = dhigh2:Util.decimate_2x_do(high0);
+      }
+      if(sem_on) {
+         _ = dsem2:Util.decimate_2x_skip(sem1);
+         sem = dsem2:Util.decimate_2x_do(sem0);
+      }
+   }
+   else {
+      val input3, input2, input1 = Util.upsampleOrder1_4x(input);
+
+      val band3, low3, high3, sem3 = step4:step(input3, h, g, semblance, sem_on);
+      val band2, low2, high2, sem2 = step4:step(input2, h, g, semblance, sem_on);
+      val band1, low1, high1, sem1 = step4:step(input1, h, g, semblance, sem_on);
+      val band0, low0, high0, sem0 = step4:step(input, h, g, semblance, sem_on);
+
+      if(band_on) {
+         _ = dband4:Util.decimate_4x_skip(band3);
+         _ = dband4:Util.decimate_4x_skip(band2);
+         _ = dband4:Util.decimate_4x_skip(band1);
+         band = dband4:Util.decimate_4x_do(band0);
+      }
+
+      if(low_on) {
+         _ = dlow4:Util.decimate_4x_skip(low3);
+         _ = dlow4:Util.decimate_4x_skip(low2);
+         _ = dlow4:Util.decimate_4x_skip(low1);
+         low = dlow4:Util.decimate_4x_do(low0);
+      }
+
+      if(high_on) {
+         _ = dhigh4:Util.decimate_4x_skip(high3);
+         _ = dhigh4:Util.decimate_4x_skip(high2);
+         _ = dhigh4:Util.decimate_4x_skip(high1);
+         high = dhigh4:Util.decimate_4x_do(high0);
+      }
+      if(sem_on) {
+         _ = dsem4:Util.decimate_4x_skip(sem3);
+         _ = dsem4:Util.decimate_4x_skip(sem2);
+         _ = dsem4:Util.decimate_4x_skip(sem1);
+         sem = dsem4:Util.decimate_4x_do(sem0);
+      }
+   }
+
+   out = low + band + high + sem;
+   return low, band, high, sem;
+}
+and default() @[init] {
+}

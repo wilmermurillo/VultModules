@@ -193,6 +193,11 @@ struct StabileWidget : ModuleWidget
    StabileWidget();
 };
 
+struct UnstabileWidget : ModuleWidget
+{
+   UnstabileWidget();
+};
+
 struct LateralusWidget : ModuleWidget
 {
    LateralusWidget();

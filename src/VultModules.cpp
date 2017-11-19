@@ -38,4 +38,5 @@ void init(rack::Plugin *p)
    p->addModel(createModel<ToheWidget>("Vult", "Tohe", "Tohe", FILTER_TAG, EQUALIZER_TAG));
    p->addModel(createModel<TrummorWidget>("Vult", "Trummor", "Trummor", DRUM_TAG, ENVELOPE_GENERATOR_TAG, NOISE_TAG));
    p->addModel(createModel<Trummor2Widget>("Vult", "Trummor2", "Trummor 2", DRUM_TAG, ENVELOPE_GENERATOR_TAG, NOISE_TAG));
+   p->addModel(createModel<UnstabileWidget>("Vult", "Unstabile", "Unstabile", FILTER_TAG));
 }
