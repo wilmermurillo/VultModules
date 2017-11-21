@@ -13,17 +13,18 @@ From the samples I'm able of extracting characteristics of the waves that help m
 
 The current model is a blend of the above mentioned oscillators with some added tweaks to give Vessek it's own personality.
 
-## Demo Sounds (early development)
 
-These are some sounds produced with a single Vessek (two oscillators from the version based on the Volca Bass). The sounds have no variating modulation (e.g. changin PW). The later sounds were found with the random function and have a filter (Tangents).
+## Videos
 
-<iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/352475906&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GPf6u3PLKys" frameborder="0" allowfullscreen></iframe>
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FAXCNRXuP1w" frameborder="0" allowfullscreen></iframe>
 
-## Videos (early development)
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EvaDTWopD40" frameborder="0" allowfullscreen></iframe>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/qtY0TyNwIwQ" frameborder="0" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/EvaDTWopD40" frameborder="0" allowfullscreen></iframe>
+
+
+
 
