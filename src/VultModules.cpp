@@ -29,6 +29,7 @@ void init(rack::Plugin *p)
    p->version = TOSTRING(VERSION);
 #endif
    p->addModel(createModel<DebriatusWidget>("Vult", "Debriatus", "Debriatus", DISTORTION_TAG, WAVESHAPER_TAG, EFFECT_TAG));
+   p->addModel(createModel<JulsteWidget>("Vult", "Julste", "Julste", LOW_PASS_GATE_TAG, AMPLIFIER_TAG));
    p->addModel(createModel<LateralusWidget>("Vult", "Lateralus", "Lateralus", FILTER_TAG, OSCILLATOR_TAG));
    p->addModel(createModel<RescombWidget>("Vult", "Rescomb", "Rescomb", FILTER_TAG, EFFECT_TAG));
    p->addModel(createModel<SpankWidget>("Vult", "Spank", "Spank", ENVELOPE_GENERATOR_TAG, AMPLIFIER_TAG));

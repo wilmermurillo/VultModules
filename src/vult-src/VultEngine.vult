@@ -67,3 +67,6 @@ fun spank(gate, in, attack, hold, release, mode) {
    val env, _ = Trummor2.env(gate > 0.2, false, mode, clip(attack, 0.001, 1.0), clip(hold, 0.001, 1.0), clip(release, 0.001, 1.0), true);
    return env, in * env;
 }
+fun do() {
+   _ = Julste.julste(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+}

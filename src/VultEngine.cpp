@@ -3228,6 +3228,316 @@ void Lateralus_process(Lateralus__ctx_type_10 &_ctx, float input, float cut_in, 
    return ;
 }
 
+void Julste__ctx_type_1_init(Julste__ctx_type_1 &_output_){
+   Julste__ctx_type_1 _ctx;
+   _ctx.s1 = 0.f;
+   _output_ = _ctx;
+   return ;
+}
+
+void Julste_vactrol_init(Julste__ctx_type_1 &_output_){
+   Julste__ctx_type_1_init(_output_);
+   return ;
+}
+
+float Julste_vactrol(Julste__ctx_type_1 &_ctx, float in1){
+   float a_base;
+   a_base = (3141.59265359f / getSampleRate());
+   float t_down;
+   t_down = 3000.f;
+   t_down = (10.f + (t_down * (1.f + (-0.9f * _ctx.s1))));
+   float a_down;
+   a_down = (a_base / t_down);
+   float t_up;
+   t_up = 20.f;
+   t_up = (1.f + (t_up * (1.f + (-0.999f * _ctx.s1))));
+   float a_up;
+   a_up = (a_base / t_up);
+   float ds1;
+   ds1 = (in1 + (- _ctx.s1));
+   float x;
+   x = (((in1 + (- _ctx.s1)) * a_up) / (1.f + a_up));
+   uint8_t _cond_878;
+   _cond_878 = (ds1 <= 0.f);
+   if(_cond_878){
+      x = (((in1 + (- _ctx.s1)) * a_down) / (1.f + a_down));
+   }
+   float y;
+   y = (x + _ctx.s1);
+   _ctx.s1 = float_clip((y + x),-1.f,1.f);
+   return y;
+}
+
+float Julste_control(float in1, float in2, float in3){
+   float Vb;
+   Vb = float_clip(in1,-10.f,50.f);
+   float offset;
+   offset = ((0.9999f * in2) + 0.0001f);
+   float scale;
+   scale = float_clip(in3,0.f,1.f);
+   scale = 0.48f;
+   float A;
+   A = 3.4645912f;
+   float B;
+   B = 1136.2129956f;
+   float Ifmin;
+   Ifmin = 1.01e-05f;
+   float Ifmax;
+   Ifmax = 0.04f;
+   float R2max;
+   R2max = 10000.f;
+   float R6max;
+   R6max = 20000.f;
+   float R7;
+   R7 = 33000.f;
+   float R3;
+   R3 = 150000.f;
+   float R5;
+   R5 = 100000.f;
+   float R4;
+   R4 = 470000.f;
+   float R8;
+   R8 = 4700.f;
+   float R9;
+   R9 = 470.f;
+   float VB;
+   VB = 3.9f;
+   float VF;
+   VF = 0.7f;
+   float VT;
+   VT = 0.026f;
+   float n;
+   n = 3.9696f;
+   float kl;
+   kl = 6.3862f;
+   float G;
+   G = 200000.f;
+   float Vs;
+   Vs = 15.f;
+   float k0;
+   k0 = 146.8f;
+   float k1;
+   k1 = 0.49202f;
+   float k2;
+   k2 = 0.00041667f;
+   float k3;
+   k3 = 7.3915e-09f;
+   float gamma;
+   gamma = 0.0001f;
+   float R6;
+   R6 = (scale * R6max);
+   float R1;
+   R1 = ((1.f + (- offset)) * R2max);
+   float R2;
+   R2 = (offset * R2max);
+   float alpha;
+   alpha = (1.f + ((R6 + R7) * ((1.f / R3) + (1.f / R5))));
+   float beta;
+   beta = ((((1.f / alpha) + -1.f) / (R6 + R7)) + (- (1.f / R8)));
+   float bound1;
+   bound1 = ((600.f * alpha * n * VT) / (G * (R6 + R7 + (- (1.f / (alpha * beta))))));
+   float Ia;
+   Ia = ((Vb / R5) + (Vs / (R3 * (1.f + (R1 / R2)))));
+   float V3;
+   V3 = 0.f;
+   float If;
+   If = 0.f;
+   float flag;
+   flag = 0.f;
+   uint8_t _cond_880;
+   _cond_880 = (Ia <= (- bound1));
+   if(_cond_880){
+      V3 = ((- Ia) / (alpha * beta));
+   }
+   else
+   {
+      uint8_t _cond_879;
+      _cond_879 = (Ia < bound1);
+      if(_cond_879){
+         float x;
+         x = ((G * Ia * (R6 + R7 + (- (1.f / (alpha * beta))))) / (alpha * n * VT));
+         float w;
+         w = (k0 + (k1 * x) + (k2 * x * x) + (k3 * x * x * x));
+         V3 = (((- (alpha / G)) * n * VT * w) + (- (Ia / (alpha * beta))));
+      }
+      else
+      {
+         V3 = ((((kl * alpha) / G) * n * VT) + (- (Ia * (R6 + R7))));
+      }
+   }
+   float Ifbound1;
+   Ifbound1 = (alpha * (Ifmin + (- (beta * V3))));
+   float Ifbound2;
+   Ifbound2 = (VB / (R6 + R7));
+   float Ifbound3;
+   Ifbound3 = (((gamma * G * VB) + (alpha * R9 * ((VB * beta) + Ifmax))) / ((gamma * G * (R6 + R7)) + R9));
+   uint8_t _cond_883;
+   _cond_883 = (Ia <= Ifbound1);
+   if(_cond_883){
+      If = Ifmin;
+   }
+   else
+   {
+      uint8_t _cond_882;
+      _cond_882 = (Ia <= Ifbound2);
+      if(_cond_882){
+         If = ((beta * V3) + (Ia / alpha));
+      }
+      else
+      {
+         uint8_t _cond_881;
+         _cond_881 = (Ia <= Ifbound3);
+         if(_cond_881){
+            If = (((gamma * G * ((Ia * (R6 + R7)) + (- VB))) / (alpha * R9)) + (- (beta * VB)) + (Ia / alpha));
+         }
+         else
+         {
+            If = Ifmax;
+         }
+      }
+   }
+   float Rf;
+   Rf = (B + (A / powf(If,1.4f)));
+   return Rf;
+}
+
+void Julste__ctx_type_3_init(Julste__ctx_type_3 &_output_){
+   Julste__ctx_type_3 _ctx;
+   _ctx.xo = 0.f;
+   _ctx.sx = 0.f;
+   _ctx.so = 0.f;
+   _ctx.sd = 0.f;
+   _output_ = _ctx;
+   return ;
+}
+
+void Julste_filter_init(Julste__ctx_type_3 &_output_){
+   Julste__ctx_type_3_init(_output_);
+   return ;
+}
+
+void Julste_filter(Julste__ctx_type_3 &_ctx, float in1, float in2, float in3, float in4, float in5, float in6, _tuple___real_real_real__ &_output_){
+   float c1;
+   c1 = 1e-09f;
+   float c2;
+   c2 = 2.2e-10f;
+   float c3;
+   c3 = 4.7e-09f;
+   uint8_t _cond_884;
+   _cond_884 = (in5 < 0.5f);
+   if(_cond_884){
+      c3 = 0.f;
+   }
+   float rf;
+   rf = in2;
+   float r3;
+   r3 = (((1.f + (- in3)) * 5000000.f) + 10000.f);
+   float max_res;
+   max_res = (((2.f * c1 * r3) + ((c2 + c3) * (r3 + rf))) / (c3 * r3));
+   float a;
+   a = float_clip(in4,0.f,max_res);
+   float x;
+   x = in1;
+   float f;
+   f = (0.5f / getSampleRate());
+   float a1;
+   a1 = (1.f / (c1 * rf));
+   float a2;
+   a2 = ((- ((1.f / rf) + (1.f / r3))) / c1);
+   float b1;
+   b1 = (1.f / (rf * c2));
+   float b2;
+   b2 = (-2.f / (rf * c2));
+   float b3;
+   b3 = (1.f / (rf * c2));
+   float b4;
+   b4 = (c3 / c2);
+   float d1;
+   d1 = a;
+   float d2;
+   d2 = -1.f;
+   float tanh_xo;
+   tanh_xo = Util_saturate(_ctx.xo);
+   float Dx;
+   Dx = (1.f / (1.f + (- (b2 * f))));
+   float Do;
+   Do = (1.f / (1.f + (- (a2 * f))));
+   float tanh_xo_2;
+   tanh_xo_2 = (tanh_xo * tanh_xo);
+   float out1;
+   float out2;
+   float out3;
+   uint8_t _cond_885;
+   _cond_885 = (in6 > 0.5f);
+   if(_cond_885){
+      float Dmas;
+      Dmas = (1.f / (1.f + (- (Dx * ((f * f * b3 * Do * a1) + (b4 * f * d1 * (1.f + (- tanh_xo_2)) * Do * a1) + (b4 * d2))))));
+      float yx;
+      yx = ((_ctx.sx + (f * b1 * x) + (f * b3 * Do * _ctx.so) + (f * b4 * (_ctx.sd + ((1.f / f) * d1 * (tanh_xo + (- (_ctx.xo * (1.f + (- tanh_xo_2)))))))) + (b4 * d1 * (1.f + (- tanh_xo_2)) * Do * _ctx.so)) * Dx * Dmas);
+      float yo;
+      yo = ((_ctx.so + (f * a1 * yx)) * Do);
+      float yd;
+      yd = (_ctx.sd + ((1.f / f) * d1 * (tanh_xo + (- (_ctx.xo * (1.f + (- tanh_xo_2)))))) + ((1.f / f) * ((d1 * (1.f + (- tanh_xo_2)) * yo) + (d2 * yx))));
+      _ctx.sx = (_ctx.sx + (2.f * f * ((b1 * x) + (b2 * yx) + (b3 * yo) + (b4 * yd))));
+      _ctx.so = (_ctx.so + (2.f * f * ((a1 * yx) + (a2 * yo))));
+      _ctx.sd = ((- (_ctx.sd + ((2.f / f) * d1 * (tanh_xo + (- (_ctx.xo * (1.f + (- tanh_xo_2)))))))) + (- ((2.f / f) * ((d1 * (1.f + (- tanh_xo_2)) * yo) + (d2 * yx)))));
+      _ctx.xo = yo;
+      out1 = yo;
+      out2 = yx;
+      out3 = yd;
+   }
+   else
+   {
+      float Dmas;
+      Dmas = (1.f / (1.f + (- (Dx * ((f * f * b3 * Do * a1) + (b4 * f * d1 * Do * a1) + (b4 * d2))))));
+      float yx;
+      yx = ((_ctx.sx + (f * b1 * x) + (f * b3 * Do * _ctx.so) + (f * b4 * _ctx.sd) + (b4 * d1 * Do * _ctx.so)) * Dx * Dmas);
+      float yo;
+      yo = ((_ctx.so + (f * a1 * yx)) * Do);
+      float yd;
+      yd = (_ctx.sd + ((1.f / f) * ((d1 * yo) + (d2 * yx))));
+      _ctx.sx = (_ctx.sx + (2.f * f * ((b1 * x) + (b2 * yx) + (b3 * yo) + (b4 * yd))));
+      _ctx.so = (_ctx.so + (2.f * f * ((a1 * yx) + (a2 * yo))));
+      _ctx.sd = ((- _ctx.sd) + (- ((2.f / f) * ((d1 * yo) + (d2 * yx)))));
+      out1 = yo;
+      out2 = yx;
+      out3 = yd;
+   }
+   _tuple___real_real_real__ _tuple_886;
+   {
+      _tuple_886.field_0 = out1;
+      _tuple_886.field_1 = out2;
+      _tuple_886.field_2 = out3;
+   }
+   _output_ = _tuple_886;
+   return ;
+}
+
+void Julste__ctx_type_4_init(Julste__ctx_type_4 &_output_){
+   Julste__ctx_type_4 _ctx;
+   Julste__ctx_type_3_init(_ctx._inst877);
+   Julste__ctx_type_1_init(_ctx._inst876);
+   _output_ = _ctx;
+   return ;
+}
+
+void Julste_julste_init(Julste__ctx_type_4 &_output_){
+   Julste__ctx_type_4_init(_output_);
+   return ;
+}
+
+float Julste_julste(Julste__ctx_type_4 &_ctx, float gate, float audio, float offset, float res, float vcaness, float lp_mode, float nonlin_mode){
+   float x;
+   x = (10.f * Julste_vactrol(_ctx._inst876,gate));
+   float ctrl;
+   ctrl = Julste_control(x,float_clip(offset,0.f,1.f),0.f);
+   float out1;
+   _tuple___real_real_real__ _call_888;
+   Julste_filter(_ctx._inst877,audio,ctrl,Util_polylog(float_clip(vcaness,0.f,1.f)),(float_clip(res,0.f,1.f) * 2.f),lp_mode,nonlin_mode,_call_888);
+   out1 = _call_888.field_0;
+   return out1;
+}
+
 float Debriatus_saturate(float x){
    int index;
    index = int_clip(float_to_int((5.f * (x + 24.f))),0,240);
@@ -3243,9 +3553,9 @@ float Debriatus_factor(float cv){
 float Debriatus_crush(float i, float cv){
    float out;
    out = i;
-   uint8_t _cond_865;
-   _cond_865 = (cv == 0.f);
-   if(_cond_865){
+   uint8_t _cond_909;
+   _cond_909 = (cv == 0.f);
+   if(_cond_909){
       out = i;
    }
    else
@@ -3261,9 +3571,9 @@ float Debriatus_crush(float i, float cv){
 
 float Debriatus_fold(float signal, float level){
    float sign;
-   uint8_t _cond_866;
-   _cond_866 = (signal > 0.f);
-   if(_cond_866){ sign = 1.f; }
+   uint8_t _cond_910;
+   _cond_910 = (signal > 0.f);
+   if(_cond_910){ sign = 1.f; }
    else
    { sign = -1.f; }
    float amp;
@@ -3273,9 +3583,9 @@ float Debriatus_fold(float signal, float level){
    float delta;
    delta = (amp + (- base));
    float out;
-   uint8_t _cond_867;
-   _cond_867 = ((float_to_int(base) % 2) != 0);
-   if(_cond_867){ out = (1.f + (- delta)); }
+   uint8_t _cond_911;
+   _cond_911 = ((float_to_int(base) % 2) != 0);
+   if(_cond_911){ out = (1.f + (- delta)); }
    else
    { out = delta; }
    return (sign * out);
@@ -3319,7 +3629,7 @@ float VultEngine_rescomb(VultEngine__ctx_type_0 &_ctx, float in, float cv_in, fl
 
 void VultEngine__ctx_type_1_init(VultEngine__ctx_type_1 &_output_){
    VultEngine__ctx_type_1 _ctx;
-   Stabile__ctx_type_8_init(_ctx._inst870);
+   Stabile__ctx_type_8_init(_ctx._inst914);
    _output_ = _ctx;
    return ;
 }
@@ -3336,15 +3646,15 @@ void VultEngine_stabile(VultEngine__ctx_type_1 &_ctx, float in, float cut_in, fl
    res = float_clip(res_in,0.f,4.f);
    float semblance;
    semblance = float_clip(semblance_in,0.f,1.f);
-   _tuple___real_real_real_real__ _call_884;
-   Stabile_process(_ctx._inst870,in,cut,res,semblance,_call_884);
-   _output_ = _call_884;
+   _tuple___real_real_real_real__ _call_930;
+   Stabile_process(_ctx._inst914,in,cut,res,semblance,_call_930);
+   _output_ = _call_930;
    return ;
 }
 
 void VultEngine__ctx_type_2_init(VultEngine__ctx_type_2 &_output_){
    VultEngine__ctx_type_2 _ctx;
-   Unstabile__ctx_type_10_init(_ctx._inst872);
+   Unstabile__ctx_type_10_init(_ctx._inst916);
    _output_ = _ctx;
    return ;
 }
@@ -3361,15 +3671,15 @@ void VultEngine_unstabile(VultEngine__ctx_type_2 &_ctx, float in, float cut_in, 
    res = float_clip(res_in,0.f,1.f);
    float semblance;
    semblance = float_clip(semblance_in,0.f,1.f);
-   _tuple___real_real_real_real__ _call_886;
-   Unstabile_process(_ctx._inst872,in,cut,res,semblance,band_on,low_on,high_on,sem_on,input_on,_call_886);
-   _output_ = _call_886;
+   _tuple___real_real_real_real__ _call_932;
+   Unstabile_process(_ctx._inst916,in,cut,res,semblance,band_on,low_on,high_on,sem_on,input_on,_call_932);
+   _output_ = _call_932;
    return ;
 }
 
 void VultEngine__ctx_type_3_init(VultEngine__ctx_type_3 &_output_){
    VultEngine__ctx_type_3 _ctx;
-   Lateralus__ctx_type_10_init(_ctx._inst874);
+   Lateralus__ctx_type_10_init(_ctx._inst918);
    _output_ = _ctx;
    return ;
 }
@@ -3380,15 +3690,15 @@ void VultEngine_lateralus_init(VultEngine__ctx_type_3 &_output_){
 }
 
 void VultEngine_lateralus(VultEngine__ctx_type_3 &_ctx, float in, float cut, float res, uint8_t db6_on, uint8_t db12_on, uint8_t db18_on, uint8_t db24_on, uint8_t input_on, _tuple___real_real_real_real__ &_output_){
-   _tuple___real_real_real_real__ _call_888;
-   Lateralus_process(_ctx._inst874,in,cut,res,db6_on,db12_on,db18_on,db24_on,input_on,_call_888);
-   _output_ = _call_888;
+   _tuple___real_real_real_real__ _call_934;
+   Lateralus_process(_ctx._inst918,in,cut,res,db6_on,db12_on,db18_on,db24_on,input_on,_call_934);
+   _output_ = _call_934;
    return ;
 }
 
 void VultEngine__ctx_type_4_init(VultEngine__ctx_type_4 &_output_){
    VultEngine__ctx_type_4 _ctx;
-   Tangents__ctx_type_11_init(_ctx._inst876);
+   Tangents__ctx_type_11_init(_ctx._inst920);
    _output_ = _ctx;
    return ;
 }
@@ -3399,7 +3709,7 @@ void VultEngine_tangents_init(VultEngine__ctx_type_4 &_output_){
 }
 
 float VultEngine_tangents(VultEngine__ctx_type_4 &_ctx, float lp, float bp, float hp, float cut, float res, uint8_t lp_on, uint8_t bp_on, uint8_t hp_on){
-   return Tangents_process(_ctx._inst876,lp,bp,hp,cut,res,lp_on,bp_on,hp_on);
+   return Tangents_process(_ctx._inst920,lp,bp,hp,cut,res,lp_on,bp_on,hp_on);
 }
 
 float VultEngine_debriatus(float in, float fold_in, float crush_in, float distort_in, float saturate_in){
@@ -3427,9 +3737,9 @@ void VultEngine_trummor_init(VultEngine__ctx_type_6 &_output_){
 }
 
 void VultEngine_trummor(VultEngine__ctx_type_6 &_ctx, float gate, float osc_in, float noise_in, _tuple___real_real_real_real__ &_output_){
-   _tuple___real_real_real_real__ _call_890;
-   Trummor_do(_ctx.processor,gate,osc_in,noise_in,_call_890);
-   _output_ = _call_890;
+   _tuple___real_real_real_real__ _call_936;
+   Trummor_do(_ctx.processor,gate,osc_in,noise_in,_call_936);
+   _output_ = _call_936;
    return ;
 }
 
@@ -3446,15 +3756,15 @@ void VultEngine_trummor2_init(VultEngine__ctx_type_7 &_output_){
 }
 
 void VultEngine_trummor2(VultEngine__ctx_type_7 &_ctx, float gate, float osc_in, float noise_in, float osc_gate, float noise_gate, _tuple___real_real_real_real_real_real__ &_output_){
-   _tuple___real_real_real_real_real_real__ _call_892;
-   Trummor2_do(_ctx.processor,gate,osc_in,noise_in,osc_gate,noise_gate,_call_892);
-   _output_ = _call_892;
+   _tuple___real_real_real_real_real_real__ _call_938;
+   Trummor2_do(_ctx.processor,gate,osc_in,noise_in,osc_gate,noise_gate,_call_938);
+   _output_ = _call_938;
    return ;
 }
 
 void VultEngine__ctx_type_8_init(VultEngine__ctx_type_8 &_output_){
    VultEngine__ctx_type_8 _ctx;
-   Tohe__ctx_type_2_init(_ctx._inst881);
+   Tohe__ctx_type_2_init(_ctx._inst925);
    _output_ = _ctx;
    return ;
 }
@@ -3467,12 +3777,12 @@ void VultEngine_tohe_init(VultEngine__ctx_type_8 &_output_){
 float VultEngine_tohe(VultEngine__ctx_type_8 &_ctx, float x, float tone_in){
    float tone;
    tone = float_clip(tone_in,-1.f,1.f);
-   return Tohe_do(_ctx._inst881,x,tone);
+   return Tohe_do(_ctx._inst925,x,tone);
 }
 
 void VultEngine__ctx_type_9_init(VultEngine__ctx_type_9 &_output_){
    VultEngine__ctx_type_9 _ctx;
-   Trummor2__ctx_type_3_init(_ctx._inst883);
+   Trummor2__ctx_type_3_init(_ctx._inst927);
    _output_ = _ctx;
    return ;
 }
@@ -3484,16 +3794,32 @@ void VultEngine_spank_init(VultEngine__ctx_type_9 &_output_){
 
 void VultEngine_spank(VultEngine__ctx_type_9 &_ctx, float gate, float in, float attack, float hold, float release, float mode, _tuple___real_real__ &_output_){
    float env;
-   _tuple___real_real__ _call_894;
-   Trummor2_env(_ctx._inst883,(gate > 0.2f),0,mode,float_clip(attack,0.001f,1.f),float_clip(hold,0.001f,1.f),float_clip(release,0.001f,1.f),1,_call_894);
-   env = _call_894.field_0;
-   _tuple___real_real__ _tuple_895;
+   _tuple___real_real__ _call_940;
+   Trummor2_env(_ctx._inst927,(gate > 0.2f),0,mode,float_clip(attack,0.001f,1.f),float_clip(hold,0.001f,1.f),float_clip(release,0.001f,1.f),1,_call_940);
+   env = _call_940.field_0;
+   _tuple___real_real__ _tuple_941;
    {
-      _tuple_895.field_0 = env;
-      _tuple_895.field_1 = (in * env);
+      _tuple_941.field_0 = env;
+      _tuple_941.field_1 = (in * env);
    }
-   _output_ = _tuple_895;
+   _output_ = _tuple_941;
    return ;
+}
+
+void VultEngine__ctx_type_10_init(VultEngine__ctx_type_10 &_output_){
+   VultEngine__ctx_type_10 _ctx;
+   Julste__ctx_type_4_init(_ctx._inst929);
+   _output_ = _ctx;
+   return ;
+}
+
+void VultEngine_do_init(VultEngine__ctx_type_10 &_output_){
+   VultEngine__ctx_type_10_init(_output_);
+   return ;
+}
+
+void VultEngine_do(VultEngine__ctx_type_10 &_ctx){
+   Julste_julste(_ctx._inst929,0.f,0.f,0.f,0.f,0.f,0.f,0.f);
 }
 
 
