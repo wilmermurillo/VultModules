@@ -3531,9 +3531,11 @@ float Julste_julste(Julste__ctx_type_4 &_ctx, float gate, float audio, float off
    x = (10.f * Julste_vactrol(_ctx._inst876,gate));
    float ctrl;
    ctrl = Julste_control(x,float_clip(offset,0.f,1.f),0.f);
+   float vca;
+   vca = Util_polylog(Util_polylog(float_clip(vcaness,0.f,1.f)));
    float out1;
    _tuple___real_real_real__ _call_888;
-   Julste_filter(_ctx._inst877,audio,ctrl,Util_polylog(float_clip(vcaness,0.f,1.f)),(float_clip(res,0.f,1.f) * 2.f),lp_mode,nonlin_mode,_call_888);
+   Julste_filter(_ctx._inst877,audio,ctrl,vca,(float_clip(res,0.f,1.f) * 2.f),lp_mode,nonlin_mode,_call_888);
    out1 = _call_888.field_0;
    return out1;
 }

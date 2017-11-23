@@ -206,7 +206,8 @@ fun filter(in1:real, in2:real, in3:real, in4:real, in5, in6){
 fun julste(gate, audio, offset, res, vcaness, lp_mode, nonlin_mode) {
    val x = 10.0 * vactrol(gate);
    val ctrl = control(x, clip(offset, 0.0, 1.0), 0.0);
-   val out1, _, _ = filter(audio, ctrl, Util.polylog(clip(vcaness, 0.0, 1.0)), clip(res, 0.0, 1.0) * 2.0, lp_mode, nonlin_mode);
+   val vca =Util.polylog(Util.polylog(clip(vcaness, 0.0, 1.0)));
+   val out1, _, _ = filter(audio, ctrl, vca, clip(res, 0.0, 1.0) * 2.0, lp_mode, nonlin_mode);
    return out1;
 }
 
