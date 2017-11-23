@@ -11,4 +11,3 @@ The module provides three operating modes: Slow, Fast and Loop. In slow mode the
 
 The module includes a VCA so you can use it directly to control an input source.
 
-*Spank will be available starting in version 0.5 of VCV Rack*
