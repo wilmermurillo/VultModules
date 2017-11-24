@@ -5,11 +5,11 @@ layout = "module"
 image = "../images/Vessek.png"
 +++
 
-Vessek started modeling the basic circuit of an analog saw wave oscillator. Most of the parameters were initially obtained from my Volca Bass. I got a pretty good matching of the sound that I bet it would pass a blind test. Later in the development, samples of the Mother32, MFB Synth II and 0-Coast were sent to me by members of the VCV Rack community.
+Vessek started modeling the basic circuit of an analog saw wave oscillator. Most of the parameters were initially obtained from my compact analog bass synth. I got a pretty good matching of the sound that I bet it would pass a blind test. Later in the development, samples of other well known analog oscillators were sent to me by members of the VCV Rack community. From the samples I was able of extracting characteristics of the waves that help me fit my greybox model.
 
-From the samples I'm able of extracting characteristics of the waves that help me fit my greybox model. Then I turned the model into something more efficient that still produces a very good analog sound. The new models allow me adding many more features that are not available in the original circuits.
+After some more mathematical processing I turned the model into something more efficient that still produces a very good analog sound.
 
-The current model is a blend of the above mentioned oscillators with some added tweaks to give Vessek it's own personality.
+The current model is a blend of the characteristics of different analog oscillators with some added tweaks to give Vessek it's own personality.
 
 ## Videos
 
