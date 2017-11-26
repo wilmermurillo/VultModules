@@ -5,6 +5,32 @@ A set of modules for VCV Rack written in Vult. You can read more about the modul
 
 ![Modules](https://modlfo.github.io/VultModules/images/modules.png "Modules")
 
+### Filters
+- [Lateralus](https://modlfo.github.io/VultModules/lateralus/): Diode ladder Filter.
+- [Tangents](https://modlfo.github.io/VultModules/tangents/): Steiner-Parker Filter.
+- [Stabile](https://modlfo.github.io/VultModules/stabile/): State Variable Filter.
+- [Unstabile](https://modlfo.github.io/VultModules/unstabile/): Circuit Bent State Variable Filter.
+- [Rescomb](https://modlfo.github.io/VultModules/rescomb/): Resonant Comb Filter.
+- [Julste](https://modlfo.github.io/VultModules/julste/): Low Pass Gate. Buchla model.
+- [Tohe](https://modlfo.github.io/VultModules/tohe/): Tone Control.
+
+### Effects
+- [Debriatus](https://modlfo.github.io/VultModules/debriatus/): Wave Destruction. Wave Folder, Bit Crusher, Distortion and Saturation.
+
+### Envelopes & VCA
+- [Spank](https://modlfo.github.io/VultModules/spank/): Drum Envelope.
+- [Julste](https://modlfo.github.io/VultModules/julste/): Low Pass Gate. Buchla model.
+
+### Drums
+- [Trummor](https://modlfo.github.io/VultModules/trummor/): Drums Synthesizer.
+- [Trummor 2](https://modlfo.github.io/VultModules/trummor2/): Drum (Percussion) Synthesizer.
+
+### Oscillators
+- [Vessek](https://modlfo.github.io/VultModules/vessek/): Complex Analog Oscillator.
+
+### Utilities
+- [Splie](https://modlfo.github.io/VultModules/splie/): Buffer
+- [HyperPower](https://modlfo.github.io/VultModules/hyperpower/): Infinite Power Supply.
 
 ## Donate
 
