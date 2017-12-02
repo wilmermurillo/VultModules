@@ -237,3 +237,8 @@ struct SpankWidget : ModuleWidget
 {
    SpankWidget();
 };
+
+struct JulsteWidget : ModuleWidget
+{
+   JulsteWidget();
+};

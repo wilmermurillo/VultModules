@@ -70,9 +70,9 @@ fun do(main_gate, osc_in, noise_in, osc_gate, noise_gate) {
    mem cutoff, resonance, filter;
    mem wave;
 
-   val gate = main_gate > 0.5;
-   val ogate = osc_gate > 0.5;
-   val ngate = noise_gate > 0.5;
+   val gate = main_gate >= 0.2;
+   val ogate = osc_gate >= 0.2;
+   val ngate = noise_gate >= 0.2;
 
    // -- Oscillator envelope
    val osc_env, env_reset = env(gate, ogate, env1_mode, env1_a, env1_h, env1_r, env_enabled);
