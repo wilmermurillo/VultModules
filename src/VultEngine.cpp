@@ -951,7 +951,7 @@ void Tricore_process_init(Tricore__ctx_type_0 &_output_){
 
 void Tricore_process(Tricore__ctx_type_0 &_ctx, float cv, float reset, float disable, float w, _tuple___real_bool__ &_output_){
    uint8_t bdisable;
-   bdisable = (disable > 0.5f);
+   bdisable = (disable > 0.2f);
    uint8_t _cond_211;
    _cond_211 = (bool_not(_ctx.reset_state) && bool_not(bdisable));
    if(_cond_211){
@@ -1414,7 +1414,7 @@ void Trummor_do_init(Trummor__ctx_type_0 &_output_){
 
 void Trummor_do(Trummor__ctx_type_0 &_ctx, float main_gate, float osc_in, float noise_in, _tuple___real_real_real_real__ &_output_){
    uint8_t gate;
-   gate = (main_gate > 0.5f);
+   gate = (main_gate >= 0.2f);
    float osc_env;
    float env_reset;
    _tuple___real_real__ _call_325;
@@ -2560,11 +2560,11 @@ void Trummor2_do_init(Trummor2__ctx_type_4 &_output_){
 
 void Trummor2_do(Trummor2__ctx_type_4 &_ctx, float main_gate, float osc_in, float noise_in, float osc_gate, float noise_gate, _tuple___real_real_real_real_real_real__ &_output_){
    uint8_t gate;
-   gate = (main_gate > 0.5f);
+   gate = (main_gate >= 0.2f);
    uint8_t ogate;
-   ogate = (osc_gate > 0.5f);
+   ogate = (osc_gate >= 0.2f);
    uint8_t ngate;
-   ngate = (noise_gate > 0.5f);
+   ngate = (noise_gate >= 0.2f);
    float osc_env;
    float env_reset;
    _tuple___real_real__ _call_621;

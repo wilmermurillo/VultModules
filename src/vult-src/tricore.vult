@@ -15,7 +15,7 @@ fun process(cv:real, reset:real, disable:real, w) {
    mem reset_state;
    mem phase, reset_phase;
    // Determine the next value
-   val bdisable = disable > 0.5;
+   val bdisable = disable > 0.2;
    if(not(reset_state) && not(bdisable)){
       phase = phase + Util.cvToRate(cv);
       if (phase > 1.0)

@@ -22,7 +22,7 @@ fun do(main_gate, osc_in, noise_in) {
    mem env1_scale, env2_scale;
    mem env_enabled;
 
-   val gate = main_gate > 0.5;
+   val gate = main_gate >= 0.2;
 
    // Envelope of the drum. One parameter affects the hold and relase
    val osc_env, env_reset = Ahr.do(gate, env1_scale * env1_a, env1_scale * env1_h, env1_scale * env1_r, env_enabled, false);
