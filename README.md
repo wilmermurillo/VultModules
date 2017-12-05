@@ -47,24 +47,10 @@ Download from the [releases page](https://github.com/modlfo/VultModules/releases
 
 ## Build
 
-First you need to build the latest release version of [Rack](https://github.com/VCVRack/Rack) following the instructions in its [README](https://github.com/VCVRack/Rack/blob/master/README.md).
+Where did the code go?
 
-Then clone this repository inside the `plugins` folder of Rack and use `make`.
+I have decided to close the source of some of my new plugins. The reason for closing them is because my new plugins have a very substantial amount of work and research. The nature of my code makes very hard enforce the license terms and the fair use. Even when only some of the modules are closed source, I have removed all the code from the repository in order to avoid confusion when someone compiles the code and some of the modules are not shown.
 
-```
-$ cd plugins
-$ git clone https://github.com/modlfo/VultModules.git
-$ make
-```
-
-## Modify
-
-To change the DSP code you need to have Vult installed. Vult can be installed by downloading it from the [Releases](https://github.com/modlfo/vult/releases) page or installed with [npm](https://www.npmjs.com/package/vult).
-
-Once you have Vult installed you can regenerate the code with the following line:
-```
-$ vultc src/VultEngine.vult -ccode -o src/VultEngine
-```
 
 ## License
 
