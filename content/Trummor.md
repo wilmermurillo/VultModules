@@ -2,7 +2,7 @@
 title = "Trummor"
 date = "2017-10-28T22:37:03+03:00"
 layout = "module"
-image = "https://github.com/modlfo/VultModules/blob/master/images/Trummor-render.png?raw=true"
+image = "../images/Trummor-render.png"
 +++
 
 Trummor is a drum synthesizer that produces 909 style kicks. Trummor can be used to produce other type of percusive sounds like toms and simple snares or hats.

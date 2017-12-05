@@ -2,10 +2,9 @@
 title = "Rescomb"
 date = "2017-10-28T22:37:03+03:00"
 layout = "module"
+image ="../images/Rescomb-render.png"
 
 +++
-
-{{% msummary image="https://github.com/modlfo/VultModules/blob/master/images/Rescomb-render.png?raw=true" %}} 
 
 Rescomb is a resonant Comb filter. A comb filter is a special kind of filter that creates multiple spaced notches. This module provides an CV input which is tuned (1V/octave) and a feedback parameter. when the feedback is high it will resonate enhancing the frequencies of the comb.
 

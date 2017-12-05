@@ -2,7 +2,7 @@
 date = "2017-10-27T11:54:59+03:00"
 title = "Tangents"
 layout = "module"
-image="https://github.com/modlfo/VultModules/blob/master/images/Tangents-render.png?raw=true"
+image="../images/Tangents-render.png"
 +++
 
 

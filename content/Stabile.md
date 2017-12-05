@@ -2,7 +2,7 @@
 title = "Stabile"
 date = "2017-10-28T22:37:03+03:00"
 layout = "module"
-image = "https://github.com/modlfo/VultModules/blob/master/images/Stabile-render.png?raw=true"
+image = "../images/Stabile-render.png"
 +++
 
 
