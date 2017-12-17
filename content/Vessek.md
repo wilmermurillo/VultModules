@@ -13,7 +13,7 @@ The current model is a blend of the characteristics of different analog oscillat
 
 ## Diagram
 
-Thanks to Bob Fuller for this making the diagram of Vessek. You can get the pdf version [HERE](/images/Vult-Vessek.pdf)
+Thanks to Bob Fuller for making the diagram of Vessek. You can get the pdf version [HERE](/images/Vult-Vessek.pdf)
 
 ![Vessek](/images/Vessek-internals.png "Signal Flow Diagram")
 
