@@ -11,6 +11,15 @@ After some more mathematical processing I turned the model into something more e
 
 The current model is a blend of the characteristics of different analog oscillators with some added tweaks to give Vessek it's own personality.
 
+## Diagram
+
+Thanks to Bob Fuller for this making the diagram of Vessek. You can get the pdf version [HERE](/images/Vult-Vessek.pdf)
+
+![Vessek](/images/Vessek-internals.png "Signal Flow Diagram")
+
+
+
+
 ## Videos
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/GPf6u3PLKys" frameborder="0" allowfullscreen></iframe>
