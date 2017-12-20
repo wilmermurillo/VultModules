@@ -19,6 +19,6 @@ Specifications:
 If you want to get one, you can donate by clicking the button below. The suggested donation for the Vult modules is 20 euro, but you can donate as little or as much as you want/can.
 
 
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RRMY2QPYEZT2S" class="btn btn-info" role="button">Donate</a>
+<a href="https://www.paypal.me/VultModules" class="btn btn-info" role="button">Donate</a>
 
 *All supporters will get HyperPower once Rack v0.5.0 is released.*
