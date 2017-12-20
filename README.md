@@ -38,7 +38,7 @@ I’m glad to publish these modules for free so anyone can use them. But these m
 
 The suggested donation is 20 euro for the full pack, but of course you can donate as much as you want any donation help me buy more coffeeeeee :)
 
-Here's the link: [DONATE](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RRMY2QPYEZT2S) 
+Here's the link: [DONATE](https://www.paypal.me/VultModules) 
 
 ## Use
 
