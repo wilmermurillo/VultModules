@@ -15,6 +15,12 @@ For Trummor 2 I tested a dozen of different ideas trying to find something that 
 
 Trummor 2 integrates better with VCV Rack making modulation easier and now includes a virtual OLED screen.
 
+## Diagram
+
+Thanks to Bob Fuller for making the diagram of Trummor2. You can get the pdf version [HERE](/images/Vult-Trummor2.pdf)
+
+![Trummor2](/images/Trummor2-internals.png "Signal Flow Diagram")
+
 ## Videos
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/GHLu03h0-vs" frameborder="0" allowfullscreen></iframe>
