@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>My New Hugo Site</title>
+    <link>https://modlfo.github.io/VultModules/</link>
+    <description>Recent content on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Oct 2017 22:37:03 +0300</lastBuildDate>
+    
+	<atom:link href="https://modlfo.github.io/VultModules/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>https://modlfo.github.io/VultModules/about/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/about/</guid>
+      <description>The Vult modules are designed by me Leonardo Laguna Ruiz in collaboration with other members of the VCV community. I create all these modules during my free time, driven by the passion I have for music, synthesizers, electronics and technology. These modules are not created by a professional music software company, but they are created by a professional in the modeling and simulation.
+If you want to know more, you can find an interview with me here:Switched On Rack: Meet the Devs</description>
+    </item>
+    
+    <item>
+      <title>Caudal</title>
+      <link>https://modlfo.github.io/VultModules/caudal/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/caudal/</guid>
+      <description>Caudal is a chaotic source that is based on the model of a multi segment pendulum (see the video below). The core of Caudal is a detailed simulation of the pendulum system from which we can get measurements like the angular velocities and positions of the segments. These measures produces very natural oscillations that are interrelated due to the nature of the system.
+I made the original model using SystemModeler and later applied manual optimizations to improve the performance and being able of running it in real-time.</description>
+    </item>
+    
+    <item>
+      <title>Debriatus</title>
+      <link>https://modlfo.github.io/VultModules/debriatus/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/debriatus/</guid>
+      <description> Debriatus is a chain of distortion effects that can be controlled with CV. Debriatus contains:
+ Wave Folder Bit Crushing Asymetric Distortion Saturation  Videos  </description>
+    </item>
+    
+    <item>
+      <title>Download</title>
+      <link>https://modlfo.github.io/VultModules/download/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/download/</guid>
+      <description>I’m glad to publish these modules for free so anyone can use them (why free?). But these modules don&amp;rsquo;t come cheap for me. Behind every module there are many hours of work (and many litters of coffee). If you enjoy these modules you can support the development by making a donation.
+The suggested donation is 20 euro for the full pack, but of course you can donate as much as you want any donation help me buy more coffeeeeee :)</description>
+    </item>
+    
+    <item>
+      <title>Flux</title>
+      <link>https://modlfo.github.io/VultModules/flux/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/flux/</guid>
+      <description>Flux is a module that was specifically designed to work with Caudal. Flux provides the following functions:
+ Attenuation and offsetting Sample &amp;amp; Hold Clocked comparison Linear and exponential signal follower (slew limiter) Envelope follower  Flux provides 4 similar channels and the classical Vult modulation section that allows you to control all parameters.
+Documentation  Mode (Switch):  S&amp;amp;H: Sample and hold. Keeps the immediate value of the input on every rising edge of the clock.</description>
+    </item>
+    
+    <item>
+      <title>HyperPower</title>
+      <link>https://modlfo.github.io/VultModules/hyperpower/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/hyperpower/</guid>
+      <description>HyperPower is a very special module that can only be obtained by making a donation.
+HyperPower provides the best power supply in the market for your VCV Rack. If you love your Vult modules don’t let them get damaged; this is the recommended power supply. Using HyperPower will allow you using as many modules as your computer can handle.
+Specifications:
+ Outputs: -12, +12, +5 V, variable output -12 V to 12 V Output power: Infinite Efficiency: 100 % Output ripple: 0 %  If you want to get one, you can donate by clicking the button below.</description>
+    </item>
+    
+    <item>
+      <title>Julste</title>
+      <link>https://modlfo.github.io/VultModules/julste/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/julste/</guid>
+      <description>Julste is the only model that I haven&amp;rsquo;t developed by myself. When I started doing research on low pass gates I came across the paper &amp;ldquo;A DIGITAL MODEL OF THE BUCHLA LOWPASS-GATE&amp;rdquo; by Julian Parker and Stefano D’Angelo. They did all the hard job modeling it, I just rewrote the code in the Vult language and created the module.
+The result is a really nice sounding low pass gate. But that&amp;rsquo;s not all&amp;hellip; I&amp;rsquo;m working on an update trying to give it my personal touch.</description>
+    </item>
+    
+    <item>
+      <title>Lateralus</title>
+      <link>https://modlfo.github.io/VultModules/lateralus/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/lateralus/</guid>
+      <description> Lateralus is a diode ladder filter. It&amp;rsquo;s based on the structure Moog of filter and considers nonlinearities. The model is efficient and produces a convincing sound.
+Videos  </description>
+    </item>
+    
+    <item>
+      <title>Rescomb</title>
+      <link>https://modlfo.github.io/VultModules/rescomb/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/rescomb/</guid>
+      <description>Rescomb is a resonant Comb filter. A comb filter is a special kind of filter that creates multiple spaced notches. This module provides an CV input which is tuned (1V/octave) and a feedback parameter. when the feedback is high it will resonate enhancing the frequencies of the comb.
+This is the first module that I designed for VCV Rack. I really like Comb filters, so I coded in Vult a very simple version after playing with it and tweaking parameters I got this version.</description>
+    </item>
+    
+    <item>
+      <title>Spank</title>
+      <link>https://modlfo.github.io/VultModules/spank/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/spank/</guid>
+      <description>Spank is the envelope generator in charge of producing the snappy sounds of Trummor and Trummor 2. All transitions are exponential since they are modeled after the behavior of a charging capacitor.
+The module provides three operating modes: Slow, Fast and Loop. In slow mode the envelope provides good time constants to use with sound sources. Fast mode is good for drum sounds. Loop mode is a special mode that sends multiple pulses during the hold time.</description>
+    </item>
+    
+    <item>
+      <title>Splie</title>
+      <link>https://modlfo.github.io/VultModules/splie/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/splie/</guid>
+      <description>Splie is an utility module that I made because it was handy when developing my modules. It provides a buffered input that can be distributed to other modules. This is very handy when one wants to change only one patch cable and distribute the signal to many other modules.</description>
+    </item>
+    
+    <item>
+      <title>Stabile</title>
+      <link>https://modlfo.github.io/VultModules/stabile/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/stabile/</guid>
+      <description>Stabile is a state variable filter. It provides LP, HP, and BP filters. Additionally to the three filter outputs it provides an extra output imitates the behavior of the SEM filter.
+The story of this filter goes even before the existence of Vult. I implemented the initial version of this filter in a microcontroller. With the years I have made many tweaks an simplifications. In fact this filter is very efficient and the sound is very effective.</description>
+    </item>
+    
+    <item>
+      <title>Tohe</title>
+      <link>https://modlfo.github.io/VultModules/tohe/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/tohe/</guid>
+      <description>Sometimes one needs just a gentle change to the sound in order to make it fit better. Tohe is a tone control. To the right you get bass sound, to the left treble.</description>
+    </item>
+    
+    <item>
+      <title>Trummor</title>
+      <link>https://modlfo.github.io/VultModules/trummor/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/trummor/</guid>
+      <description>Trummor is a drum synthesizer that produces 909 style kicks. Trummor can be used to produce other type of percusive sounds like toms and simple snares or hats.
+I started developing the algorithms behind Trummor a long time ago and I made a simplified hardware version of it. When VCV Rack came out, I adapted the code and started expanding the sonic capabilities.
+Trummor has been replaced by Trummor 2 which is an improved version with even more sonic capabilities.</description>
+    </item>
+    
+    <item>
+      <title>Trummor 2</title>
+      <link>https://modlfo.github.io/VultModules/trummor2/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/trummor2/</guid>
+      <description>Trummor 2 is the evolution of Trummor that was designed with the idea of expanding the sonic capabilities of Trummor.
+It was designed based on the input of many members of the VCV Rack community specially Alejandro Galán Álvaro who participated in most of the stages. Trummor 2 is, in his words:
+&amp;ldquo;a powerhouse of drum sounds. FM drums, metalic claps, analog-style kicks, all sorts of resonated karplus-strong style strings, blips and blops.</description>
+    </item>
+    
+    <item>
+      <title>Unstabile</title>
+      <link>https://modlfo.github.io/VultModules/unstabile/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/unstabile/</guid>
+      <description>Unstabile is &amp;ldquo;circuit bent&amp;rdquo; version of Stabile. When making Stabile I aimed to have a ver efficient and smooth filter that I could run in a small ARM processor. To achieve that I left out many things from the original circuit. With Unstabile remade the model and introduced nonlinearities that can occur when the circuit is fed with low voltage. The result is Unstabile a filter that makes everything sound big and distorted&amp;hellip; and it can self-oscillate.</description>
+    </item>
+    
+    <item>
+      <title>Vessek</title>
+      <link>https://modlfo.github.io/VultModules/vessek/</link>
+      <pubDate>Sat, 28 Oct 2017 22:37:03 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/vessek/</guid>
+      <description>Vessek started modeling the basic circuit of an analog saw wave oscillator. Most of the parameters were initially obtained from my compact analog bass synth. I got a pretty good matching of the sound that I bet it would pass a blind test. Later in the development, samples of other well known analog oscillators were sent to me by members of the VCV Rack community. From the samples I was able of extracting characteristics of the waves that help me fit my greybox model.</description>
+    </item>
+    
+    <item>
+      <title>Tangents</title>
+      <link>https://modlfo.github.io/VultModules/tangents/</link>
+      <pubDate>Fri, 27 Oct 2017 11:54:59 +0300</pubDate>
+      
+      <guid>https://modlfo.github.io/VultModules/tangents/</guid>
+      <description>Tangents is a filter based on the Steiner-Parker structure. This module provides separate inputs to use it as LP, BP, and HP filter. This allows you to insert different signals into the inputs and process them together.
+The model has been created analyzing the Yves Usson version (YuSynth) and simplified to a point where the filter is good sounding and efficient.
+This module has a long history. Some years ago I got obsessed with the Steiner-Parker filter.</description>
+    </item>
+    
+  </channel>
+</rss>
