@@ -5,7 +5,6 @@ layout = "module"
 image = "../images/Flux.png"
 +++
 
-*This module has not been released yet*
 
 Flux is a module that was specifically designed to work with Caudal. Flux provides the following functions:
 

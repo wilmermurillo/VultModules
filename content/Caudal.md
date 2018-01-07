@@ -5,7 +5,6 @@ layout = "module"
 image = "../images/Caudal.png"
 +++
 
-*This module has not been released yet*
 
 Caudal is a chaotic source that is based on the model of a multi segment pendulum (see the video below). The core of Caudal is a detailed simulation of the pendulum system from which we can get measurements like the angular velocities and positions of the segments. These measures produces very natural oscillations that are interrelated due to the nature of the system.
 
