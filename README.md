@@ -27,8 +27,10 @@ A set of modules for VCV Rack written in Vult. You can read more about the modul
 
 ### Oscillators
 - [Vessek](https://modlfo.github.io/VultModules/vessek/): Complex Analog Oscillator.
+- [Caudal](https://modlfo.github.io/VultModules/caudal/): Mechanical Chaos Source.
 
 ### Utilities
+- [Flux](https://modlfo.github.io/VultModules/flux/): Quad Voltage Processor
 - [Splie](https://modlfo.github.io/VultModules/splie/): Buffer
 - [HyperPower](https://modlfo.github.io/VultModules/hyperpower/): Infinite Power Supply.
 
