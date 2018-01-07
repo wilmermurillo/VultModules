@@ -33,3 +33,7 @@ Flux provides 4 similar channels and the classical Vult modulation section that 
 - **In (Input)**: Input signal.
 - **Clk (Input)**: Signal used to trigger the S&H and comparison, active on the rising edge.
 - **Out (Output)**: Output of the processed signal.
+
+## Videos
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/x-ddYFdtANc" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
